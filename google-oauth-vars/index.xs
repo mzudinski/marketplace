@@ -181,7 +181,7 @@ query "oauth/google/continue" verb=GET {
             {{market_item.tablemap.user.columns.name|json_encode}}        : $userinfo.name
             {%- endif %}
             {%- if market_item.tablemap.columns.user.email %}
-            {{market_item.tablemap.user.columns.email]|json_encode}}       : $userinfo.email
+            {{market_item.tablemap.user.columns.email|json_encode}}       : $userinfo.email
             {%- endif %}
             google_oauth: {
               id   : $userinfo.id
@@ -306,7 +306,7 @@ query "oauth/google/signup" verb=GET {
         {{market_item.tablemap.user.columns.name|json_encode}}        : $userinfo.name
         {%- endif %}
         {%- if market_item.tablemap.columns.user.email %}
-        {{market_item.tablemap.user.columns.email]|json_encode}}       : $userinfo.email
+        {{market_item.tablemap.user.columns.email|json_encode}}       : $userinfo.email
         {%- endif %}
         google_oauth: {
           id   : $userinfo.id
