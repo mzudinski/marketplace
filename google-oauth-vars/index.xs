@@ -174,15 +174,15 @@ query "oauth/google/continue" verb=GET {
       if ($user == null) {
         db.add user {
           data = {
-            {%- if tablemap.user.columns.created_at %}
+            {%~ if tablemap.user.columns.created_at %}
             {{tablemap.user.columns.created_at|json_encode}} : "now"
-            {%- endif %}
-            {%- if tablemap.user.columns.name %}
+            {%~ endif %}
+            {%~ if tablemap.user.columns.name %}
             {{tablemap.user.columns.name|json_encode}}        : $userinfo.name
-            {%- endif %}
-            {%- if tablemap.columns.user.email %}
+            {%~ endif %}
+            {%~ if tablemap.user.columns.email %}
             {{tablemap.user.columns.email|json_encode}}       : $userinfo.email
-            {%- endif %}
+            {%~ endif %}
             google_oauth: {
               id   : $userinfo.id
               name : $userinfo.name
@@ -299,15 +299,15 @@ query "oauth/google/signup" verb=GET {
   
     db.add user {
       data = {
-        {%- if tablemap.user.columns.created_at %}
+        {%~ if tablemap.user.columns.created_at %}
         {{tablemap.user.columns.created_at|json_encode}} : "now"
-        {%- endif %}
-        {%- if tablemap.user.columns.name %}
+        {%~ endif %}
+        {%~ if tablemap.user.columns.name %}
         {{tablemap.user.columns.name|json_encode}}        : $userinfo.name
-        {%- endif %}
-        {%- if tablemap.columns.user.email %}
+        {%~ endif %}
+        {%~ if tablemap.user.columns.email %}
         {{tablemap.user.columns.email|json_encode}}       : $userinfo.email
-        {%- endif %}
+        {%~ endif %}
         google_oauth: {
           id   : $userinfo.id
           name : $userinfo.name
