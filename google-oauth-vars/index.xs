@@ -174,14 +174,14 @@ query "oauth/google/continue" verb=GET {
       if ($user == null) {
         db.add user {
           data = {
-            {%- if market_item.tablemap.user.columns.created_at %}
-            {{market_item.tablemap.user.columns.created_at|json_encode}} : "now"
+            {%- if tablemap.user.columns.created_at %}
+            {{tablemap.user.columns.created_at|json_encode}} : "now"
             {%- endif %}
-            {%- if market_item.tablemap.user.columns.name %}
-            {{market_item.tablemap.user.columns.name|json_encode}}        : $userinfo.name
+            {%- if tablemap.user.columns.name %}
+            {{tablemap.user.columns.name|json_encode}}        : $userinfo.name
             {%- endif %}
-            {%- if market_item.tablemap.columns.user.email %}
-            {{market_item.tablemap.user.columns.email|json_encode}}       : $userinfo.email
+            {%- if tablemap.columns.user.email %}
+            {{tablemap.user.columns.email|json_encode}}       : $userinfo.email
             {%- endif %}
             google_oauth: {
               id   : $userinfo.id
@@ -299,14 +299,14 @@ query "oauth/google/signup" verb=GET {
   
     db.add user {
       data = {
-        {%- if market_item.tablemap.user.columns.created_at %}
-        {{market_item.tablemap.user.columns.created_at|json_encode}} : "now"
+        {%- if tablemap.user.columns.created_at %}
+        {{tablemap.user.columns.created_at|json_encode}} : "now"
         {%- endif %}
-        {%- if market_item.tablemap.user.columns.name %}
-        {{market_item.tablemap.user.columns.name|json_encode}}        : $userinfo.name
+        {%- if tablemap.user.columns.name %}
+        {{tablemap.user.columns.name|json_encode}}        : $userinfo.name
         {%- endif %}
-        {%- if market_item.tablemap.columns.user.email %}
-        {{market_item.tablemap.user.columns.email|json_encode}}       : $userinfo.email
+        {%- if tablemap.columns.user.email %}
+        {{tablemap.user.columns.email|json_encode}}       : $userinfo.email
         {%- endif %}
         google_oauth: {
           id   : $userinfo.id
