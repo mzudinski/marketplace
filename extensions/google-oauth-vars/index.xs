@@ -1,0 +1,332 @@
+market_item "google-oauth-vars" {
+  type = "extension"
+  category = "authentication"
+  license = "CC BY 4.0"
+
+  guid = "022027D0-D2F8-4C1A-8BCA-73BBC9891EEA"
+  email = "sean@xano.com"
+  canonical = "jk234l"
+
+  video = "Oy5F9h5JqEU"
+  icon_url = "https://cdn.xano.com/marketplace/7zYt8hK2wEPPzw_Lr2OdRdPAXt0/google-logo.png"
+  short_description = "This extension provides functionality to enable authentication against a Google account."
+  long_description = """
+    <p>This extension supports three modes of authentication that can be leveraged for different requirements on your frontend application. Additional schema is merged into your user table to store necessary information in the google_oauth object.</p>
+    <p><span style="font-size: 18px;"><strong>Continue with Google</strong></span></p>
+    <p>This mode is the most flexible because it allows both sign up and login in the same API request. If you want an extremely low friction entry point and don&#39;t have special sign up requirements, this is the best way to create a seamless experience for your customer.</p>
+    <p><span style="font-size: 18px;"><strong>Login with Google</strong></span></p>
+    <p>This mode allows you to login to your application with your Google account. If you did not sign up previously through your Google account, then this API will fail. &nbsp;This API request is normally used in conjunction with the Sign up request.</p>
+    <p><span style="font-size: 18px;"><strong>Sign up with Google</strong></span></p>
+    <p>This mode allows you to sign up to your application with your Google account. &nbsp;This request will only work once for your user as it throws an error if you have a customer that has already signed up previously with this same request. If you have special requirements like perhaps an invite code, then this request tends to be more flexible than the &quot;continue with google&quot; version.</p>
+    """
+  readme = """
+    <p>This extension requires a <strong>client id</strong> and a <strong>client secret</strong> from Google.&nbsp;</p>
+    <ol><li>If you don't have a Google project already, then go to the <a href="https://console.developers.google.com/" rel="noopener noreferrer" target="_blank">Google Developer Console</a>, login with your Google account, and create a project.&nbsp;</li><li>Now that you have your project created, you need to configure your <a href="https://console.developers.google.com/apis/credentials/consent" rel="noopener noreferrer" target="_blank">OAuth consent screen</a>. If you have already done this before, then you can skip to step 5.</li><li>Click configure, and choose a User Type of External.</li><li>Next you need to enter in some basic information: choose your application name, authorized domain, homepage link, and privacy link. If you don't have all of this information ready, then you can just enter a placeholder and come back to it later. Make sure to not adjust any of the "Scopes" or there may be a significant delay before being able to use your Oauth integration.</li><li>Once your OAuth consent screen is ready, you need to go to the <a href="https://console.developers.google.com/apis/credentials" rel="noopener noreferrer" target="_blank">Credentials</a> page.</li><li>Click Create credentials -&gt; OAuth client ID</li><li>Select your application type depending on if this is a website, mobile app, etc.</li><li>Name your OAuth client and click Create.&nbsp;</li><li>Copy the client id and the client secret and make sure to enter it in the environment variable settings for this extension.</li></ol><p>NOTE: Additional settings can be configured for restricting access. Once you have authentication working with Xano, it is recommended to revisit this to use these options with settings that make sense for your application.</p>
+    """
+  env = {google_oauth_client_id: "", google_oauth_secret: ""}
+
+  demo = {
+    video: "lzaye3l1zpc",
+    link: "https://demo.xano.com/xano-google-oauth/"
+  }
+
+  tablemap user {
+    mode = "merge-auth"
+    columns = [
+      {name: "created_at", required: false}
+      {name: "name", required: false}
+      {name: "email", required: false}
+    ]
+
+    schema {
+      object google_oauth? {
+        schema {
+          text id? filters=trim
+          text name? filters=trim
+          email email?
+        }
+      }
+    }
+  }
+
+  dependency = [
+    {
+      name: "Google OAuth API"
+      link : "https://developers.google.com/identity/protocols/oauth2"
+    }
+    {
+      name: "Google Developer Console"
+      link : "https://console.developers.google.com/"
+    }
+  ]
+}
+---
+// This creates the URL from your environment variables that you will use to send the user to for authentication.
+function google_oauth_getauthurl {
+  input {
+    text redirect_uri? filters=trim
+  }
+
+  stack {
+    precondition ($env.workspace.google_oauth_client_id != "") {
+      error = 'Please set your "google_oauth_client_id" environment variable.'
+    }
+  
+    precondition ($env.workspace.google_oauth_secret != "") {
+      error = 'Please set your "google_oauth_secret" environment variable.'
+    }
+  
+    var $google_url {
+      value = "https://accounts.google.com/o/oauth2/auth"
+        |url_addarg:"response_type":"code"
+        |url_addarg:"access_type":"online"
+        |url_addarg:"client_id":$env.workspace.google_oauth_client_id
+        |url_addarg:"redirect_uri":$input.redirect_uri
+        |url_addarg:"state":""
+        |url_addarg:"scope":"https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+        |url_addarg:"approval_prompt":"auto"
+    }
+  }
+
+  response = $google_url
+}
+---
+// After the user completes authentication, the user gets sent back to the "redirect_uri" along with the "code" parameter. That page is then responsible for exchanging the "code" parameter for an access token via this function.
+function google_oauth_getaccesstoken {
+  input {
+    text code? filters=trim
+    text redirect_uri? filters=trim
+  }
+
+  stack {
+    api.request {
+      url = "https://oauth2.googleapis.com/token"
+      method = "POST"
+      params = {}
+        |set:"code":$input.code
+        |set:"client_id":$env.workspace.google_oauth_client_id
+        |set:"client_secret":$env.workspace.google_oauth_secret
+        |set:"redirect_uri":$input.redirect_uri
+        |set:"grant_type":"authorization_code"
+      headers = ""
+    } as $api_1
+  
+    precondition ($api_1.response.status == 200) {
+      error_type = "accessdenied"
+      error = "Access Denied."
+    }
+  }
+
+  response = $api_1.response.result.access_token
+}
+---
+// This gets user information stored within Google which is retrieved via access token.
+function google_oauth_getuserinfo {
+  input {
+    text token? filters=trim
+  }
+
+  stack {
+    api.request {
+      url = "https://www.googleapis.com/userinfo/v2/me"
+      method = "GET"
+      params = {}|set:"access_token":$input.token
+      headers = ""
+    } as $api_1
+  
+    precondition ($api_1.response.status == 200) {
+      error = "Access Denied"
+    }
+  }
+
+  response = $api_1.response.result
+}
+---
+// This API group handles all aspects of Google OAuth support.
+api_group "google-oauth" {
+  canonical = "HYKWXVjp"
+}
+---
+// This endpoint handles both login and signup depending on the state of the user account.
+query "oauth/google/continue" verb=GET {
+  api_group = "google-oauth"
+
+  input {
+    text code? filters=trim
+    text redirect_uri? filters=trim
+  }
+
+  stack {
+    function.run google_oauth_getaccesstoken {
+      input = {code: $input.code, redirect_uri: $input.redirect_uri}
+    } as $token
+  
+    function.run google_oauth_getuserinfo {
+      input = {token: $token}
+    } as $userinfo
+  
+    db.get user {
+      field_name = "google_oauth.id"
+      field_value = $userinfo.id
+    } as $user
+  
+    conditional {
+      if ($user == null) {
+        db.add user {
+          data = {
+            {%~ if tablemap.user.columns.created_at %}
+            {{tablemap.user.columns.created_at|json_encode}} : "now"
+            {%~ endif %}
+            {%~ if tablemap.user.columns.name %}
+            {{tablemap.user.columns.name|json_encode}}        : $userinfo.name
+            {%~ endif %}
+            {%~ if tablemap.user.columns.email %}
+            {{tablemap.user.columns.email|json_encode}}       : $userinfo.email
+            {%~ endif %}
+            google_oauth: {
+              id   : $userinfo.id
+              name : $userinfo.name
+              email: $userinfo.email
+            }
+          }
+        } as $user
+      }
+    }
+  
+    security.create_auth_token {
+      table = "user"
+      extras = {
+      }
+      expiration = 86400
+      id = $user.id
+    } as $token
+  }
+
+  response = {
+    token: $token
+    name : $userinfo.name
+    email: $userinfo.email
+  }
+}
+---
+// This endpoint is responsible for sending the user off to a Google webpage to authenticate. Once complete, the user will be redirected to where this request was initiated and then depending on your requirements, the user will go down the login, signup, or continue path.
+query "oauth/google/init" verb=GET {
+  api_group = "google-oauth"
+
+  input {
+    text redirect_uri? filters=trim
+  }
+
+  stack {
+    function.run google_oauth_getauthurl {
+      input = {redirect_uri: $input.redirect_uri}
+    } as $func_1
+  }
+
+  response = {authUrl: $func_1}
+}
+---
+// This endpoint handles login only. If the user has not already signed up through Google, then this endpoint will throw an error message.
+query "oauth/google/login" verb=GET {
+  api_group = "google-oauth"
+
+  input {
+    text code? filters=trim
+    text redirect_uri? filters=trim
+  }
+
+  stack {
+    function.run google_oauth_getaccesstoken {
+      input = {code: $input.code, redirect_uri: $input.redirect_uri}
+    } as $token
+  
+    function.run google_oauth_getuserinfo {
+      input = {token: $token}
+    } as $userinfo
+  
+    db.get user {
+      field_name = "google_oauth.id"
+      field_value = $userinfo.id
+    } as $user_1
+  
+    precondition ($user_1 != null) {
+      error_type = "notfound"
+      error = "No user exists with these credentials. Try signing up instead."
+    }
+  
+    security.create_auth_token {
+      table = "user"
+      extras = {}
+      expiration = 86400
+      id = $user_1.id
+    } as $token
+  }
+
+  response = {
+    token: $token
+    name : $userinfo.name
+    email: $userinfo.email
+  }
+}
+---
+// This endpoint handles signup only. If the user already has signed up through Google, then this endpoint will throw an error message.
+query "oauth/google/signup" verb=GET {
+  api_group = "google-oauth"
+
+  input {
+    text code? filters=trim
+    text redirect_uri? filters=trim
+  }
+
+  stack {
+    function.run google_oauth_getaccesstoken {
+      input = {code: $input.code, redirect_uri: $input.redirect_uri}
+    } as $token
+  
+    function.run google_oauth_getuserinfo {
+      input = {token: $token}
+    } as $userinfo
+  
+    db.get user {
+      field_name = "google_oauth.id"
+      field_value = $userinfo.id
+    } as $existing_user
+  
+    precondition ($existing_user == null) {
+      error_type = "accessdenied"
+      error = "There is already an account with these credentials. Try logging in instead."
+    }
+  
+    db.add user {
+      data = {
+        {%~ if tablemap.user.columns.created_at %}
+        {{tablemap.user.columns.created_at|json_encode}} : "now"
+        {%~ endif %}
+        {%~ if tablemap.user.columns.name %}
+        {{tablemap.user.columns.name|json_encode}}        : $userinfo.name
+        {%~ endif %}
+        {%~ if tablemap.user.columns.email %}
+        {{tablemap.user.columns.email|json_encode}}       : $userinfo.email
+        {%~ endif %}
+        google_oauth: {
+          id   : $userinfo.id
+          name : $userinfo.name
+          email: $userinfo.email
+        }
+      }
+    } as $new_user
+  
+    security.create_auth_token {
+      table = "user"
+      extras = {}
+      expiration = 86400
+      id = $new_user.id
+    } as $token
+  }
+
+  response = {
+    token: $token
+    name : $userinfo.name
+    email: $userinfo.email
+  }
+}
