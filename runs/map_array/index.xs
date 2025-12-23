@@ -25,8 +25,12 @@ workspace map_array
 // ```
 function "$main" {
   input {
-    json collection?
-    text path? filters=trim
+    object args {
+      schema {
+        json collection?
+        text path? filters=trim
+      }
+    }
   }
 
   stack {

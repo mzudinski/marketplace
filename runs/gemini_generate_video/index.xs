@@ -4,14 +4,18 @@ workspace gemini_generate_video {
 ---
 function "$main" {
   input {
-    text model?="veo-3.0-generate-preview:predictLongRunning" filters=trim
-    text prompt? filters=trim
-    enum aspect_ratio?="16:9" {
-      values = ["16:9", "9:16"]
-    }
-  
-    enum person_generation?="allow_all" {
-      values = ["dont_allow", "allow_adult", "allow_all"]
+    object args {
+      schema {
+        text model?="veo-3.0-generate-preview:predictLongRunning" filters=trim
+        text prompt? filters=trim
+        enum aspect_ratio?="16:9" {
+          values = ["16:9", "9:16"]
+        }
+      
+        enum person_generation?="allow_all" {
+          values = ["dont_allow", "allow_adult", "allow_all"]
+        }
+      }
     }
   }
 

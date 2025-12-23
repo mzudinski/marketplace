@@ -2,8 +2,12 @@ workspace take_from_array_from_right
 ---
 function "$main" {
   input {
-    json array?
-    int n?=1
+    object args {
+      schema {
+        json array?
+        int n?=1
+      }
+    }
   }
 
   stack {

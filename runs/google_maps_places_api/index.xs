@@ -4,12 +4,16 @@ workspace google_maps_places_api {
 ---
 function "$main" {
   input {
-    text query filters=trim
-    text field_mask? filters=trim
-    text language_code? filters=trim
-    text page_token? filters=trim
-    int page_size?
-    json location_bias?
+    object args {
+      schema {
+        text query filters=trim
+        text field_mask? filters=trim
+        text language_code? filters=trim
+        text page_token? filters=trim
+        int page_size?
+        json location_bias?
+      }
+    }
   }
 
   stack {

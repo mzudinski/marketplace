@@ -2,8 +2,12 @@ workspace remove_from_array
 ---
 function "$main" {
   input {
-    json array?
-    json[] values?
+    object args {
+      schema {
+        json array?
+        json[] values?
+      }
+    }
   }
 
   stack {

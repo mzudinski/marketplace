@@ -43,9 +43,13 @@ workspace union
 // ```
 function "$main" {
   input {
-    json[] left_collection?
-    json[] right_collection?
-    text? path? filters=trim
+    object args {
+      schema {
+        json[] left_collection?
+        json[] right_collection?
+        text? path? filters=trim
+      }
+    }
   }
 
   stack {

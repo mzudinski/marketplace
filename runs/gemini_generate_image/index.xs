@@ -4,8 +4,12 @@ workspace gemini_generate_image {
 ---
 function "$main" {
   input {
-    text model?="gemini-2.0-flash-preview-image-generation" filters=trim
-    text prompt? filters=trim
+    object args {
+      schema {
+        text model?="gemini-2.0-flash-preview-image-generation" filters=trim
+        text prompt? filters=trim
+      }
+    }
   }
 
   stack {

@@ -4,8 +4,12 @@ workspace gemini_chat_with_pdf {
 ---
 function "$main" {
   input {
-    text file_uri filters=trim
-    text question filters=trim
+    object args {
+      schema {
+        text file_uri filters=trim
+        text question filters=trim
+      }
+    }
   }
 
   stack {

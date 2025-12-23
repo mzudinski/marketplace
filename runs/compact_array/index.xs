@@ -3,7 +3,11 @@ workspace compact_array
 // Creates an array with all falsey values removed. The values false, null, 0, `""` (empty string), `{}` (empty object) , `[]` (empty array) are falsey.
 function "$main" {
   input {
-    json[] array?
+    object args {
+      schema {
+        json[] array?
+      }
+    }
   }
 
   stack {

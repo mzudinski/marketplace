@@ -3,8 +3,12 @@ workspace skewness
 // Measures the asymmetry of a data set’s distribution around its mean.
 function "$main" {
   input {
-    decimal[] numbers?
-    bool bias?
+    object args {
+      schema {
+        decimal[] numbers?
+        bool bias?
+      }
+    }
   }
 
   stack {

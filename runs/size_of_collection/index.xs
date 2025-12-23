@@ -2,8 +2,12 @@ workspace size_of_collection
 ---
 function "$main" {
   input {
-    // The collection to inspect
-    json collection?
+    object args {
+      schema {
+        // The collection to inspect
+        json collection?
+      }
+    }
   }
 
   stack {

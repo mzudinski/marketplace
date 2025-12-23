@@ -78,8 +78,12 @@ workspace slack_send_channel_message {
 // ```
 function "$main" {
   input {
-    text channel_id filters=trim
-    text message filters=trim
+    object args {
+      schema {
+        text channel_id filters=trim
+        text message filters=trim
+      }
+    }
   }
 
   stack {

@@ -15,7 +15,11 @@ workspace to_pairs
 // ```
 function "$main" {
   input {
-    json collection?
+    object args {
+      schema {
+        json collection?
+      }
+    }
   }
 
   stack {

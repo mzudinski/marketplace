@@ -2,7 +2,11 @@ workspace median_of_values
 ---
 function "$main" {
   input {
-    decimal[] values
+    object args {
+      schema {
+        decimal[] values
+      }
+    }
   }
 
   stack {

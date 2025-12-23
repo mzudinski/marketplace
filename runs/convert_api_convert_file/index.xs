@@ -105,15 +105,19 @@ workspace convert_api_convert_file {
 // ```
 function "$main" {
   input {
-    enum from_format {
-      values = ["pdf", "docx", "css", "xlsx", "jpg"]
+    object args {
+      schema {
+        enum from_format {
+          values = ["pdf", "docx", "css", "xlsx", "jpg"]
+        }
+      
+        enum to_format? {
+          values = ["pdf", "docx", "css", "xlsx", "jpg"]
+        }
+      
+        text file_url filters=trim
+      }
     }
-  
-    enum to_format? {
-      values = ["pdf", "docx", "css", "xlsx", "jpg"]
-    }
-  
-    text file_url filters=trim
   }
 
   stack {

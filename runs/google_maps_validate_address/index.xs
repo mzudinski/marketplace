@@ -4,10 +4,14 @@ workspace google_maps_validate_address {
 ---
 function "$main" {
   input {
-    text region_code? filters=trim
-    text address_lines filters=trim
-    text language_code?=en filters=trim
-    text session_token? filters=trim
+    object args {
+      schema {
+        text region_code? filters=trim
+        text address_lines filters=trim
+        text language_code?=en filters=trim
+        text session_token? filters=trim
+      }
+    }
   }
 
   stack {

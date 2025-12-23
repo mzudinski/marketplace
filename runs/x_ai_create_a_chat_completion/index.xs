@@ -63,9 +63,13 @@ workspace x_ai_create_a_chat_completion {
 // ```
 function "$main" {
   input {
-    text model?="grok-beta" filters=trim
-    text message? filters=trim
-    text system?="You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy." filters=trim
+    object args {
+      schema {
+        text model?="grok-beta" filters=trim
+        text message? filters=trim
+        text system?="You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy." filters=trim
+      }
+    }
   }
 
   stack {

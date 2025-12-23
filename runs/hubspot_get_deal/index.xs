@@ -80,9 +80,13 @@ workspace hubspot_get_deal {
 // ```
 function "$main" {
   input {
-    int deal_id
-    text[] properties? filters=trim
-    text[] properties_with_history? filters=trim
+    object args {
+      schema {
+        int deal_id
+        text[] properties? filters=trim
+        text[] properties_with_history? filters=trim
+      }
+    }
   }
 
   stack {

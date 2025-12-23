@@ -4,7 +4,11 @@ workspace shopify_get_collection_by_id {
 ---
 function "$main" {
   input {
-    text collection_id filters=trim
+    object args {
+      schema {
+        text collection_id filters=trim
+      }
+    }
   }
 
   stack {

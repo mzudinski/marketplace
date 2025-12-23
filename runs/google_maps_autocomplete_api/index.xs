@@ -4,13 +4,17 @@ workspace google_maps_autocomplete_api {
 ---
 function "$main" {
   input {
-    text input filters=trim
-    text session_token? filters=trim
-    text field_mask? filters=trim
-    text latitude? filters=trim
-    text longitude? filters=trim
-    int radius?
-    text region_code? filters=trim
+    object args {
+      schema {
+        text input filters=trim
+        text session_token? filters=trim
+        text field_mask? filters=trim
+        text latitude? filters=trim
+        text longitude? filters=trim
+        int radius?
+        text region_code? filters=trim
+      }
+    }
   }
 
   stack {

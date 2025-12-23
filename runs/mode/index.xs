@@ -3,7 +3,11 @@ workspace mode
 // Identifies the most frequently occurring value(s) in a data set
 function "$main" {
   input {
-    decimal[] numbers?
+    object args {
+      schema {
+        decimal[] numbers?
+      }
+    }
   }
 
   stack {

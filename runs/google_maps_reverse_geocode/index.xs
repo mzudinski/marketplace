@@ -4,8 +4,12 @@ workspace google_maps_reverse_geocode {
 ---
 function "$main" {
   input {
-    text latitude filters=trim
-    text longitude? filters=trim
+    object args {
+      schema {
+        text latitude filters=trim
+        text longitude? filters=trim
+      }
+    }
   }
 
   stack {

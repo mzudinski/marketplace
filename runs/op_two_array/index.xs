@@ -3,12 +3,16 @@ workspace op_two_array
 // apply the operation from one array to the other
 function "$main" {
   input {
-    decimal[] left_numbers?
-    enum op?=add {
-      values = ["add", "subtract", "multiply", "divide", "power"]
+    object args {
+      schema {
+        decimal[] left_numbers?
+        enum op?=add {
+          values = ["add", "subtract", "multiply", "divide", "power"]
+        }
+      
+        decimal[] right_numbers?
+      }
     }
-  
-    decimal[] right_numbers?
   }
 
   stack {

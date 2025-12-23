@@ -135,14 +135,18 @@ workspace claude_ai_ask_a_question {
 // ```
 function "$main" {
   input {
-    // User prompt to be asked from AI
-    text prompt filters=trim
-  
-    // Maximum number of tokens that can be used in single transaction
-    int max_tokens?=1024
-  
-    // Prompt for the assistant 
-    text assistant_prompt?="As an enthusiastic assistant, provide clear and understandable responses." filters=trim
+    object args {
+      schema {
+        // User prompt to be asked from AI
+        text prompt filters=trim
+      
+        // Maximum number of tokens that can be used in single transaction
+        int max_tokens?=1024
+      
+        // Prompt for the assistant 
+        text assistant_prompt?="As an enthusiastic assistant, provide clear and understandable responses." filters=trim
+      }
+    }
   }
 
   stack {

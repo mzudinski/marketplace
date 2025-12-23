@@ -65,11 +65,15 @@ workspace open_ai_create_a_chat_completion {
 // ```
 function "$main" {
   input {
-    enum model?="gpt-4o-mini" {
-      values = ["gpt-4o-mini", "gpt-4o"]
+    object args {
+      schema {
+        enum model?="gpt-4o-mini" {
+          values = ["gpt-4o-mini", "gpt-4o"]
+        }
+      
+        text message filters=trim
+      }
     }
-  
-    text message filters=trim
   }
 
   stack {

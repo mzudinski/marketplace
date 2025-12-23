@@ -4,6 +4,9 @@ workspace resend_list_audiences {
 ---
 function "$main" {
   input {
+    object args {
+      schema
+    }
   }
 
   stack {

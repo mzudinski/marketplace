@@ -80,8 +80,12 @@ workspace hubspot_get_contact {
 // ```
 function "$main" {
   input {
-    int id filters=min:1
-    text[] properties? filters=trim
+    object args {
+      schema {
+        int id filters=min:1
+        text[] properties? filters=trim
+      }
+    }
   }
 
   stack {

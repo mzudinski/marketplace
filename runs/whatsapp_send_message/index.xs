@@ -104,9 +104,13 @@ workspace whatsapp_send_message {
 // ```
 function "$main" {
   input {
-    text to_number filters=trim
-    text message filters=trim
-    text version filters=trim
+    object args {
+      schema {
+        text to_number filters=trim
+        text message filters=trim
+        text version filters=trim
+      }
+    }
   }
 
   stack {

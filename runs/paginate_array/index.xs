@@ -15,11 +15,15 @@ workspace paginate_array
 // This allows for easier navigation through large datasets by breaking them up into smaller, manageable “pages.”
 function "$main" {
   input {
-    // The array you wish to paginate.
-    json array
-  
-    int page?=1 filters=min:1
-    int per_page?=10 filters=min:1
+    object args {
+      schema {
+        // The array you wish to paginate.
+        json array
+      
+        int page?=1 filters=min:1
+        int per_page?=10 filters=min:1
+      }
+    }
   }
 
   stack {

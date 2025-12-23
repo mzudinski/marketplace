@@ -67,11 +67,15 @@ workspace open_ai_describe_an_image_from_a_url {
 // ```
 function "$main" {
   input {
-    text image_url? filters=trim|pattern:"(?i)^https?:\\/\\/[^\\s]+?\\.(jpg|jpeg|png|gif|bmp|webp)$":"Whoops, the input parameter image_url is invalid :-(!"
-  
-    // The model from OpenAI to use
-    enum model?="gpt-4o-mini" {
-      values = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo"]
+    object args {
+      schema {
+        text image_url? filters=trim|pattern:"(?i)^https?:\\/\\/[^\\s]+?\\.(jpg|jpeg|png|gif|bmp|webp)$":"Whoops, the input parameter image_url is invalid :-(!"
+      
+        // The model from OpenAI to use
+        enum model?="gpt-4o-mini" {
+          values = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo"]
+        }
+      }
     }
   }
 

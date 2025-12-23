@@ -4,7 +4,11 @@ workspace stripe_void_invoice {
 ---
 function "$main" {
   input {
-    text invoice_id filters=trim
+    object args {
+      schema {
+        text invoice_id filters=trim
+      }
+    }
   }
 
   stack {

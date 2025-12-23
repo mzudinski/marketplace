@@ -113,24 +113,28 @@ workspace hubspot_update_deal {
 // ```
 function "$main" {
   input {
-    text name? filters=trim
-    enum deal_stage? {
-      values = [
-        "appointmentscheduled"
-        "qualifiedtobuy"
-        "presentationscheduled"
-        "decisionmakerboughtin"
-        "contractsent"
-        "closedwon"
-        "closedlost"
-      ]
+    object args {
+      schema {
+        text name? filters=trim
+        enum deal_stage? {
+          values = [
+            "appointmentscheduled"
+            "qualifiedtobuy"
+            "presentationscheduled"
+            "decisionmakerboughtin"
+            "contractsent"
+            "closedwon"
+            "closedlost"
+          ]
+        }
+      
+        timestamp? close_date?
+        int owner_id?
+        decimal amount?
+        json additional_properties?
+        text deal_id filters=trim
+      }
     }
-  
-    timestamp? close_date?
-    int owner_id?
-    decimal amount?
-    json additional_properties?
-    text deal_id filters=trim
   }
 
   stack {

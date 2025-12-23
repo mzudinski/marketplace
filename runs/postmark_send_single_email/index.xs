@@ -4,11 +4,15 @@ workspace postmark_send_single_email {
 ---
 function "$main" {
   input {
-    text from_email filters=trim|lower
-    text to_email filters=trim|lower
-    text subject? filters=trim
-    text text_body? filters=trim
-    text html_body? filters=trim
+    object args {
+      schema {
+        text from_email filters=trim|lower
+        text to_email filters=trim|lower
+        text subject? filters=trim
+        text text_body? filters=trim
+        text html_body? filters=trim
+      }
+    }
   }
 
   stack {

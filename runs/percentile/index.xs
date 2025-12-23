@@ -2,11 +2,15 @@ workspace percentile
 ---
 function "$main" {
   input {
-    // Array of numbers to calculate the percentile from
-    decimal[] numbers?
-  
-    // The percentile to calculate (0-100)
-    decimal percentile? filters=min:1|max:100
+    object args {
+      schema {
+        // Array of numbers to calculate the percentile from
+        decimal[] numbers?
+      
+        // The percentile to calculate (0-100)
+        decimal percentile? filters=min:1|max:100
+      }
+    }
   }
 
   stack {

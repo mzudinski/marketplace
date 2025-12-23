@@ -3,8 +3,12 @@ workspace find_last_index_in_array
 // This method is like `Find index in array` except that it iterates over elements of collection from right to left.
 function "$main" {
   input {
-    json array?
-    json predicate?
+    object args {
+      schema {
+        json array?
+        json predicate?
+      }
+    }
   }
 
   stack {

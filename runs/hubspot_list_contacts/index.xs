@@ -105,8 +105,12 @@ workspace hubspot_list_contacts {
 // ```
 function "$main" {
   input {
-    int after?
-    text[] properties? filters=trim
+    object args {
+      schema {
+        int after?
+        text[] properties? filters=trim
+      }
+    }
   }
 
   stack {

@@ -82,10 +82,14 @@ workspace hubspot_list_deals {
 // ```
 function "$main" {
   input {
-    text after? filters=trim
-    int limit?
-    text[] properties? filters=trim
-    text[] properties_with_history? filters=trim
+    object args {
+      schema {
+        text after? filters=trim
+        int limit?
+        text[] properties? filters=trim
+        text[] properties_with_history? filters=trim
+      }
+    }
   }
 
   stack {

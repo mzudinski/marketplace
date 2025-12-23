@@ -61,8 +61,12 @@ workspace filter
 // ```
 function "$main" {
   input {
-    json[] array?
-    json props?
+    object args {
+      schema {
+        json[] array?
+        json props?
+      }
+    }
   }
 
   stack {

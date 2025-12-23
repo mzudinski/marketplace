@@ -4,7 +4,11 @@ workspace gemini_upload_file {
 ---
 function "$main" {
   input {
-    file? file
+    object args {
+      schema {
+        file? file
+      }
+    }
   }
 
   stack {

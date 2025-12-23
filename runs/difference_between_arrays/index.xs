@@ -2,8 +2,12 @@ workspace difference_between_arrays
 ---
 function "$main" {
   input {
-    json[] array_1?
-    json[] array_2?
+    object args {
+      schema {
+        json[] array_1?
+        json[] array_2?
+      }
+    }
   }
 
   stack {

@@ -80,16 +80,20 @@ workspace open_ai_get_embeddings {
 // ```
 function "$main" {
   input {
-    text input_text filters=trim
-  
-    // The model from OpenAI to use
-    enum model?="text-embedding-3-small" {
-      values = [
-        "text-embedding-3-large"
-        "text-embedding-3-small"
-        "text-embedding-ada-002"
-      ]
-    
+    object args {
+      schema {
+        text input_text filters=trim
+      
+        // The model from OpenAI to use
+        enum model?="text-embedding-3-small" {
+          values = [
+            "text-embedding-3-large"
+            "text-embedding-3-small"
+            "text-embedding-ada-002"
+          ]
+        
+        }
+      }
     }
   }
 

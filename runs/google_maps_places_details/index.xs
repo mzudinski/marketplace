@@ -4,10 +4,14 @@ workspace google_maps_places_details {
 ---
 function "$main" {
   input {
-    text place_id filters=trim
-    text field_mask? filters=trim
-    text language_code? filters=trim
-    text session_token? filters=trim
+    object args {
+      schema {
+        text place_id filters=trim
+        text field_mask? filters=trim
+        text language_code? filters=trim
+        text session_token? filters=trim
+      }
+    }
   }
 
   stack {

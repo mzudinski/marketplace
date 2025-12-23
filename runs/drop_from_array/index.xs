@@ -21,8 +21,12 @@ workspace drop_from_array
 // ```
 function "$main" {
   input {
-    json[] array?
-    int n?
+    object args {
+      schema {
+        json[] array?
+        int n?
+      }
+    }
   }
 
   stack {

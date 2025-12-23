@@ -4,13 +4,17 @@ workspace postmark_send_batch_emails {
 ---
 function "$main" {
   input {
-    object[1:] messages? {
+    object args {
       schema {
-        text from_email filters=trim
-        text to_email filters=trim
-        text subject? filters=trim
-        text text_body? filters=trim
-        text html_body? filters=trim
+        object[1:] messages? {
+          schema {
+            text from_email filters=trim
+            text to_email filters=trim
+            text subject? filters=trim
+            text text_body? filters=trim
+            text html_body? filters=trim
+          }
+        }
       }
     }
   }

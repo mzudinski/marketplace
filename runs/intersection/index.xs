@@ -52,11 +52,15 @@ workspace intersection
 // ```
 function "$main" {
   input {
-    json[] left_collection?
-    json[] right_collection?
-  
-    // Optional object key to retrieve attribute to use for matching
-    text? path? filters=trim
+    object args {
+      schema {
+        json[] left_collection?
+        json[] right_collection?
+      
+        // Optional object key to retrieve attribute to use for matching
+        text? path? filters=trim
+      }
+    }
   }
 
   stack {

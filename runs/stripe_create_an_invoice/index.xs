@@ -4,11 +4,15 @@ workspace stripe_create_an_invoice {
 ---
 function "$main" {
   input {
-    text customer_id filters=trim
-    text discount? filters=trim
-    text description? filters=trim
-    enum collection_method? {
-      values = ["charge_automatically", "send_invoice"]
+    object args {
+      schema {
+        text customer_id filters=trim
+        text discount? filters=trim
+        text description? filters=trim
+        enum collection_method? {
+          values = ["charge_automatically", "send_invoice"]
+        }
+      }
     }
   }
 

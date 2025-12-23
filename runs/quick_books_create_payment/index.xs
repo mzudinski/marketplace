@@ -139,8 +139,12 @@ workspace quick_books_create_payment {
 // ```
 function "$main" {
   input {
-    decimal amount
-    int consumer_ref
+    object args {
+      schema {
+        decimal amount
+        int consumer_ref
+      }
+    }
   }
 
   stack {

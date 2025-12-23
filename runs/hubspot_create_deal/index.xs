@@ -110,23 +110,27 @@ workspace hubspot_create_deal {
 // ```
 function "$main" {
   input {
-    text name? filters=trim
-    enum deal_stage? {
-      values = [
-        "appointmentscheduled"
-        "qualifiedtobuy"
-        "presentationscheduled"
-        "decisionmakerboughtin"
-        "contractsent"
-        "closedwon"
-        "closedlost"
-      ]
+    object args {
+      schema {
+        text name? filters=trim
+        enum deal_stage? {
+          values = [
+            "appointmentscheduled"
+            "qualifiedtobuy"
+            "presentationscheduled"
+            "decisionmakerboughtin"
+            "contractsent"
+            "closedwon"
+            "closedlost"
+          ]
+        }
+      
+        timestamp? close_date?
+        int owner_id?
+        decimal amount?
+        json additional_properties?
+      }
     }
-  
-    timestamp? close_date?
-    int owner_id?
-    decimal amount?
-    json additional_properties?
   }
 
   stack {

@@ -4,9 +4,13 @@ workspace gemini_image_understanding {
 ---
 function "$main" {
   input {
-    text model?="gemini-2.0-flash" filters=trim
-    text prompt? filters=trim
-    file? image
+    object args {
+      schema {
+        text model?="gemini-2.0-flash" filters=trim
+        text prompt? filters=trim
+        file? image
+      }
+    }
   }
 
   stack {

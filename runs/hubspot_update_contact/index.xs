@@ -134,27 +134,31 @@ workspace hubspot_update_contact {
 // ```
 function "$main" {
   input {
-    text first_name? filters=trim
-    text last_name? filters=trim
-    email email? filters=trim|lower
-    text company? filters=trim
-    enum lead_status? {
-      values = [
-        "NEW"
-        "OPEN"
-        "IN_PROGRESS"
-        "OPEN_DEAL"
-        "UNQUALIFIED"
-        "ATTEMPTED_TO_CONTACT"
-        "CONNECTED"
-        "BAD_TIMING"
-      ]
+    object args {
+      schema {
+        text first_name? filters=trim
+        text last_name? filters=trim
+        email email? filters=trim|lower
+        text company? filters=trim
+        enum lead_status? {
+          values = [
+            "NEW"
+            "OPEN"
+            "IN_PROGRESS"
+            "OPEN_DEAL"
+            "UNQUALIFIED"
+            "ATTEMPTED_TO_CONTACT"
+            "CONNECTED"
+            "BAD_TIMING"
+          ]
+        }
+      
+        int contact_owner?
+        text phone_number? filters=trim
+        int contact_id
+        json additional_properties?
+      }
     }
-  
-    int contact_owner?
-    text phone_number? filters=trim
-    int contact_id
-    json additional_properties?
   }
 
   stack {

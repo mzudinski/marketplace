@@ -4,7 +4,11 @@ workspace shopify_get_customer_by_id {
 ---
 function "$main" {
   input {
-    text customer_id filters=trim
+    object args {
+      schema {
+        text customer_id filters=trim
+      }
+    }
   }
 
   stack {

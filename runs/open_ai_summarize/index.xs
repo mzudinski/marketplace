@@ -5,9 +5,13 @@ workspace open_ai_summarize {
 // This function summarizes a piece of text using the OpenAI API
 function "$main" {
   input {
-    text input_text filters=trim
-    enum model?="gpt-4o-mini" {
-      values = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo"]
+    object args {
+      schema {
+        text input_text filters=trim
+        enum model?="gpt-4o-mini" {
+          values = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo"]
+        }
+      }
     }
   }
 

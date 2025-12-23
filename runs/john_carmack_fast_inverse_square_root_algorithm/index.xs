@@ -5,7 +5,11 @@ workspace john_carmack_fast_inverse_square_root_algorithm
 // It was notably used in the Quake III Arena game engine to speed up computations related to lighting, shading, and physics. The function approximates the value of 1/sqrt(x) very efficiently, significantly faster than the traditional method of calculating a square root followed by division.
 function "$main" {
   input {
-    int number?
+    object args {
+      schema {
+        int number?
+      }
+    }
   }
 
   stack {

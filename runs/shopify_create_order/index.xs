@@ -4,8 +4,12 @@ workspace shopify_create_order {
 ---
 function "$main" {
   input {
-    text currency_code? filters=trim
-    json[] line_items?
+    object args {
+      schema {
+        text currency_code? filters=trim
+        json[] line_items?
+      }
+    }
   }
 
   stack {

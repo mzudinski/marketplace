@@ -18,8 +18,12 @@ workspace xor_array
 // ```
 function "$main" {
   input {
-    json[] array_1?
-    json[] array_2?
+    object args {
+      schema {
+        json[] array_1?
+        json[] array_2?
+      }
+    }
   }
 
   stack {

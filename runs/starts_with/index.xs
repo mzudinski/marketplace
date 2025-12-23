@@ -18,9 +18,13 @@ workspace starts_with
 // ```
 function "$main" {
   input {
-    json text?
-    json target?
-    int position?
+    object args {
+      schema {
+        json text?
+        json target?
+        int position?
+      }
+    }
   }
 
   stack {

@@ -18,10 +18,14 @@ workspace fill_array
 // ```
 function "$main" {
   input {
-    json array?
-    json value?
-    int start?
-    int end?="-1"
+    object args {
+      schema {
+        json array?
+        json value?
+        int start?
+        int end?="-1"
+      }
+    }
   }
 
   stack {

@@ -3,8 +3,12 @@ workspace is_match
 // Performs a partial deep comparison between `object` and `source` to determine if `object` contains equivalent property values.
 function "$main" {
   input {
-    json object?
-    json props?
+    object args {
+      schema {
+        json object?
+        json props?
+      }
+    }
   }
 
   stack {

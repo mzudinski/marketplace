@@ -15,11 +15,15 @@ workspace chunk_array
 // ```
 function "$main" {
   input {
-    // The length of each chunk
-    int size?=1
-  
-    // The array to process
-    json[] array
+    object args {
+      schema {
+        // The length of each chunk
+        int size?=1
+      
+        // The array to process
+        json[] array
+      }
+    }
   }
 
   stack {

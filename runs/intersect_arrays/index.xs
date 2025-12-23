@@ -18,11 +18,15 @@ workspace intersect_arrays
 // ```
 function "$main" {
   input {
-    json array_1
-    json array_2?
-    json array_3?
-    json array_4?
-    json array_5?
+    object args {
+      schema {
+        json array_1
+        json array_2?
+        json array_3?
+        json array_4?
+        json array_5?
+      }
+    }
   }
 
   stack {

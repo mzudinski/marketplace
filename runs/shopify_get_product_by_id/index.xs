@@ -82,7 +82,11 @@ workspace shopify_get_product_by_id {
 // 
 function "$main" {
   input {
-    text product_id? filters=trim
+    object args {
+      schema {
+        text product_id? filters=trim
+      }
+    }
   }
 
   stack {

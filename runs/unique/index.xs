@@ -73,10 +73,14 @@ workspace unique
 // it will return all the object with a unique email
 function "$main" {
   input {
-    json[] collection?
-  
-    // optional path value to compare elements
-    text? path? filters=trim
+    object args {
+      schema {
+        json[] collection?
+      
+        // optional path value to compare elements
+        text? path? filters=trim
+      }
+    }
   }
 
   stack {

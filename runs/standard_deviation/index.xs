@@ -18,10 +18,14 @@ workspace standard_deviation
 // ```
 function "$main" {
   input {
-    decimal[] values?
-  
-    // Indicate a sample of data instead of a complete data set
-    bool is_sample?
+    object args {
+      schema {
+        decimal[] values?
+      
+        // Indicate a sample of data instead of a complete data set
+        bool is_sample?
+      }
+    }
   }
 
   stack {

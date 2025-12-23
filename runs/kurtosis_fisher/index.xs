@@ -5,10 +5,14 @@ workspace kurtosis_fisher
 // This action returns Fisher kurtosis, to get the raw kurtosis you can add 3 to its result.
 function "$main" {
   input {
-    decimal[] numbers?
-  
-    // Set the bias to false for small dataset
-    bool bias?=true
+    object args {
+      schema {
+        decimal[] numbers?
+      
+        // Set the bias to false for small dataset
+        bool bias?=true
+      }
+    }
   }
 
   stack {

@@ -104,17 +104,21 @@ workspace google_sheets_update_values {
 // ---
 function "$main" {
   input {
-    // The ID of the Google Spreadsheet.
-    text spreadsheet_id
-  
-    // The A1 notation of the range to update (e.g., 'Sheet1!A1:C10').
-    text range
-  
-    // 2D array of values to update in the sheet.
-    json values
-  
-    // How the input data should be interpreted (RAW or USER_ENTERED). Default is RAW.
-    text value_input_option?=RAW
+    object args {
+      schema {
+        // The ID of the Google Spreadsheet.
+        text spreadsheet_id
+      
+        // The A1 notation of the range to update (e.g., 'Sheet1!A1:C10').
+        text range
+      
+        // 2D array of values to update in the sheet.
+        json values
+      
+        // How the input data should be interpreted (RAW or USER_ENTERED). Default is RAW.
+        text value_input_option?=RAW
+      }
+    }
   }
 
   stack {

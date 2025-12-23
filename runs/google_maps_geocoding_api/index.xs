@@ -4,8 +4,12 @@ workspace google_maps_geocoding_api {
 ---
 function "$main" {
   input {
-    text address filters=trim
-    text region? filters=trim
+    object args {
+      schema {
+        text address filters=trim
+        text region? filters=trim
+      }
+    }
   }
 
   stack {

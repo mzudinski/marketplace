@@ -4,7 +4,11 @@ workspace stripe_verify_signature {
 ---
 function "$main" {
   input {
-    json http_headers
+    object args {
+      schema {
+        json http_headers
+      }
+    }
   }
 
   stack {

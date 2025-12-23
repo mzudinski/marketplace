@@ -4,7 +4,11 @@ workspace shopify_get_order_by_id {
 ---
 function "$main" {
   input {
-    int id
+    object args {
+      schema {
+        int id
+      }
+    }
   }
 
   stack {

@@ -83,10 +83,14 @@ workspace cursor_create_1_click_mcp_install_deeplink
 // ```
 function "$main" {
   input {
-    text mcp_server_url filters=trim
-    text server_name? filters=trim
-    enum server_type?=sse {
-      values = ["sse", "streamable-http"]
+    object args {
+      schema {
+        text mcp_server_url filters=trim
+        text server_name? filters=trim
+        enum server_type?=sse {
+          values = ["sse", "streamable-http"]
+        }
+      }
     }
   }
 

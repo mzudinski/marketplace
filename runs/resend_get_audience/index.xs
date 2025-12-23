@@ -4,7 +4,11 @@ workspace resend_get_audience {
 ---
 function "$main" {
   input {
-    text audience_id filters=trim
+    object args {
+      schema {
+        text audience_id filters=trim
+      }
+    }
   }
 
   stack {

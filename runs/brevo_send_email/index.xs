@@ -100,22 +100,26 @@ workspace brevo_send_email {
 // ```
 function "$main" {
   input {
-    object from {
+    object args {
       schema {
-        text name filters=trim
-        email email filters=trim|lower
+        object from {
+          schema {
+            text name filters=trim
+            email email filters=trim|lower
+          }
+        }
+      
+        object to {
+          schema {
+            text name filters=trim
+            email email filters=trim|lower
+          }
+        }
+      
+        text message_html filters=trim
+        text subject filters=trim
       }
     }
-  
-    object to {
-      schema {
-        text name filters=trim
-        email email filters=trim|lower
-      }
-    }
-  
-    text message_html filters=trim
-    text subject filters=trim
   }
 
   stack {

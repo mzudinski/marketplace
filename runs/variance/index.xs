@@ -25,10 +25,14 @@ workspace variance
 // returns `3.5`
 function "$main" {
   input {
-    decimal[] numbers?
-  
-    // set to false for small dataset
-    bool bias?=true
+    object args {
+      schema {
+        decimal[] numbers?
+      
+        // set to false for small dataset
+        bool bias?=true
+      }
+    }
   }
 
   stack {

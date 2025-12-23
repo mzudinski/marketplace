@@ -3,7 +3,11 @@ workspace factorial
 // Compute the factorial of a value
 function "$main" {
   input {
-    int number?
+    object args {
+      schema {
+        int number?
+      }
+    }
   }
 
   stack {

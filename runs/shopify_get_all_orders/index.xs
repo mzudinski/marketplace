@@ -4,6 +4,9 @@ workspace shopify_get_all_orders {
 ---
 function "$main" {
   input {
+    object args {
+      schema
+    }
   }
 
   stack {

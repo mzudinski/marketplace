@@ -85,10 +85,14 @@ workspace shopify_update_customer {
 // }
 function "$main" {
   input {
-    text customer_id filters=trim
-    text firstName? filters=trim
-    text lastName? filters=trim
-    email email? filters=trim|lower
+    object args {
+      schema {
+        text customer_id filters=trim
+        text firstName? filters=trim
+        text lastName? filters=trim
+        email email? filters=trim|lower
+      }
+    }
   }
 
   stack {

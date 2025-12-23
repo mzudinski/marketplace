@@ -2,8 +2,12 @@ workspace find_index_in_array
 ---
 function "$main" {
   input {
-    json array?
-    json predicate?
+    object args {
+      schema {
+        json array?
+        json predicate?
+      }
+    }
   }
 
   stack {

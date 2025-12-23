@@ -17,9 +17,13 @@ workspace ends_with
 // ```
 function "$main" {
   input {
-    json text?
-    json target?
-    int position?="-1"
+    object args {
+      schema {
+        json text?
+        json target?
+        int position?="-1"
+      }
+    }
   }
 
   stack {

@@ -2,7 +2,11 @@ workspace reverse_array
 ---
 function "$main" {
   input {
-    json array?
+    object args {
+      schema {
+        json array?
+      }
+    }
   }
 
   stack {

@@ -90,8 +90,12 @@ workspace google_sheets_create_spreadsheet {
 // - **For more help**: Refer to the [Google Sheets API documentation](https://developers.google.com/sheets/api/guides/concepts).
 function "$main" {
   input {
-    // The title of the new spreadsheet.
-    text title
+    object args {
+      schema {
+        // The title of the new spreadsheet.
+        text title
+      }
+    }
   }
 
   stack {

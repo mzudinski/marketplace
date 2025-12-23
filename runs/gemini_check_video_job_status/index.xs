@@ -4,7 +4,11 @@ workspace gemini_check_video_job_status {
 ---
 function "$main" {
   input {
-    text name filters=trim
+    object args {
+      schema {
+        text name filters=trim
+      }
+    }
   }
 
   stack {

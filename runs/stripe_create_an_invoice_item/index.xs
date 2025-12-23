@@ -52,8 +52,12 @@ workspace stripe_create_an_invoice_item {
 // ```
 function "$main" {
   input {
-    text customer_id filters=trim
-    text price_id? filters=trim
+    object args {
+      schema {
+        text customer_id filters=trim
+        text price_id? filters=trim
+      }
+    }
   }
 
   stack {

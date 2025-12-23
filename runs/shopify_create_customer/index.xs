@@ -4,9 +4,13 @@ workspace shopify_create_customer {
 ---
 function "$main" {
   input {
-    email email filters=trim|lower
-    text firstName filters=trim
-    text lastName filters=trim
+    object args {
+      schema {
+        email email filters=trim|lower
+        text firstName filters=trim
+        text lastName filters=trim
+      }
+    }
   }
 
   stack {

@@ -4,9 +4,13 @@ workspace stripe_list_all_customers {
 ---
 function "$main" {
   input {
-    email email? filters=trim|lower
-    text starting_after? filters=trim
-    int limit?
+    object args {
+      schema {
+        email email? filters=trim|lower
+        text starting_after? filters=trim
+        int limit?
+      }
+    }
   }
 
   stack {

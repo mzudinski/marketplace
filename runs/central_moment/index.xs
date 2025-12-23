@@ -41,11 +41,15 @@ workspace central_moment
 // Unbiased Fourth Central Moment: `23.9806547`
 function "$main" {
   input {
-    decimal[] numbers?
-    int power?=2 filters=min:2|max:4
-  
-    // Set the bias to false for small datasets
-    bool bias?=true
+    object args {
+      schema {
+        decimal[] numbers?
+        int power?=2 filters=min:2|max:4
+      
+        // Set the bias to false for small datasets
+        bool bias?=true
+      }
+    }
   }
 
   stack {

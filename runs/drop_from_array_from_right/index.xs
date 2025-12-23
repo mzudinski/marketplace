@@ -3,8 +3,12 @@ workspace drop_from_array_from_right
 // Creates a slice of `array` with `n` elements dropped from the end.
 function "$main" {
   input {
-    json array?
-    int n?
+    object args {
+      schema {
+        json array?
+        int n?
+      }
+    }
   }
 
   stack {

@@ -3,13 +3,17 @@ workspace op_all
 // Apply an operation on all the element of an array
 function "$main" {
   input {
-    decimal[] numbers?
-    enum op? {
-      values = ["add", "subtract", "divide", "multiply", "power"]
+    object args {
+      schema {
+        decimal[] numbers?
+        enum op? {
+          values = ["add", "subtract", "divide", "multiply", "power"]
+        }
+      
+        // a single value or an array of values the same size as the numbers
+        json value?
+      }
     }
-  
-    // a single value or an array of values the same size as the numbers
-    json value?
   }
 
   stack {

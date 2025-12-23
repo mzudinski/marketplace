@@ -22,11 +22,15 @@ workspace linear_regression
 // ```
 function "$main" {
   input {
-    // the X dataset
-    decimal[] x?
-  
-    // The Y dataset
-    decimal[] y?
+    object args {
+      schema {
+        // the X dataset
+        decimal[] x?
+      
+        // The Y dataset
+        decimal[] y?
+      }
+    }
   }
 
   stack {

@@ -4,8 +4,12 @@ workspace stripe_list_all_products {
 ---
 function "$main" {
   input {
-    text starting_after? filters=trim
-    int limit?
+    object args {
+      schema {
+        text starting_after? filters=trim
+        int limit?
+      }
+    }
   }
 
   stack {

@@ -2,10 +2,14 @@ workspace optimize_ai_input
 ---
 function "$main" {
   input {
-    json payload?
-  
-    // This will remove any empty keys to reduce token usage
-    bool strip_empty_keys?
+    object args {
+      schema {
+        json payload?
+      
+        // This will remove any empty keys to reduce token usage
+        bool strip_empty_keys?
+      }
+    }
   }
 
   stack {

@@ -109,10 +109,14 @@ workspace postmark_send_email_with_template {
 // ```
 function "$main" {
   input {
-    text from_email filters=trim|lower
-    text to_email filters=trim|lower
-    int template_id
-    json template_model
+    object args {
+      schema {
+        text from_email filters=trim|lower
+        text to_email filters=trim|lower
+        int template_id
+        json template_model
+      }
+    }
   }
 
   stack {

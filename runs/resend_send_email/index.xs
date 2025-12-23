@@ -64,11 +64,15 @@ workspace resend_send_email {
 // This example sends a test email from `onboarding@resend.dev` to `michael@xano.com` with the subject "Test" and both text and HTML body content "Test123" and "Test" respectively.
 function "$main" {
   input {
-    email from filters=trim|lower
-    email[1:] to filters=trim|lower
-    text subject filters=trim
-    text text? filters=trim
-    text html? filters=trim
+    object args {
+      schema {
+        email from filters=trim|lower
+        email[1:] to filters=trim|lower
+        text subject filters=trim
+        text text? filters=trim
+        text html? filters=trim
+      }
+    }
   }
 
   stack {

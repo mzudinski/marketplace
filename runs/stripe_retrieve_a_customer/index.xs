@@ -4,7 +4,11 @@ workspace stripe_retrieve_a_customer {
 ---
 function "$main" {
   input {
-    text customer_id filters=trim
+    object args {
+      schema {
+        text customer_id filters=trim
+      }
+    }
   }
 
   stack {
