@@ -16,7 +16,7 @@ workspace xor_array
 // ```
 // [1, 2]
 // ```
-function "Xor array" {
+function "$main" {
   input {
     json[] array_1?
     json[] array_2?

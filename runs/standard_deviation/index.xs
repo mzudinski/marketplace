@@ -16,7 +16,7 @@ workspace standard_deviation
 // ```
 // 1.4142135623731
 // ```
-function "Standard Deviation" {
+function "$main" {
   input {
     decimal[] values?
   

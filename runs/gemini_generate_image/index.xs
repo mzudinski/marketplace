@@ -2,7 +2,7 @@ workspace gemini_generate_image {
   env = {gemini_api_key: ""}
 }
 ---
-function "Gemini -> Generate Image" {
+function "$main" {
   input {
     text model?="gemini-2.0-flash-preview-image-generation" filters=trim
     text prompt? filters=trim

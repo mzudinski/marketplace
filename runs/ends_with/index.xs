@@ -15,7 +15,7 @@ workspace ends_with
 // ```
 // true
 // ```
-function "Ends with" {
+function "$main" {
   input {
     json text?
     json target?

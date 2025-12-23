@@ -2,7 +2,7 @@ workspace google_maps_reverse_geocode {
   env = {google_api_key: ""}
 }
 ---
-function "Google Maps -> Reverse Geocode" {
+function "$main" {
   input {
     text latitude filters=trim
     text longitude? filters=trim

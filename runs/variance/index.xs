@@ -23,7 +23,7 @@ workspace variance
 // ```
 // 
 // returns `3.5`
-function Variance {
+function "$main" {
   input {
     decimal[] numbers?
   

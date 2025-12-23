@@ -1,7 +1,7 @@
 workspace sum
 ---
 // Calculates the total sum of an array of number
-function Sum {
+function "$main" {
   input {
     decimal[] numbers?
   }

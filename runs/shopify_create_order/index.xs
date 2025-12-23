@@ -2,7 +2,7 @@ workspace shopify_create_order {
   env = {access_token: "", store: ""}
 }
 ---
-function "Shopify -> Create Order" {
+function "$main" {
   input {
     text currency_code? filters=trim
     json[] line_items?

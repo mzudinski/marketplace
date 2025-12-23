@@ -2,7 +2,7 @@ workspace stripe_create_an_invoice {
   env = {stripe_api_key: ""}
 }
 ---
-function "Stripe -> Create an Invoice" {
+function "$main" {
   input {
     text customer_id filters=trim
     text discount? filters=trim

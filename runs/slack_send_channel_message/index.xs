@@ -76,7 +76,7 @@ workspace slack_send_channel_message {
 // }
 // }
 // ```
-function "Slack -> Send Channel Message" {
+function "$main" {
   input {
     text channel_id filters=trim
     text message filters=trim

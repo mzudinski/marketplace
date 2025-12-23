@@ -16,7 +16,7 @@ workspace starts_with
 // ```
 // true
 // ```
-function "Starts with" {
+function "$main" {
   input {
     json text?
     json target?

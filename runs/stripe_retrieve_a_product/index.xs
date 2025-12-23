@@ -2,7 +2,7 @@ workspace stripe_retrieve_a_product {
   env = {stripe_api_key: ""}
 }
 ---
-function "Stripe -> Get Product" {
+function "$main" {
   input {
     text product_id filters=trim
   }

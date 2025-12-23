@@ -1,6 +1,6 @@
 workspace optimize_ai_input
 ---
-function "Optimize AI Input" {
+function "$main" {
   input {
     json payload?
   

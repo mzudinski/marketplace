@@ -2,7 +2,7 @@ workspace stripe_finalize_invoice {
   env = {stripe_api_key: ""}
 }
 ---
-function "Stripe -> Finalize Invoice" {
+function "$main" {
   input {
     text invoice_id filters=trim
   }

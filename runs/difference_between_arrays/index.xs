@@ -1,6 +1,6 @@
 workspace difference_between_arrays
 ---
-function "Difference array" {
+function "$main" {
   input {
     json[] array_1?
     json[] array_2?

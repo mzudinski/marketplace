@@ -2,7 +2,7 @@ workspace google_maps_places_details {
   env = {google_api_key: ""}
 }
 ---
-function "Google Maps -> Places Details" {
+function "$main" {
   input {
     text place_id filters=trim
     text field_mask? filters=trim

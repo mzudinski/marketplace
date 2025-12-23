@@ -2,7 +2,7 @@ workspace stripe_list_all_products {
   env = {stripe_api_key: ""}
 }
 ---
-function "Stripe -> List All Products" {
+function "$main" {
   input {
     text starting_after? filters=trim
     int limit?

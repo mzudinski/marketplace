@@ -1,6 +1,6 @@
 workspace size_of_collection
 ---
-function "Size of collection" {
+function "$main" {
   input {
     // The collection to inspect
     json collection?

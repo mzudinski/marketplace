@@ -41,7 +41,7 @@ workspace union
 //   "path": "email"
 // }
 // ```
-function Union {
+function "$main" {
   input {
     json[] left_collection?
     json[] right_collection?

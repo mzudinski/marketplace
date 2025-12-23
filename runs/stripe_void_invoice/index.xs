@@ -2,7 +2,7 @@ workspace stripe_void_invoice {
   env = {stripe_api_key: ""}
 }
 ---
-function "Stripe -> Void Invoice" {
+function "$main" {
   input {
     text invoice_id filters=trim
   }

@@ -1,7 +1,7 @@
 workspace op_all
 ---
 // Apply an operation on all the element of an array
-function op_all {
+function "$main" {
   input {
     decimal[] numbers?
     enum op? {

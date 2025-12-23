@@ -1,7 +1,7 @@
 workspace sum_of_squares
 ---
 // The sum of squares is the result of squaring each number in a set and then adding those squares together.
-function "Sum of squares" {
+function "$main" {
   input {
     decimal[] numbers?
   }

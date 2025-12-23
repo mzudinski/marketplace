@@ -2,7 +2,7 @@ workspace gemini_audio_understanding {
   env = {gemini_api_key: ""}
 }
 ---
-function "Gemini -> Audio Understanding" {
+function "$main" {
   input {
     text file_uri filters=trim
     text question filters=trim

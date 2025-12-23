@@ -1,7 +1,7 @@
 workspace skewness
 ---
 // Measures the asymmetry of a data set’s distribution around its mean.
-function Skewness {
+function "$main" {
   input {
     decimal[] numbers?
     bool bias?

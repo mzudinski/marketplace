@@ -1,6 +1,6 @@
 workspace find_index_in_array
 ---
-function "FindIndex in array" {
+function "$main" {
   input {
     json array?
     json predicate?

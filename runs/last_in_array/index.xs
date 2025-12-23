@@ -1,6 +1,6 @@
 workspace last_in_array
 ---
-function "Last array" {
+function "$main" {
   input {
     json array?
   }

@@ -1,7 +1,7 @@
 workspace sum_of_products
 ---
 // Calculates the sum of the element-wise products of two arrays, requiring two input arrays of equal length.
-function "Sum of products" {
+function "$main" {
   input {
     decimal[] numbers_a?
     decimal[] numbers_b?

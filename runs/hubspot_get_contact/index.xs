@@ -78,7 +78,7 @@ workspace hubspot_get_contact {
 //     "archived": false
 // }
 // ```
-function "Hubspot -> Get Contact" {
+function "$main" {
   input {
     int id filters=min:1
     text[] properties? filters=trim

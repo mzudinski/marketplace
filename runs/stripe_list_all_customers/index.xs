@@ -2,7 +2,7 @@ workspace stripe_list_all_customers {
   env = {stripe_api_key: ""}
 }
 ---
-function "Stripe -> List All Customers" {
+function "$main" {
   input {
     email email? filters=trim|lower
     text starting_after? filters=trim

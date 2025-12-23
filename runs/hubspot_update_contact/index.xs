@@ -132,7 +132,7 @@ workspace hubspot_update_contact {
 //   "archived": false
 // }
 // ```
-function "Hubspot -> Edit Contact" {
+function "$main" {
   input {
     text first_name? filters=trim
     text last_name? filters=trim

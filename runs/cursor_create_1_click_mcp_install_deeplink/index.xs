@@ -81,7 +81,7 @@ workspace cursor_create_1_click_mcp_install_deeplink
 //   "url": "{mcp_server_url}"
 // }
 // ```
-function "Cursor -> Create 1-click MCP Install Deeplink" {
+function "$main" {
   input {
     text mcp_server_url filters=trim
     text server_name? filters=trim

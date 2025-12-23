@@ -78,7 +78,7 @@ workspace hubspot_get_deal {
 //     "archived": false
 // }
 // ```
-function "Hubspot -> Get Deal" {
+function "$main" {
   input {
     int deal_id
     text[] properties? filters=trim

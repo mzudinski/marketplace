@@ -102,7 +102,7 @@ workspace whatsapp_send_message {
 //     ]
 // }
 // ```
-function "Whatsapp -> Send Message" {
+function "$main" {
   input {
     text to_number filters=trim
     text message filters=trim

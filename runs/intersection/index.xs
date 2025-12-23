@@ -50,7 +50,7 @@ workspace intersection
 //   "path": "email"
 // }
 // ```
-function Intersection {
+function "$main" {
   input {
     json[] left_collection?
     json[] right_collection?

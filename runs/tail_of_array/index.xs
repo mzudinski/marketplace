@@ -1,6 +1,6 @@
 workspace tail_of_array
 ---
-function "Tail of array" {
+function "$main" {
   input {
     json array?
   }

@@ -102,7 +102,7 @@ workspace google_sheets_update_values {
 // - For more help, refer to the [Google Sheets API documentation](https://developers.google.com/sheets/api/guides/concepts).
 // 
 // ---
-function "Google Sheets -> Update Values" {
+function "$main" {
   input {
     // The ID of the Google Spreadsheet.
     text spreadsheet_id

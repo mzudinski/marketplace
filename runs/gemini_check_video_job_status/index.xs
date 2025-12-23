@@ -2,7 +2,7 @@ workspace gemini_check_video_job_status {
   env = {gemini_api_key: ""}
 }
 ---
-function "Gemini -> Check Video Job Status" {
+function "$main" {
   input {
     text name filters=trim
   }

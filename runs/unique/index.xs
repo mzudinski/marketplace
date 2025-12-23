@@ -71,7 +71,7 @@ workspace unique
 // ```
 // 
 // it will return all the object with a unique email
-function Unique {
+function "$main" {
   input {
     json[] collection?
   

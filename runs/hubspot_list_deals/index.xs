@@ -80,7 +80,7 @@ workspace hubspot_list_deals {
 //     .
 // ]
 // ```
-function "Hubspot -> List Deals" {
+function "$main" {
   input {
     text after? filters=trim
     int limit?

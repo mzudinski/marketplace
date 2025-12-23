@@ -39,7 +39,7 @@ workspace central_moment
 // ```
 // 
 // Unbiased Fourth Central Moment: `23.9806547`
-function "Central Moment" {
+function "$main" {
   input {
     decimal[] numbers?
     int power?=2 filters=min:2|max:4

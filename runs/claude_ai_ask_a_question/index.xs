@@ -133,7 +133,7 @@ workspace claude_ai_ask_a_question {
 //     }
 // }
 // ```
-function "Claude AI -> Ask a Question" {
+function "$main" {
   input {
     // User prompt to be asked from AI
     text prompt filters=trim

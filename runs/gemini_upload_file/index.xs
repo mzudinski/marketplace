@@ -2,7 +2,7 @@ workspace gemini_upload_file {
   env = {gemini_api_key: ""}
 }
 ---
-function "Gemini -> Upload File" {
+function "$main" {
   input {
     file? file
   }

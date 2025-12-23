@@ -13,7 +13,7 @@ workspace flatten_deep_array
 // ```
 // [1, 2, 3, 4, 5]
 // ```
-function "Flatten deep array" {
+function "$main" {
   input {
     json[] array?
   }

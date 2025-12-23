@@ -2,7 +2,7 @@ workspace shopify_get_customer_by_id {
   env = {access_token: "", store: ""}
 }
 ---
-function "Shopify -> Get Customer by ID" {
+function "$main" {
   input {
     text customer_id filters=trim
   }

@@ -1,7 +1,7 @@
 workspace pluck
 ---
 // Retrieves the value of a specified property from all elements in the collection.
-function Pluck {
+function "$main" {
   input {
     json[] array?
     text key? filters=trim

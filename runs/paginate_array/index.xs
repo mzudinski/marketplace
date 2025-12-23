@@ -13,7 +13,7 @@ workspace paginate_array
 // 	•	The previous page (if there is one).
 // 
 // This allows for easier navigation through large datasets by breaking them up into smaller, manageable “pages.”
-function "Paginate array" {
+function "$main" {
   input {
     // The array you wish to paginate.
     json array

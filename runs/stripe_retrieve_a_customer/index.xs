@@ -2,7 +2,7 @@ workspace stripe_retrieve_a_customer {
   env = {stripe_api_key: ""}
 }
 ---
-function "Stripe -> Retrieve a Customer" {
+function "$main" {
   input {
     text customer_id filters=trim
   }

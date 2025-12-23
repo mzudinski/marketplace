@@ -61,7 +61,7 @@ workspace x_ai_create_a_chat_completion {
 // ```
 // "Barack Obama is 6 feet 1 inch tall (185 cm)."  
 // ```
-function "xAI -> Completion" {
+function "$main" {
   input {
     text model?="grok-beta" filters=trim
     text message? filters=trim

@@ -108,7 +108,7 @@ workspace hubspot_create_deal {
 //     "archived": false
 // }
 // ```
-function "Hubspot -> Create Deal" {
+function "$main" {
   input {
     text name? filters=trim
     enum deal_stage? {

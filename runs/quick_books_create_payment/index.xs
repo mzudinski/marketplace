@@ -137,7 +137,7 @@ workspace quick_books_create_payment {
 // }
 // 
 // ```
-function "QuickBooks -> Create Payment" {
+function "$main" {
   input {
     decimal amount
     int consumer_ref

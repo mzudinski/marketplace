@@ -2,7 +2,7 @@ workspace google_maps_geocoding_api {
   env = {google_api_key: ""}
 }
 ---
-function "Google Maps -> Geocoding API" {
+function "$main" {
   input {
     text address filters=trim
     text region? filters=trim

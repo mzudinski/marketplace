@@ -16,7 +16,7 @@ workspace fill_array
 // ```
 // [1,2,"replaced","replaced",5,6]
 // ```
-function "Fill array" {
+function "$main" {
   input {
     json array?
     json value?

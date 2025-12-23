@@ -78,7 +78,7 @@ workspace resend_send_batch_email {
 // ---
 // 
 // This example will send two separate emails in one batch operation: one to `michael@xano.com` and another to `alex@xano.com`, each with different subjects and message bodies.
-function "Resend -> Send Batch Email" {
+function "$main" {
   input {
     object[1:] emails {
       schema {

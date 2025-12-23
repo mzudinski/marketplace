@@ -2,7 +2,7 @@ workspace shopify_create_customer {
   env = {access_token: "", store: ""}
 }
 ---
-function "Shopify -> Create Customer" {
+function "$main" {
   input {
     email email filters=trim|lower
     text firstName filters=trim

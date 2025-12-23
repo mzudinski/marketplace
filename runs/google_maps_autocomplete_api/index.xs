@@ -2,7 +2,7 @@ workspace google_maps_autocomplete_api {
   env = {google_api_key: ""}
 }
 ---
-function "Google Maps -> Autocomplete API" {
+function "$main" {
   input {
     text input filters=trim
     text session_token? filters=trim

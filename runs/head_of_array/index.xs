@@ -1,6 +1,6 @@
 workspace head_of_array
 ---
-function "Head array" {
+function "$main" {
   input {
     json array?
   }

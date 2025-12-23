@@ -103,7 +103,7 @@ workspace hubspot_list_contacts {
 //   }
 // }
 // ```
-function "Hubspot -> List Contacts" {
+function "$main" {
   input {
     int after?
     text[] properties? filters=trim

@@ -1,7 +1,7 @@
 workspace average_of_values_mean
 ---
 // Compute the average (aka. mean) of provided `values`
-function "Average of values" {
+function "$main" {
   input {
     decimal[] values?
   }

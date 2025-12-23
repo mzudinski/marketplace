@@ -1,6 +1,6 @@
 workspace concat_arrays
 ---
-function "Concat array" {
+function "$main" {
   input {
     json[] array_1?
     json[] array_2?

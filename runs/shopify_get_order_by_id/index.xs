@@ -2,7 +2,7 @@ workspace shopify_get_order_by_id {
   env = {access_token: "", store: ""}
 }
 ---
-function "Shopify -> Get Order by ID" {
+function "$main" {
   input {
     int id
   }

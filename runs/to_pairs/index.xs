@@ -13,7 +13,7 @@ workspace to_pairs
 // ```
 // [["a", 1], ["b", 2]]
 // ```
-function "To pairs" {
+function "$main" {
   input {
     json collection?
   }

@@ -147,7 +147,7 @@ workspace hubspot_create_contact {
 //   "archived": false
 // }
 // ```
-function "Hubspot -> Create Contact" {
+function "$main" {
   input {
     text first_name? filters=trim
     text last_name? filters=trim

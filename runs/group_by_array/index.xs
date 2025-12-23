@@ -26,7 +26,7 @@ workspace group_by_array
 //   }
 // }
 // ```
-function "Group by array" {
+function "$main" {
   input {
     json collection?
     text path? filters=trim

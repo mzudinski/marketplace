@@ -2,7 +2,7 @@ workspace gemini_generate_video {
   env = {gemini_api_key: ""}
 }
 ---
-function "Gemini -> Generate Video" {
+function "$main" {
   input {
     text model?="veo-3.0-generate-preview:predictLongRunning" filters=trim
     text prompt? filters=trim

@@ -1,6 +1,6 @@
 workspace remove_from_array
 ---
-function "Remove from array" {
+function "$main" {
   input {
     json array?
     json[] values?

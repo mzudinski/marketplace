@@ -1,6 +1,6 @@
 workspace median_of_values
 ---
-function median {
+function "$main" {
   input {
     decimal[] values
   }

@@ -2,7 +2,7 @@ workspace resend_get_audience {
   env = {resend_api_key: ""}
 }
 ---
-function "Resend -> Get Audience" {
+function "$main" {
   input {
     text audience_id filters=trim
   }

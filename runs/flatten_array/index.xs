@@ -1,6 +1,6 @@
 workspace flatten_array
 ---
-function "Flatten array" {
+function "$main" {
   input {
     json[] array?
   }

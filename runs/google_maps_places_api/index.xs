@@ -2,7 +2,7 @@ workspace google_maps_places_api {
   env = {google_key: ""}
 }
 ---
-function "Gmaps test" {
+function "$main" {
   input {
     text query filters=trim
     text field_mask? filters=trim

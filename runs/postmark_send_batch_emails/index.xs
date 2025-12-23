@@ -2,7 +2,7 @@ workspace postmark_send_batch_emails {
   env = {postmark_base_url: "", postmark_api_token: ""}
 }
 ---
-function "Postmark -> Send Batch Emails" {
+function "$main" {
   input {
     object[1:] messages? {
       schema {

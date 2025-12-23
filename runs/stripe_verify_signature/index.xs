@@ -2,7 +2,7 @@ workspace stripe_verify_signature {
   env = {stripe_webhook_secret: ""}
 }
 ---
-function "Stripe: Verify Signature" {
+function "$main" {
   input {
     json http_headers
   }

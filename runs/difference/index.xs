@@ -62,7 +62,7 @@ workspace difference
 //   "path": "email"
 // }
 // ```
-function Difference {
+function "$main" {
   input {
     json[] left_collection?
     json[] right_collection?

@@ -78,7 +78,7 @@ workspace open_ai_get_embeddings {
 //    ]
 // }
 // ```
-function "OpenAI -> Get an embedding (simple)" {
+function "$main" {
   input {
     text input_text filters=trim
   

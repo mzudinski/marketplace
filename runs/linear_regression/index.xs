@@ -20,7 +20,7 @@ workspace linear_regression
 //   ]
 // }
 // ```
-function "Linear Regression" {
+function "$main" {
   input {
     // the X dataset
     decimal[] x?

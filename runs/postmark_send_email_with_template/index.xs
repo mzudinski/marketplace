@@ -107,7 +107,7 @@ workspace postmark_send_email_with_template {
 //   "Message": "OK"
 // }
 // ```
-function "Postmark Send email with template" {
+function "$main" {
   input {
     text from_email filters=trim|lower
     text to_email filters=trim|lower

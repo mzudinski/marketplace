@@ -2,7 +2,7 @@ workspace shopify_get_all_orders {
   env = {access_token: "", store: ""}
 }
 ---
-function "Shopify -> Get All Orders" {
+function "$main" {
   input {
   }
 

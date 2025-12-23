@@ -65,7 +65,7 @@ workspace open_ai_describe_an_image_from_a_url {
 // }
 // 
 // ```
-function "OpenAI -> Describe an Image from a URL" {
+function "$main" {
   input {
     text image_url? filters=trim|pattern:"(?i)^https?:\\/\\/[^\\s]+?\\.(jpg|jpeg|png|gif|bmp|webp)$":"Whoops, the input parameter image_url is invalid :-(!"
   

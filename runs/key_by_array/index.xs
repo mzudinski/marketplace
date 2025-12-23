@@ -1,6 +1,6 @@
 workspace key_by_array
 ---
-function "Key by array" {
+function "$main" {
   input {
     json collection?
     text path? filters=trim

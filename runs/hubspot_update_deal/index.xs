@@ -111,7 +111,7 @@ workspace hubspot_update_deal {
 //     "archived": false
 // }
 // ```
-function "Hubspot -> Edit Deal" {
+function "$main" {
   input {
     text name? filters=trim
     enum deal_stage? {

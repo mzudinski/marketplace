@@ -103,7 +103,7 @@ workspace convert_api_convert_file {
 //    ]
 // }
 // ```
-function "Convert API -> Convert File" {
+function "$main" {
   input {
     enum from_format {
       values = ["pdf", "docx", "css", "xlsx", "jpg"]

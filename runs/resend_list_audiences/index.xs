@@ -2,7 +2,7 @@ workspace resend_list_audiences {
   env = {resend_api_key: ""}
 }
 ---
-function "Resend -> List Audiences" {
+function "$main" {
   input {
   }
 

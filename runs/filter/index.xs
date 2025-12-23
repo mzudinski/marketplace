@@ -59,7 +59,7 @@ workspace filter
 // }
 // 
 // ```
-function Filter {
+function "$main" {
   input {
     json[] array?
     json props?

@@ -16,7 +16,7 @@ workspace intersect_arrays
 // ```
 // [2]
 // ```
-function "Intersect arrays" {
+function "$main" {
   input {
     json array_1
     json array_2?

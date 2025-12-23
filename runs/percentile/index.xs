@@ -1,6 +1,6 @@
 workspace percentile
 ---
-function Percentile {
+function "$main" {
   input {
     // Array of numbers to calculate the percentile from
     decimal[] numbers?

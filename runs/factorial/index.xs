@@ -1,7 +1,7 @@
 workspace factorial
 ---
 // Compute the factorial of a value
-function Factorial {
+function "$main" {
   input {
     int number?
   }

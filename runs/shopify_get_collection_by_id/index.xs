@@ -2,7 +2,7 @@ workspace shopify_get_collection_by_id {
   env = {access_token: "", store: ""}
 }
 ---
-function "Shopify -> Get Collection by ID" {
+function "$main" {
   input {
     text collection_id filters=trim
   }

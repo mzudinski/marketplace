@@ -2,7 +2,7 @@ workspace google_maps_validate_address {
   env = {google_api_key: ""}
 }
 ---
-function "Google Maps -> Validate Address" {
+function "$main" {
   input {
     text region_code? filters=trim
     text address_lines filters=trim

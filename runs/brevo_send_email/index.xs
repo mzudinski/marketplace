@@ -98,7 +98,7 @@ workspace brevo_send_email {
 //   "messageId": "<202410100***.1236169****@smtp-relay.mailin.fr>"
 // }
 // ```
-function "Brevo -> Send Email" {
+function "$main" {
   input {
     object from {
       schema {

@@ -23,7 +23,7 @@ workspace map_array
 // ```
 // [true, false, true, false]
 // ```
-function "Map array" {
+function "$main" {
   input {
     json collection?
     text path? filters=trim

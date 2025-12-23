@@ -2,7 +2,7 @@ workspace gemini_chat_with_pdf {
   env = {gemini_api_key: ""}
 }
 ---
-function "Gemini -> Chat with PDF" {
+function "$main" {
   input {
     text file_uri filters=trim
     text question filters=trim

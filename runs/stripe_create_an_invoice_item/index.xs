@@ -50,7 +50,7 @@ workspace stripe_create_an_invoice_item {
 //   "livemode": false
 // }
 // ```
-function "Stripe -> Create an Invoice Item" {
+function "$main" {
   input {
     text customer_id filters=trim
     text price_id? filters=trim

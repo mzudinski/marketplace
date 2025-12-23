@@ -63,7 +63,7 @@ workspace open_ai_create_a_chat_completion {
 //    "Barack Obama is 6 feet 1 inch tall (185 cm)."
 // }
 // ```
-function "OpenAI -> Create a Chat Completion (Simple)" {
+function "$main" {
   input {
     enum model?="gpt-4o-mini" {
       values = ["gpt-4o-mini", "gpt-4o"]

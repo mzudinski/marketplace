@@ -1,6 +1,6 @@
 workspace initial_of_array
 ---
-function "Initial of array" {
+function "$main" {
   input {
     json array?
   }

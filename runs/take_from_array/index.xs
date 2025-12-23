@@ -1,6 +1,6 @@
 workspace take_from_array
 ---
-function "Take from array" {
+function "$main" {
   input {
     json array?
     int n?=1

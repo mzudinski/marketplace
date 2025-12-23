@@ -13,7 +13,7 @@ workspace chunk_array
 // ```
 // [1, 2], [3, 4], [5]
 // ```
-function "Chunk array" {
+function "$main" {
   input {
     // The length of each chunk
     int size?=1

@@ -3,7 +3,7 @@ workspace open_ai_summarize {
 }
 ---
 // This function summarizes a piece of text using the OpenAI API
-function "OpenAI -> Summarize (Simple)" {
+function "$main" {
   input {
     text input_text filters=trim
     enum model?="gpt-4o-mini" {

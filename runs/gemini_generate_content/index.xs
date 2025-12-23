@@ -2,7 +2,7 @@ workspace gemini_generate_content {
   env = {gemini_api_key: ""}
 }
 ---
-function "Gemini -> Generate Content" {
+function "$main" {
   input {
     text model?="gemini-2.0-flash" filters=trim
     text prompt? filters=trim

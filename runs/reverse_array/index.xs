@@ -1,6 +1,6 @@
 workspace reverse_array
 ---
-function "Reverse array" {
+function "$main" {
   input {
     json array?
   }

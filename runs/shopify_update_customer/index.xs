@@ -83,7 +83,7 @@ workspace shopify_update_customer {
 //     }
 //   }
 // }
-function "Shopify -> Update Customer" {
+function "$main" {
   input {
     text customer_id filters=trim
     text firstName? filters=trim

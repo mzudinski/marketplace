@@ -88,7 +88,7 @@ workspace google_sheets_create_spreadsheet {
 // - **PERMISSION_DENIED**: Check your access token and Google account permissions.
 // - **INVALID_ARGUMENT**: Ensure all required fields are provided and valid.
 // - **For more help**: Refer to the [Google Sheets API documentation](https://developers.google.com/sheets/api/guides/concepts).
-function "Google Sheets -> Create Spreadsheet" {
+function "$main" {
   input {
     // The title of the new spreadsheet.
     text title

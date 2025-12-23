@@ -19,7 +19,7 @@ workspace drop_from_array
 // ```
 // [4]
 // ```
-function "Drop array" {
+function "$main" {
   input {
     json[] array?
     int n?

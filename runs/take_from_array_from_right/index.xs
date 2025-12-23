@@ -1,6 +1,6 @@
 workspace take_from_array_from_right
 ---
-function "Take from array from right" {
+function "$main" {
   input {
     json array?
     int n?=1

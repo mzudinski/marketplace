@@ -1,7 +1,7 @@
 workspace op_two_array
 ---
 // apply the operation from one array to the other
-function op_two_array {
+function "$main" {
   input {
     decimal[] left_numbers?
     enum op?=add {

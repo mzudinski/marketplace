@@ -3,7 +3,7 @@ workspace open_ai_generate_an_image {
 }
 ---
 // This function creates an image from an input text using the OpenAI API
-function "OpenAI -> Create an image" {
+function "$main" {
   input {
     text prompt filters=trim
   

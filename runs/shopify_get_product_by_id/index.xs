@@ -80,7 +80,7 @@ workspace shopify_get_product_by_id {
 //   "product_id": "gid://shopify/Product/1234567890"
 // }
 // 
-function "Shopify - Get Product By ID" {
+function "$main" {
   input {
     text product_id? filters=trim
   }
