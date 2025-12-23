@@ -194,7 +194,7 @@ function "Hubspot -> Create Contact" {
             |set:"objectWriteTraceId":(""|create_uid)
             |set:"properties":$properties_object
           headers = []
-            |push:("authorization: Bearer %s"|sprintf:"hubspot_api_key")
+            |push:("authorization: Bearer %s"|sprintf:$reg.hubspot_api_key)
             |push:"content-type: application/json"
         } as $hubspot_api
       }

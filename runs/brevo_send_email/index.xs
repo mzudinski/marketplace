@@ -142,7 +142,7 @@ function "Brevo -> Send Email" {
             |set:"htmlContent":$input.message_html
           headers = []
             |push:"accept: application/json"
-            |push:("api-key: %s"|sprintf:"brevo_api_key")
+            |push:("api-key: %s"|sprintf:$reg.brevo_api_key)
             |push:"content-type: application/json"
         } as $api_response
       

@@ -114,7 +114,7 @@ function "Hubspot -> List Contacts" {
           method = "GET"
           params = {}|set:"archived":"false"
           headers = []
-            |push:("authorization: Bearer %s"|sprintf:"hubspot_api_key")
+            |push:("authorization: Bearer %s"|sprintf:$reg.hubspot_api_key)
         } as $hubspot_api
       }
     }

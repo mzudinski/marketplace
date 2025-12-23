@@ -130,7 +130,7 @@ function "Convert API -> Convert File" {
             |set:"File":$input.file_url
             |set:"StoreFile":"true"
           headers = []
-            |push:("Authorization: Bearer %s"|sprintf:"convert_api_secret")
+            |push:("Authorization: Bearer %s"|sprintf:$reg.convert_api_secret)
         } as $api1
       
         // Response variable

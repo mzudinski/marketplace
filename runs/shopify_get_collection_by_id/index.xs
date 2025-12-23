@@ -8,7 +8,7 @@ function "Shopify -> Get Collection by ID" {
     group {
       stack {
         api.request {
-          url = "https://%s/admin/api/2025-07/graphql.json"|sprintf:"store"
+          url = "https://%s/admin/api/2025-07/graphql.json"|sprintf:$reg.store
           method = "POST"
           params = {}
             |set:"query":"query CollectionMetafield($namespace: String!, $key: String!, $ownerId: ID!) { collection(id: $ownerId) { id title handle description image { url altText } products(first: 10) { edges { node { id title handle status totalInventory } } } subtitle: metafield(namespace: $namespace, key: $key) { value } } }"
@@ -19,7 +19,7 @@ function "Shopify -> Get Collection by ID" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Shopify-Access-Token: %s"|sprintf:"access_token")
+            |push:("X-Shopify-Access-Token: %s"|sprintf:$reg.access_token)
         } as $shopify_api
       }
     }

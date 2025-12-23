@@ -86,7 +86,7 @@ function "Shopify - Get Product By ID" {
     group {
       stack {
         api.request {
-          url = "https://%s/admin/api/2025-07/graphql.json"|sprintf:"store"
+          url = "https://%s/admin/api/2025-07/graphql.json"|sprintf:$reg.store
           method = "POST"
           params = {}
             |set:"query":"query($identifier: ProductIdentifierInput!) { product: productByIdentifier(identifier: $identifier) { id title handle descriptionHtml status createdAt updatedAt vendor productType tags variants(first: 50) { edges { node { id title sku price inventoryQuantity createdAt updatedAt } } } images(first: 10) { edges { node { id src altText } } } } }"
@@ -97,7 +97,7 @@ function "Shopify - Get Product By ID" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Shopify-Access-Token: %s"|sprintf:"access_token")
+            |push:("X-Shopify-Access-Token: %s"|sprintf:$reg.access_token)
         } as $shopify_api
       }
     }

@@ -164,7 +164,7 @@ function "Claude AI -> Ask a Question" {
                   )
                 )
               headers = []
-                |push:("x-api-key: %s"|sprintf:"claude_api_key")
+                |push:("x-api-key: %s"|sprintf:$reg.claude_api_key)
                 |push:"anthropic-version: 2023-06-01"
                 |push:"content-type: application/json"
             } as $api_response

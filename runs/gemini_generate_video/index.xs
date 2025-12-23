@@ -28,7 +28,7 @@ function "Gemini -> Generate Video" {
               |!set:"durationSeconds":$input.duration_seconds
             )
           headers = []
-            |push:("x-goog-api-key: %s"|sprintf:"gemini_api_key")
+            |push:("x-goog-api-key: %s"|sprintf:$reg.gemini_api_key)
             |push:"Content-Type: application/json"
           timeout = 60
         } as $gemini_api

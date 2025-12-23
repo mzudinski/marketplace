@@ -27,7 +27,7 @@ function "Google Maps -> Places Details" {
             |set_conditional:"sessionToken":$input.session_token:(($input.session_token|is_empty)|not)
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Goog-Api-Key: %s"|sprintf:"google_api_key")
+            |push:("X-Goog-Api-Key: %s"|sprintf:$reg.google_api_key)
             |push:("X-Goog-FieldMask: %s"|sprintf:$field_mask)
         } as $gmaps_api
       }

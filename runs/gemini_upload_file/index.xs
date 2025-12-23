@@ -13,7 +13,7 @@ function "Gemini -> Upload File" {
       stack {
         api.request {
           url = "https://generativelanguage.googleapis.com/upload/v1beta/files?key=YOUR_KEY"
-            |replace:"YOUR_KEY":"gemini_api_key"
+            |replace:"YOUR_KEY":$reg.gemini_api_key
           method = "POST"
           params = {}
             |set:"file":({}

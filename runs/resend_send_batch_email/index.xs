@@ -96,7 +96,7 @@ function "Resend -> Send Batch Email" {
           method = "POST"
           params = $input.emails
           headers = []
-            |push:("Authorization: Bearer %s"|sprintf:"resend_api_key")
+            |push:("Authorization: Bearer %s"|sprintf:$reg.resend_api_key)
             |push:"Content-Type: application/json"
         } as $resend_api
       }

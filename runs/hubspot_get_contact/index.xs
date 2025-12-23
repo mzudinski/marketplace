@@ -92,7 +92,7 @@ function "Hubspot -> Get Contact" {
             |set:"archived":"false"
             |set:"properties":($input.properties|join:",")
           headers = []
-            |push:("Authorization: Bearer"|concat:"hubspot_api_key":" ")
+            |push:("Authorization: Bearer"|concat:$reg.hubspot_api_key:" ")
         } as $hubspot_api
       }
     }

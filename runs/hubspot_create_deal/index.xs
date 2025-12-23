@@ -152,7 +152,7 @@ function "Hubspot -> Create Deal" {
             |set:"objectWriteTraceId":(""|create_uid)
             |set:"properties":$properties_obj
           headers = []
-            |push:("authorization: Bearer %s"|sprintf:"hubspot_api_key")
+            |push:("authorization: Bearer %s"|sprintf:$reg.hubspot_api_key)
             |push:"content-type: application/json"
         } as $hubspot_api
       }

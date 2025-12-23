@@ -101,7 +101,7 @@ function "OpenAI -> Get an embedding (simple)" {
             |set:"model":$input.model
           headers = []
             |push:"Content-Type: application/json"
-            |push:("Authorization: Bearer %s"|sprintf:"openai_api_key")
+            |push:("Authorization: Bearer %s"|sprintf:$reg.openai_api_key)
           timeout = 60
         } as $openai_api
       

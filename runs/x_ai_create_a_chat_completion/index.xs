@@ -85,7 +85,7 @@ function "xAI -> Completion" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("Authorization: Bearer %s"|sprintf:"xai_api_key")
+            |push:("Authorization: Bearer %s"|sprintf:$reg.xai_api_key)
           timeout = 60
         } as $xai_api
       

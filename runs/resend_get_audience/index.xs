@@ -11,7 +11,7 @@ function "Resend -> Get Audience" {
           url = "https://api.resend.com/audiences/%s"|sprintf:$input.audience_id
           method = "GET"
           headers = []
-            |push:("Authorization: Bearer %s"|sprintf:"resend_api_key")
+            |push:("Authorization: Bearer %s"|sprintf:$reg.resend_api_key)
             |push:"Content-Type: application/json"
         } as $resend_api
       }

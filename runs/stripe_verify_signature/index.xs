@@ -54,7 +54,7 @@ function "Stripe: Verify Signature" {
   
     var $hmac_sha256_signature {
       value = $signed_payload
-        |hmac_sha256:"stripe_webhook_secret":false
+        |hmac_sha256:$reg.stripe_webhook_secret:false
     }
   
     // Result

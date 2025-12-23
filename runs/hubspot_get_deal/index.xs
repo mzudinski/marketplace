@@ -93,7 +93,7 @@ function "Hubspot -> Get Deal" {
             |set:"properties":($input.properties|join:",")
             |set:"propertiesWithHistory":($input.properties_with_history|join:",")
           headers = []
-            |push:("authorization: Bearer %s"|sprintf:"hubspot_api_key")
+            |push:("authorization: Bearer %s"|sprintf:$reg.hubspot_api_key)
         } as $hubspot_api
       }
     }

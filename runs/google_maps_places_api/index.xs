@@ -32,7 +32,7 @@ function "Gmaps test" {
             |set_conditional:"locationBias":$input.location_bias:($input.location_bias|is_empty|not)
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Goog-Api-Key: %s"|sprintf:"google_key")
+            |push:("X-Goog-Api-Key: %s"|sprintf:$reg.google_key)
             |push:("X-Goog-FieldMask: %s"|sprintf:$field_mask)
         } as $gmaps_api
       }

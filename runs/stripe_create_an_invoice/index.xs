@@ -40,7 +40,7 @@ function "Stripe -> Create an Invoice" {
           params = $body_params
           headers = []
             |push:("Authorization: Basic %s"
-              |sprintf:("stripe_api_key"|base64_encode)
+              |sprintf:($reg.stripe_api_key|base64_encode)
             )
         } as $stripe_api
       }

@@ -80,7 +80,7 @@ function "Resend -> Send Email" {
             |set:"subject":$input.subject
             |set:"html":$input.html
           headers = []
-            |push:("Authorization: Bearer %s"|sprintf:"resend_api_key")
+            |push:("Authorization: Bearer %s"|sprintf:$reg.resend_api_key)
             |push:"Content-Type: application/json"
         } as $resend_api
       }

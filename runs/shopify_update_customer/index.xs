@@ -92,7 +92,7 @@ function "Shopify -> Update Customer" {
     group {
       stack {
         api.request {
-          url = "https://%s/admin/api/2025-01/graphql.json"|sprintf:"store"
+          url = "https://%s/admin/api/2025-01/graphql.json"|sprintf:$reg.store
           method = "POST"
           params = {}
             |set:"query":"mutation customerUpdate($input: CustomerInput!) { customerUpdate(input: $input) { customer { id firstName } userErrors { field message } } }"
@@ -106,7 +106,7 @@ function "Shopify -> Update Customer" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Shopify-Access-Token: %s"|sprintf:"access_token")
+            |push:("X-Shopify-Access-Token: %s"|sprintf:$reg.access_token)
         } as $shopify_api
       }
     }

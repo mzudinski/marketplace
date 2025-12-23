@@ -111,7 +111,7 @@ function "Whatsapp -> Send Message" {
       stack {
         api.request {
           url = "https://graph.facebook.com/%s/%s/messages"
-            |sprintf:$input.version:"whatsapp_account_id"
+            |sprintf:$input.version:$reg.whatsapp_account_id
           method = "POST"
           params = {}
             |set:"messaging_product":"whatsapp"
@@ -124,7 +124,7 @@ function "Whatsapp -> Send Message" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("Authorization: Bearer %s"|sprintf:"whatsapp_token")
+            |push:("Authorization: Bearer %s"|sprintf:$reg.whatsapp_token)
         } as $api_response
       }
     }

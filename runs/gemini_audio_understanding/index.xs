@@ -10,7 +10,7 @@ function "Gemini -> Audio Understanding" {
       stack {
         api.request {
           url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=YOUR_API_KEY"
-            |replace:"YOUR_API_KEY":"gemini_api_key"
+            |replace:"YOUR_API_KEY":$reg.gemini_api_key
           method = "POST"
           params = {}
             |set:"contents":([]

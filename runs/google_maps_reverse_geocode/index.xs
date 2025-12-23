@@ -13,7 +13,7 @@ function "Google Maps -> Reverse Geocode" {
           method = "GET"
           params = {}
             |set:"latlng":($input.latitude|concat:$input.longitude:",")
-            |set:"key":"google_api_key"
+            |set:"key":$reg.google_api_key
         } as $gmaps_api
       }
     }

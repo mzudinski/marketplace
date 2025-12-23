@@ -30,7 +30,7 @@ function "Stripe -> List All Products" {
           method = "GET"
           params = $body_params
           headers = []
-            |push:("Authorization: Bearer "|concat:"stripe_api_key":"")
+            |push:("Authorization: Bearer "|concat:$reg.stripe_api_key:"")
         } as $stripe_api
       }
     }

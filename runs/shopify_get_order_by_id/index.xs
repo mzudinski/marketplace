@@ -8,7 +8,7 @@ function "Shopify -> Get Order by ID" {
     group {
       stack {
         api.request {
-          url = "https://%s/admin/api/2025-07/graphql.json"|sprintf:"store"
+          url = "https://%s/admin/api/2025-07/graphql.json"|sprintf:$reg.store
           method = "POST"
           params = {}
             |set:"query":"query GetOrderById($id: ID!) { order(id: $id) { id name displayFinancialStatus totalPriceSet { shopMoney { amount currencyCode } } } }"
@@ -17,7 +17,7 @@ function "Shopify -> Get Order by ID" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Shopify-Access-Token: %s"|sprintf:"access_token")
+            |push:("X-Shopify-Access-Token: %s"|sprintf:$reg.access_token)
         } as $shopify_api
       }
     }

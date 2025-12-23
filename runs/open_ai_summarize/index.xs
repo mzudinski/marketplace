@@ -29,7 +29,7 @@ function "OpenAI -> Summarize (Simple)" {
           headers = []
             |push:"Content-Type: application/json"
             |push:("Authorization: Bearer %s"
-              |sprintf:("openai_api_key"|!get:"openai_api_key":null)
+              |sprintf:($reg.openai_api_key|!get:"openai_api_key":null)
             )
         } as $openai_api
       }

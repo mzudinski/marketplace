@@ -20,7 +20,7 @@ function "Gemini -> Image Understanding" {
       stack {
         api.request {
           url = "https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent?key=%s"
-            |sprintf:$input.model:"gemini_api_key"
+            |sprintf:$input.model:$reg.gemini_api_key
           method = "POST"
           params = {}
             |set:"contents":([]

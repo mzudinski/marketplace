@@ -11,7 +11,7 @@ function "Gemini -> Check Video Job Status" {
           url = "https://generativelanguage.googleapis.com/v1beta/%s"|sprintf:$input.name
           method = "GET"
           headers = []
-            |push:("x-goog-api-key: %s"|sprintf:"gemini_api_key")
+            |push:("x-goog-api-key: %s"|sprintf:$reg.gemini_api_key)
         } as $gemini_api
       }
     }

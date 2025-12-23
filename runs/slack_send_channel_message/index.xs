@@ -89,7 +89,7 @@ function "Slack -> Send Channel Message" {
             |set:"text":$input.message
             |set:"channel":$input.channel_id
           headers = []
-            |push:("Authorization: Bearer"|concat:"slack_token":" ")
+            |push:("Authorization: Bearer"|concat:$reg.slack_token:" ")
         } as $api_response
       }
     }

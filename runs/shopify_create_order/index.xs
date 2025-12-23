@@ -9,7 +9,7 @@ function "Shopify -> Create Order" {
     group {
       stack {
         api.request {
-          url = "https://%s/admin/api/2025-07/graphql.json"|sprintf:"store"
+          url = "https://%s/admin/api/2025-07/graphql.json"|sprintf:$reg.store
           method = "POST"
           params = {}
             |set:"query":"mutation orderCreate($order: OrderCreateOrderInput!, $options: OrderCreateOptionsInput) { orderCreate(order: $order, options: $options) { userErrors { field message } order { id totalTaxSet { shopMoney { amount currencyCode } } lineItems(first: 5) { nodes { variant { id } id title quantity taxLines { title rate priceSet { shopMoney { amount currencyCode } } } } } } } }"
@@ -21,7 +21,7 @@ function "Shopify -> Create Order" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Shopify-Access-Token: %s"|sprintf:"access_token")
+            |push:("X-Shopify-Access-Token: %s"|sprintf:$reg.access_token)
         } as $shopify_api
       }
     }

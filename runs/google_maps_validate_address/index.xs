@@ -22,7 +22,7 @@ function "Google Maps -> Validate Address" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Goog-Api-Key: %s"|sprintf:"google_api_key")
+            |push:("X-Goog-Api-Key: %s"|sprintf:$reg.google_api_key)
         } as $gmaps_api
       }
     }
