@@ -1,3 +1,5 @@
+workspace kurtosis_fisher
+---
 // The kurtosis measures the "tailedness" of a distribution, showing whether the data has heavy or light tails compared to a normal distribution.
 // 
 // This action returns Fisher kurtosis, to get the raw kurtosis you can add 3 to its result.

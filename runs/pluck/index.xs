@@ -1,3 +1,5 @@
+workspace pluck
+---
 // Retrieves the value of a specified property from all elements in the collection.
 function Pluck {
   input {

@@ -1,3 +1,5 @@
+workspace intersection
+---
 // Returns the elements from left that have a match in right. Optional path allow you to specify the path to the value used for matching.
 // 
 // ## Examples 

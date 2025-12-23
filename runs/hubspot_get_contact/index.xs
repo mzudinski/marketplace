@@ -1,3 +1,7 @@
+workspace hubspot_get_contact {
+  env = {hubspot_api_key: ""}
+}
+---
 // # Function Documentation: HubSpot → Get Contact
 // 
 // ## Overview
@@ -92,7 +96,7 @@ function "Hubspot -> Get Contact" {
             |set:"archived":"false"
             |set:"properties":($input.properties|join:",")
           headers = []
-            |push:("Authorization: Bearer"|concat:$reg.hubspot_api_key:" ")
+            |push:("Authorization: Bearer"|concat:$env.hubspot_api_key:" ")
         } as $hubspot_api
       }
     }

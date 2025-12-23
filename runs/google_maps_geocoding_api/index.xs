@@ -1,3 +1,7 @@
+workspace google_maps_geocoding_api {
+  env = {google_api_key: ""}
+}
+---
 function "Google Maps -> Geocoding API" {
   input {
     text address filters=trim
@@ -13,7 +17,7 @@ function "Google Maps -> Geocoding API" {
           method = "GET"
           params = {}
             |set:"address":$input.address
-            |set:"key":$reg.google_api_key
+            |set:"key":$env.google_api_key
             |set_conditional:"region":$input.region:($input.region|is_empty|not)
         } as $gmaps_api
       }

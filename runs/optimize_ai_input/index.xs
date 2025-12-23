@@ -1,3 +1,5 @@
+workspace optimize_ai_input
+---
 function "Optimize AI Input" {
   input {
     json payload?

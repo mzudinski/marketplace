@@ -1,3 +1,7 @@
+workspace stripe_list_all_products {
+  env = {stripe_api_key: ""}
+}
+---
 function "Stripe -> List All Products" {
   input {
     text starting_after? filters=trim
@@ -30,7 +34,7 @@ function "Stripe -> List All Products" {
           method = "GET"
           params = $body_params
           headers = []
-            |push:("Authorization: Bearer "|concat:$reg.stripe_api_key:"")
+            |push:("Authorization: Bearer "|concat:$env.stripe_api_key:"")
         } as $stripe_api
       }
     }

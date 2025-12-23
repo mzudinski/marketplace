@@ -1,3 +1,7 @@
+workspace google_maps_validate_address {
+  env = {google_api_key: ""}
+}
+---
 function "Google Maps -> Validate Address" {
   input {
     text region_code? filters=trim
@@ -22,7 +26,7 @@ function "Google Maps -> Validate Address" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Goog-Api-Key: %s"|sprintf:$reg.google_api_key)
+            |push:("X-Goog-Api-Key: %s"|sprintf:$env.google_api_key)
         } as $gmaps_api
       }
     }

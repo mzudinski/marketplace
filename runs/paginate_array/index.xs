@@ -1,3 +1,5 @@
+workspace paginate_array
+---
 // The array paginator is a function that divides a large array into smaller chunks, allowing you to display only a specific portion (or “page”) of the array at a time. It takes in parameters like the number of items you want per page (per_page) and the current page (page), and returns a portion of the array corresponding to that page. 
 // 
 // This is useful if you are working with Redis lists, need to break apart a large dataset into smaller chunks for loops and more.

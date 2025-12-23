@@ -1,3 +1,7 @@
+workspace gemini_generate_image {
+  env = {gemini_api_key: ""}
+}
+---
 function "Gemini -> Generate Image" {
   input {
     text model?="gemini-2.0-flash-preview-image-generation" filters=trim
@@ -10,7 +14,7 @@ function "Gemini -> Generate Image" {
       stack {
         api.request {
           url = "https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent?key=%s"
-            |sprintf:$input.model:$reg.gemini_api_key
+            |sprintf:$input.model:$env.gemini_api_key
           method = "POST"
           params = {}
             |set:"contents":([]

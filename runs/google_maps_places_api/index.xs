@@ -1,3 +1,7 @@
+workspace google_maps_places_api {
+  env = {google_key: ""}
+}
+---
 function "Gmaps test" {
   input {
     text query filters=trim
@@ -32,7 +36,7 @@ function "Gmaps test" {
             |set_conditional:"locationBias":$input.location_bias:($input.location_bias|is_empty|not)
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Goog-Api-Key: %s"|sprintf:$reg.google_key)
+            |push:("X-Goog-Api-Key: %s"|sprintf:$env.google_key)
             |push:("X-Goog-FieldMask: %s"|sprintf:$field_mask)
         } as $gmaps_api
       }

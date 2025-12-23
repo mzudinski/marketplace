@@ -1,3 +1,7 @@
+workspace open_ai_create_a_chat_completion {
+  env = {openai_api_key: ""}
+}
+---
 // # Function Documentation: OpenAI -> Create a Chat Completion (Hybrid)
 // [OpenAI API documentation](https://platform.openai.com/docs/guides/chat-completions)
 // ## Overview
@@ -89,7 +93,7 @@ function "OpenAI -> Create a Chat Completion (Simple)" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("Authorization: Bearer %s"|sprintf:$reg.openai_api_key)
+            |push:("Authorization: Bearer %s"|sprintf:$env.openai_api_key)
           timeout = 60
         } as $openai_api
       

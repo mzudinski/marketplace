@@ -1,3 +1,5 @@
+workspace central_moment
+---
 // Compute the central moment at different level (default second). Change the power to compute different central moment.
 // 
 // ## Second Central Moment

@@ -1,3 +1,5 @@
+workspace take_from_array
+---
 function "Take from array" {
   input {
     json array?

@@ -1,3 +1,5 @@
+workspace linear_regression
+---
 // Performs simple linear regression and returns the slope, intercept, standard errors, residual variance, and R² goodness-of-fit score.
 // 
 // ```

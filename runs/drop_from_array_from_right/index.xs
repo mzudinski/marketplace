@@ -1,3 +1,5 @@
+workspace drop_from_array_from_right
+---
 // Creates a slice of `array` with `n` elements dropped from the end.
 function "Drop right array" {
   input {

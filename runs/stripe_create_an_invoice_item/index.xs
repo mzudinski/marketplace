@@ -1,3 +1,7 @@
+workspace stripe_create_an_invoice_item {
+  env = {stripe_api_key: ""}
+}
+---
 // **Stripe - Create an Invoice Item**
 // ## How to Get the Stripe API Key
 // To retrieve your Stripe API key, follow these steps:
@@ -64,7 +68,7 @@ function "Stripe -> Create an Invoice Item" {
             |set:"price":$input.price_id
           headers = []
             |push:("Authorization: Basic %s"
-              |sprintf:($reg.stripe_api_key|base64_encode)
+              |sprintf:($env.stripe_api_key|base64_encode)
             )
         } as $stripe_api
       }

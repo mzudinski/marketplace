@@ -1,3 +1,7 @@
+workspace resend_send_batch_email {
+  env = {resend_api_key: ""}
+}
+---
 // # Resend → Send Batch Email Xano Action
 // 
 // This Xano Action sends multiple emails at once using the Resend API's batch endpoint. It allows you to submit a list of emails (with associated payloads) and triggers all sends in a single API call. The API key is securely stored in the Settings Registry.
@@ -96,7 +100,7 @@ function "Resend -> Send Batch Email" {
           method = "POST"
           params = $input.emails
           headers = []
-            |push:("Authorization: Bearer %s"|sprintf:$reg.resend_api_key)
+            |push:("Authorization: Bearer %s"|sprintf:$env.resend_api_key)
             |push:"Content-Type: application/json"
         } as $resend_api
       }

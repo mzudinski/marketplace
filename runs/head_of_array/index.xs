@@ -1,3 +1,5 @@
+workspace head_of_array
+---
 function "Head array" {
   input {
     json array?

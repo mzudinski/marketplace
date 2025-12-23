@@ -1,3 +1,5 @@
+workspace size_of_collection
+---
 function "Size of collection" {
   input {
     // The collection to inspect

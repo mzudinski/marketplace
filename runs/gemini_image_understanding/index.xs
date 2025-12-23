@@ -1,3 +1,7 @@
+workspace gemini_image_understanding {
+  env = {gemini_api_key: ""}
+}
+---
 function "Gemini -> Image Understanding" {
   input {
     text model?="gemini-2.0-flash" filters=trim
@@ -20,7 +24,7 @@ function "Gemini -> Image Understanding" {
       stack {
         api.request {
           url = "https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent?key=%s"
-            |sprintf:$input.model:$reg.gemini_api_key
+            |sprintf:$input.model:$env.gemini_api_key
           method = "POST"
           params = {}
             |set:"contents":([]

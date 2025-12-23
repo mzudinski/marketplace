@@ -1,3 +1,7 @@
+workspace quick_books_create_payment {
+  env = {quickbooks_realm_id: "", quickbooks_api_token: ""}
+}
+---
 // ## Function Documentation: QuickBooks -> Create Payment
 // [Quickbooks API documentation](https://developer.intuit.com/app/developer/qbdesktop/docs/api-reference/qbdesktop)
 // 
@@ -144,7 +148,7 @@ function "QuickBooks -> Create Payment" {
       try {
         // QuickBooks API Call
         api.request {
-          url = "https://quickbooks.api.intuit.com/v3/company/%s/payment?minorversion=73"|sprintf:$reg.quickbooks_realm_id
+          url = "https://quickbooks.api.intuit.com/v3/company/%s/payment?minorversion=73"|sprintf:$env.quickbooks_realm_id
           method = "POST"
           params = {}
             |set:"TotalAmt":$input.amount
@@ -154,7 +158,7 @@ function "QuickBooks -> Create Payment" {
           headers = []
             |push:"Content-Type: application/json"
             |push:("Authorization: Bearer %s"
-              |sprintf:$reg.quickbooks_api_token
+              |sprintf:$env.quickbooks_api_token
             )
         } as $api1
       

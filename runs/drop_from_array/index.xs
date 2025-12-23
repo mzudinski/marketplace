@@ -1,3 +1,5 @@
+workspace drop_from_array
+---
 // Creates a slice of `array` with `n` elements dropped from the beginning.
 // 
 // ```

@@ -1,3 +1,7 @@
+workspace gemini_generate_video {
+  env = {gemini_api_key: ""}
+}
+---
 function "Gemini -> Generate Video" {
   input {
     text model?="veo-3.0-generate-preview:predictLongRunning" filters=trim
@@ -28,7 +32,7 @@ function "Gemini -> Generate Video" {
               |!set:"durationSeconds":$input.duration_seconds
             )
           headers = []
-            |push:("x-goog-api-key: %s"|sprintf:$reg.gemini_api_key)
+            |push:("x-goog-api-key: %s"|sprintf:$env.gemini_api_key)
             |push:"Content-Type: application/json"
           timeout = 60
         } as $gemini_api

@@ -1,3 +1,5 @@
+workspace op_all
+---
 // Apply an operation on all the element of an array
 function op_all {
   input {

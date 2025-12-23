@@ -1,3 +1,5 @@
+workspace find_index_in_array
+---
 function "FindIndex in array" {
   input {
     json array?

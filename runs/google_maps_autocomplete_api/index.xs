@@ -1,3 +1,7 @@
+workspace google_maps_autocomplete_api {
+  env = {google_api_key: ""}
+}
+---
 function "Google Maps -> Autocomplete API" {
   input {
     text input filters=trim
@@ -46,7 +50,7 @@ function "Google Maps -> Autocomplete API" {
         |set_conditional:"regionCode":$input.region_code:(($input.region_code|is_empty)|not)
       headers = []
         |push:"Content-Type: application/json"
-        |push:("X-Goog-Api-Key: %s"|sprintf:$reg.google_api_key)
+        |push:("X-Goog-Api-Key: %s"|sprintf:$env.google_api_key)
         |push:("X-Goog-FieldMask: %s"|sprintf:$field_mask)
     } as $gmaps_api
   

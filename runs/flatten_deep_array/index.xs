@@ -1,3 +1,5 @@
+workspace flatten_deep_array
+---
 // Recursively flattens `array`.
 // 
 // for the following input

@@ -1,3 +1,5 @@
+workspace group_by_array
+---
 // Creates an object composed of keys generated from the results of running each element of `collection` thru the provided `path`. The corresponding value of each key is the last element responsible for generating the key.
 // 
 // ## example

@@ -1,3 +1,7 @@
+workspace shopify_get_customer_by_id {
+  env = {access_token: "", store: ""}
+}
+---
 function "Shopify -> Get Customer by ID" {
   input {
     text customer_id filters=trim
@@ -8,7 +12,7 @@ function "Shopify -> Get Customer by ID" {
     group {
       stack {
         api.request {
-          url = "https://%s/admin/api/2025-01/graphql.json"|sprintf:$reg.store
+          url = "https://%s/admin/api/2025-01/graphql.json"|sprintf:$env.store
           method = "POST"
           params = {}
             |set:"query":"query getCustomer($id: ID!) { customer(id: $id) { id email firstName lastName phone tags state amountSpent { amount currencyCode } createdAt updatedAt } }"
@@ -17,7 +21,7 @@ function "Shopify -> Get Customer by ID" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Shopify-Access-Token: %s"|sprintf:$reg.access_token)
+            |push:("X-Shopify-Access-Token: %s"|sprintf:$env.access_token)
         } as $shopify_api
       }
     }

@@ -1,3 +1,7 @@
+workspace x_ai_create_a_chat_completion {
+  env = {xai_api_key: ""}
+}
+---
 // # Function Documentation: xAI -> Create a Chat Completion
 // 
 // [xAI API documentation](https://docs.x.ai/api/endpoints#completions)
@@ -85,7 +89,7 @@ function "xAI -> Completion" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("Authorization: Bearer %s"|sprintf:$reg.xai_api_key)
+            |push:("Authorization: Bearer %s"|sprintf:$env.xai_api_key)
           timeout = 60
         } as $xai_api
       

@@ -1,3 +1,5 @@
+workspace tail_of_array
+---
 function "Tail of array" {
   input {
     json array?

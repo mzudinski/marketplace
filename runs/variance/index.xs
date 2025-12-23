@@ -1,3 +1,5 @@
+workspace variance
+---
 // Compute the variance of a sample or population
 // 
 // Set the bias to false for small population

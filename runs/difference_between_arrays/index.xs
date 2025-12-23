@@ -1,3 +1,5 @@
+workspace difference_between_arrays
+---
 function "Difference array" {
   input {
     json[] array_1?

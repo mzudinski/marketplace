@@ -1,3 +1,7 @@
+workspace gemini_audio_understanding {
+  env = {gemini_api_key: ""}
+}
+---
 function "Gemini -> Audio Understanding" {
   input {
     text file_uri filters=trim
@@ -10,7 +14,7 @@ function "Gemini -> Audio Understanding" {
       stack {
         api.request {
           url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=YOUR_API_KEY"
-            |replace:"YOUR_API_KEY":$reg.gemini_api_key
+            |replace:"YOUR_API_KEY":$env.gemini_api_key
           method = "POST"
           params = {}
             |set:"contents":([]

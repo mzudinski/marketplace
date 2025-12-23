@@ -1,3 +1,7 @@
+workspace stripe_void_invoice {
+  env = {stripe_api_key: ""}
+}
+---
 function "Stripe -> Void Invoice" {
   input {
     text invoice_id filters=trim
@@ -12,7 +16,7 @@ function "Stripe -> Void Invoice" {
           method = "POST"
           headers = []
             |push:("Authorization: Basic %s"
-              |sprintf:($reg.stripe_api_key|base64_encode)
+              |sprintf:($env.stripe_api_key|base64_encode)
             )
         } as $stripe_api
       }

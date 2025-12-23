@@ -1,3 +1,7 @@
+workspace resend_get_audience {
+  env = {resend_api_key: ""}
+}
+---
 function "Resend -> Get Audience" {
   input {
     text audience_id filters=trim
@@ -11,7 +15,7 @@ function "Resend -> Get Audience" {
           url = "https://api.resend.com/audiences/%s"|sprintf:$input.audience_id
           method = "GET"
           headers = []
-            |push:("Authorization: Bearer %s"|sprintf:$reg.resend_api_key)
+            |push:("Authorization: Bearer %s"|sprintf:$env.resend_api_key)
             |push:"Content-Type: application/json"
         } as $resend_api
       }

@@ -1,3 +1,5 @@
+workspace unique
+---
 // Creates a duplicate-free version of a collection, using equality comparisons, in which only the first occurrence of each element is kept. The order of result values is determined by the order they occur in the array.
 // 
 // If a path is provided it will be used to match the objects.

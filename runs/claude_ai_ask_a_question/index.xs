@@ -1,3 +1,7 @@
+workspace claude_ai_ask_a_question {
+  env = {claude_api_key: ""}
+}
+---
 // ## Function Documentation: Claude AI -> Ask a Question
 // [Claude AI API documentation](https://docs.anthropic.com/en/home)
 // 
@@ -164,7 +168,7 @@ function "Claude AI -> Ask a Question" {
                   )
                 )
               headers = []
-                |push:("x-api-key: %s"|sprintf:$reg.claude_api_key)
+                |push:("x-api-key: %s"|sprintf:$env.claude_api_key)
                 |push:"anthropic-version: 2023-06-01"
                 |push:"content-type: application/json"
             } as $api_response

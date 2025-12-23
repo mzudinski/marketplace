@@ -1,3 +1,7 @@
+workspace stripe_create_an_invoice {
+  env = {stripe_api_key: ""}
+}
+---
 function "Stripe -> Create an Invoice" {
   input {
     text customer_id filters=trim
@@ -40,7 +44,7 @@ function "Stripe -> Create an Invoice" {
           params = $body_params
           headers = []
             |push:("Authorization: Basic %s"
-              |sprintf:($reg.stripe_api_key|base64_encode)
+              |sprintf:($env.stripe_api_key|base64_encode)
             )
         } as $stripe_api
       }

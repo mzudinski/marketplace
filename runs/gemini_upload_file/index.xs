@@ -1,3 +1,7 @@
+workspace gemini_upload_file {
+  env = {gemini_api_key: ""}
+}
+---
 function "Gemini -> Upload File" {
   input {
     file? file
@@ -13,7 +17,7 @@ function "Gemini -> Upload File" {
       stack {
         api.request {
           url = "https://generativelanguage.googleapis.com/upload/v1beta/files?key=YOUR_KEY"
-            |replace:"YOUR_KEY":$reg.gemini_api_key
+            |replace:"YOUR_KEY":$env.gemini_api_key
           method = "POST"
           params = {}
             |set:"file":({}

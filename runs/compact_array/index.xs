@@ -1,3 +1,5 @@
+workspace compact_array
+---
 // Creates an array with all falsey values removed. The values false, null, 0, `""` (empty string), `{}` (empty object) , `[]` (empty array) are falsey.
 function "Compact array" {
   input {

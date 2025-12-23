@@ -1,3 +1,5 @@
+workspace to_pairs
+---
 // Creates an array of own enumerable string keyed-value pairs for `collection` which can be consumed by `From pairs`. If object is a map or set, its entries are returned.
 // 
 // ## Example

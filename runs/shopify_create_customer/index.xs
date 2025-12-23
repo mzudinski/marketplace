@@ -1,3 +1,7 @@
+workspace shopify_create_customer {
+  env = {access_token: "", store: ""}
+}
+---
 function "Shopify -> Create Customer" {
   input {
     email email filters=trim|lower
@@ -10,7 +14,7 @@ function "Shopify -> Create Customer" {
     group {
       stack {
         api.request {
-          url = "https://%s/admin/api/2025-01/graphql.json"|sprintf:$reg.store
+          url = "https://%s/admin/api/2025-01/graphql.json"|sprintf:$env.store
           method = "POST"
           params = {}
             |set:"query":"mutation customerCreate($input: CustomerInput!) { customerCreate(input: $input) { customer { id email } userErrors { field message } } }"
@@ -23,7 +27,7 @@ function "Shopify -> Create Customer" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Shopify-Access-Token: %s"|!sprintf:$reg.access_token)
+            |push:("X-Shopify-Access-Token: %s"|!sprintf:$env.access_token)
         } as $shopify_api
       }
     }

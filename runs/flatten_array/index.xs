@@ -1,3 +1,5 @@
+workspace flatten_array
+---
 function "Flatten array" {
   input {
     json[] array?

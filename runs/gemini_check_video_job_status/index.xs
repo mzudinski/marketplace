@@ -1,3 +1,7 @@
+workspace gemini_check_video_job_status {
+  env = {gemini_api_key: ""}
+}
+---
 function "Gemini -> Check Video Job Status" {
   input {
     text name filters=trim
@@ -11,7 +15,7 @@ function "Gemini -> Check Video Job Status" {
           url = "https://generativelanguage.googleapis.com/v1beta/%s"|sprintf:$input.name
           method = "GET"
           headers = []
-            |push:("x-goog-api-key: %s"|sprintf:$reg.gemini_api_key)
+            |push:("x-goog-api-key: %s"|sprintf:$env.gemini_api_key)
         } as $gemini_api
       }
     }

@@ -1,3 +1,7 @@
+workspace gemini_generate_content {
+  env = {gemini_api_key: ""}
+}
+---
 function "Gemini -> Generate Content" {
   input {
     text model?="gemini-2.0-flash" filters=trim
@@ -10,7 +14,7 @@ function "Gemini -> Generate Content" {
       stack {
         api.request {
           url = "https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent?key=%s"
-            |sprintf:$input.model:$reg.gemini_api_key
+            |sprintf:$input.model:$env.gemini_api_key
           method = "POST"
           params = {}
             |set:"contents":([]

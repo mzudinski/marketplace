@@ -1,3 +1,5 @@
+workspace concat_arrays
+---
 function "Concat array" {
   input {
     json[] array_1?

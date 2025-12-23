@@ -1,3 +1,5 @@
+workspace factorial
+---
 // Compute the factorial of a value
 function Factorial {
   input {

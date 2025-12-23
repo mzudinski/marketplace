@@ -1,3 +1,7 @@
+workspace shopify_update_customer {
+  env = {access_token: "", store: ""}
+}
+---
 // Xano Action: Update Shopify Customer
 // This Xano action updates an existing customer in a Shopify store using their unique Customer GID.
 // 
@@ -92,7 +96,7 @@ function "Shopify -> Update Customer" {
     group {
       stack {
         api.request {
-          url = "https://%s/admin/api/2025-01/graphql.json"|sprintf:$reg.store
+          url = "https://%s/admin/api/2025-01/graphql.json"|sprintf:$env.store
           method = "POST"
           params = {}
             |set:"query":"mutation customerUpdate($input: CustomerInput!) { customerUpdate(input: $input) { customer { id firstName } userErrors { field message } } }"
@@ -106,7 +110,7 @@ function "Shopify -> Update Customer" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Shopify-Access-Token: %s"|sprintf:$reg.access_token)
+            |push:("X-Shopify-Access-Token: %s"|sprintf:$env.access_token)
         } as $shopify_api
       }
     }

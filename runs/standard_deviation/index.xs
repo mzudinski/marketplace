@@ -1,3 +1,5 @@
+workspace standard_deviation
+---
 // Return the standard deviation of the provided `values`. Set `is_sample` to `true` when submitting a partial data set instead of a complete population.
 // 
 // ## Example

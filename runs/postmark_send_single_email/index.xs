@@ -1,3 +1,7 @@
+workspace postmark_send_single_email {
+  env = {postmark_base_url: "", postmark_api_token: ""}
+}
+---
 function "Postmark Send single email" {
   input {
     text from_email filters=trim|lower

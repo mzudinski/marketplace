@@ -1,3 +1,7 @@
+workspace brevo_send_email {
+  env = {brevo_api_key: ""}
+}
+---
 // # Function Documentation: Brevo → Send Single Email
 // [Brevo API documentation](https://developers.brevo.com/docs/getting-started)
 // 
@@ -142,7 +146,7 @@ function "Brevo -> Send Email" {
             |set:"htmlContent":$input.message_html
           headers = []
             |push:"accept: application/json"
-            |push:("api-key: %s"|sprintf:$reg.brevo_api_key)
+            |push:("api-key: %s"|sprintf:$env.brevo_api_key)
             |push:"content-type: application/json"
         } as $api_response
       

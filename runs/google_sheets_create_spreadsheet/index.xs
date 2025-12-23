@@ -1,3 +1,7 @@
+workspace google_sheets_create_spreadsheet {
+  env = {access_token: ""}
+}
+---
 // Here is the updated documentation for your new `create_spreadsheet` function:
 // 
 // ---
@@ -105,7 +109,7 @@ function "Google Sheets -> Create Spreadsheet" {
       params = {properties: $properties}
       headers = []
         |push:"Content-Type: application/json"
-        |push:"Authorization: Bearer " ~ $reg.access_token
+        |push:"Authorization: Bearer " ~ $env.access_token
       verify_host = false
       verify_peer = false
     } as $create_response

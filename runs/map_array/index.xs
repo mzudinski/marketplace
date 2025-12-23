@@ -1,3 +1,5 @@
+workspace map_array
+---
 // Creates an array of values by running each element in collection thru the `path`.
 // 
 // When provided an object, map will use the object's values as the collection

@@ -1,3 +1,7 @@
+workspace google_maps_reverse_geocode {
+  env = {google_api_key: ""}
+}
+---
 function "Google Maps -> Reverse Geocode" {
   input {
     text latitude filters=trim
@@ -13,7 +17,7 @@ function "Google Maps -> Reverse Geocode" {
           method = "GET"
           params = {}
             |set:"latlng":($input.latitude|concat:$input.longitude:",")
-            |set:"key":$reg.google_api_key
+            |set:"key":$env.google_api_key
         } as $gmaps_api
       }
     }

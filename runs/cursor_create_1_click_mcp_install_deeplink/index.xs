@@ -1,3 +1,5 @@
+workspace cursor_create_1_click_mcp_install_deeplink
+---
 // A helper function that creates a 1-click MCP install link for Cursor using URL-based authentication with Xano MCP Servers. This function generates deeplinks and various markup formats (Markdown, HTML, JSX) that allow users to install MCP servers directly into Cursor with a single click.
 // 
 // ## Input Parameters

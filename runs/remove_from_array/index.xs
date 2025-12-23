@@ -1,3 +1,5 @@
+workspace remove_from_array
+---
 function "Remove from array" {
   input {
     json array?

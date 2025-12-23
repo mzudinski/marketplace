@@ -1,3 +1,5 @@
+workspace reverse_array
+---
 function "Reverse array" {
   input {
     json array?

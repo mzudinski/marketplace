@@ -1,3 +1,7 @@
+workspace stripe_retrieve_a_product {
+  env = {stripe_api_key: ""}
+}
+---
 function "Stripe -> Get Product" {
   input {
     text product_id filters=trim
@@ -11,7 +15,7 @@ function "Stripe -> Get Product" {
           url = "https://api.stripe.com/v1/products/"|concat:$input.product_id:""
           method = "GET"
           headers = []
-            |push:("Authorization: Bearer "|concat:$reg.stripe_api_key:"")
+            |push:("Authorization: Bearer "|concat:$env.stripe_api_key:"")
         } as $stripe_api
       }
     }

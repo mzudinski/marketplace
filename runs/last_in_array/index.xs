@@ -1,3 +1,5 @@
+workspace last_in_array
+---
 function "Last array" {
   input {
     json array?

@@ -1,3 +1,5 @@
+workspace starts_with
+---
 // Checks if `string` (or `array`) starts with the given `target` string (or `array`).
 // 
 // ## Example

@@ -1,3 +1,7 @@
+workspace resend_send_email {
+  env = {resend_api_key: ""}
+}
+---
 // # Resend → Send Email Xano Action
 // 
 // This Xano Action sends an email using the Resend API. It provides a simple interface for specifying the sender, recipients, subject, and content (text and HTML). The action securely uses an API key stored in the Settings Registry.
@@ -80,7 +84,7 @@ function "Resend -> Send Email" {
             |set:"subject":$input.subject
             |set:"html":$input.html
           headers = []
-            |push:("Authorization: Bearer %s"|sprintf:$reg.resend_api_key)
+            |push:("Authorization: Bearer %s"|sprintf:$env.resend_api_key)
             |push:"Content-Type: application/json"
         } as $resend_api
       }

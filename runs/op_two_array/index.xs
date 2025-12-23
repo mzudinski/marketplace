@@ -1,3 +1,5 @@
+workspace op_two_array
+---
 // apply the operation from one array to the other
 function op_two_array {
   input {

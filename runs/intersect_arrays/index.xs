@@ -1,3 +1,5 @@
+workspace intersect_arrays
+---
 // Creates an array of unique values that are included in all given `arrays` using equality comparisons. The order and references of result values are determined by the first array.
 // 
 // ## Example

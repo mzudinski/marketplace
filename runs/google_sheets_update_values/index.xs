@@ -1,3 +1,7 @@
+workspace google_sheets_update_values {
+  env = {access_token: ""}
+}
+---
 // Updates values in a specific range of a Google Sheet using the Sheets API.
 // 
 // ### Inputs
@@ -126,7 +130,7 @@ function "Google Sheets -> Update Values" {
     
       headers = []
         |push:"Content-Type: application/json"
-        |push:"Authorization: Bearer " ~ $reg.access_token
+        |push:"Authorization: Bearer " ~ $env.access_token
       verify_host = false
       verify_peer = false
     } as $update_response

@@ -1,3 +1,7 @@
+workspace stripe_retrieve_a_customer {
+  env = {stripe_api_key: ""}
+}
+---
 function "Stripe -> Retrieve a Customer" {
   input {
     text customer_id filters=trim
@@ -11,7 +15,7 @@ function "Stripe -> Retrieve a Customer" {
           url = "https://api.stripe.com/v1/customers/%s"|sprintf:$input.customer_id
           method = "GET"
           headers = []
-            |push:("Authorization: Bearer "|concat:$reg.stripe_api_key:"")
+            |push:("Authorization: Bearer "|concat:$env.stripe_api_key:"")
         } as $stripe_api
       }
     }

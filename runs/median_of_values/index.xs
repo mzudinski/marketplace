@@ -1,3 +1,5 @@
+workspace median_of_values
+---
 function median {
   input {
     decimal[] values

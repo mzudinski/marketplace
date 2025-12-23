@@ -1,3 +1,5 @@
+workspace initial_of_array
+---
 function "Initial of array" {
   input {
     json array?

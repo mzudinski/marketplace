@@ -1,3 +1,7 @@
+workspace hubspot_create_contact {
+  env = {hubspot_api_key: ""}
+}
+---
 // # Function Documentation: HubSpot → Create Contact
 // ## Overview
 // This function creates a new contact in HubSpot using specified input parameters. It involves setting environment variables, preparing the request, and handling the response.
@@ -194,7 +198,7 @@ function "Hubspot -> Create Contact" {
             |set:"objectWriteTraceId":(""|create_uid)
             |set:"properties":$properties_object
           headers = []
-            |push:("authorization: Bearer %s"|sprintf:$reg.hubspot_api_key)
+            |push:("authorization: Bearer %s"|sprintf:$env.hubspot_api_key)
             |push:"content-type: application/json"
         } as $hubspot_api
       }

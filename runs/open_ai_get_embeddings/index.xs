@@ -1,3 +1,7 @@
+workspace open_ai_get_embeddings {
+  env = {openai_api_key: ""}
+}
+---
 // # Function Documentation: OpenAI -> Get an Embedding
 // [OpenAI Embeddings API](https://platform.openai.com/docs/guides/embeddings)
 // ## Overview
@@ -101,7 +105,7 @@ function "OpenAI -> Get an embedding (simple)" {
             |set:"model":$input.model
           headers = []
             |push:"Content-Type: application/json"
-            |push:("Authorization: Bearer %s"|sprintf:$reg.openai_api_key)
+            |push:("Authorization: Bearer %s"|sprintf:$env.openai_api_key)
           timeout = 60
         } as $openai_api
       

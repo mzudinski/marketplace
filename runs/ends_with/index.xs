@@ -1,3 +1,5 @@
+workspace ends_with
+---
 // Checks if `string` (or `array`) ends with the given `target` string (or `array`).
 // 
 // ## Example

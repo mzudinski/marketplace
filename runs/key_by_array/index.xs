@@ -1,3 +1,5 @@
+workspace key_by_array
+---
 function "Key by array" {
   input {
     json collection?

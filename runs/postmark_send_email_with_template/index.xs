@@ -1,3 +1,7 @@
+workspace postmark_send_email_with_template {
+  env = {postmark_base_url: "", postmark_api_token: ""}
+}
+---
 // # Function Documentation: Postmark → Send Email with Template
 // ## Overview
 // This function allows you to send emails using the Postmark API with a pre-defined template. You can specify the recipient email address, the template ID, and the data to populate the template placeholders.

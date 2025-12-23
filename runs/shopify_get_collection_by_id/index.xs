@@ -1,3 +1,7 @@
+workspace shopify_get_collection_by_id {
+  env = {access_token: "", store: ""}
+}
+---
 function "Shopify -> Get Collection by ID" {
   input {
     text collection_id filters=trim
@@ -8,7 +12,7 @@ function "Shopify -> Get Collection by ID" {
     group {
       stack {
         api.request {
-          url = "https://%s/admin/api/2025-07/graphql.json"|sprintf:$reg.store
+          url = "https://%s/admin/api/2025-07/graphql.json"|sprintf:$env.store
           method = "POST"
           params = {}
             |set:"query":"query CollectionMetafield($namespace: String!, $key: String!, $ownerId: ID!) { collection(id: $ownerId) { id title handle description image { url altText } products(first: 10) { edges { node { id title handle status totalInventory } } } subtitle: metafield(namespace: $namespace, key: $key) { value } } }"
@@ -19,7 +23,7 @@ function "Shopify -> Get Collection by ID" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("X-Shopify-Access-Token: %s"|sprintf:$reg.access_token)
+            |push:("X-Shopify-Access-Token: %s"|sprintf:$env.access_token)
         } as $shopify_api
       }
     }

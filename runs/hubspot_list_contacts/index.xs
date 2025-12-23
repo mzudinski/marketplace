@@ -1,3 +1,7 @@
+workspace hubspot_list_contacts {
+  env = {hubspot_api_key: ""}
+}
+---
 // # Function Documentation: HubSpot → List Contacts
 // 
 // ## Overview
@@ -114,7 +118,7 @@ function "Hubspot -> List Contacts" {
           method = "GET"
           params = {}|set:"archived":"false"
           headers = []
-            |push:("authorization: Bearer %s"|sprintf:$reg.hubspot_api_key)
+            |push:("authorization: Bearer %s"|sprintf:$env.hubspot_api_key)
         } as $hubspot_api
       }
     }

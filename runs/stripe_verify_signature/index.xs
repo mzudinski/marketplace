@@ -1,3 +1,7 @@
+workspace stripe_verify_signature {
+  env = {stripe_webhook_secret: ""}
+}
+---
 function "Stripe: Verify Signature" {
   input {
     json http_headers
@@ -54,7 +58,7 @@ function "Stripe: Verify Signature" {
   
     var $hmac_sha256_signature {
       value = $signed_payload
-        |hmac_sha256:$reg.stripe_webhook_secret:false
+        |hmac_sha256:$env.stripe_webhook_secret:false
     }
   
     // Result

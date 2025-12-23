@@ -1,3 +1,7 @@
+workspace hubspot_update_contact {
+  env = {hubspot_api_key: ""}
+}
+---
 // # Function Documentation: HubSpot → Edit Contact
 // 
 // ## Overview
@@ -182,7 +186,7 @@ function "Hubspot -> Edit Contact" {
             |set:"objectWriteTraceId":(""|create_uid)
             |set:"properties":$properties_object
           headers = []
-            |push:("authorization: Bearer %s"|sprintf:$reg.hubspot_api_key)
+            |push:("authorization: Bearer %s"|sprintf:$env.hubspot_api_key)
             |push:"content-type: application/json"
         } as $hubspot_api
       }

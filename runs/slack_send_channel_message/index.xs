@@ -1,3 +1,7 @@
+workspace slack_send_channel_message {
+  env = {slack_token: ""}
+}
+---
 // # Function Documentation: Slack -> Send Channel Message
 // ## Overview
 // This function sends a message to a specified Slack channel using the Slack API. It uses a pre-configured Slack token from the environment to authenticate the request and sends a message to the channel based on user inputs.
@@ -89,7 +93,7 @@ function "Slack -> Send Channel Message" {
             |set:"text":$input.message
             |set:"channel":$input.channel_id
           headers = []
-            |push:("Authorization: Bearer"|concat:$reg.slack_token:" ")
+            |push:("Authorization: Bearer"|concat:$env.slack_token:" ")
         } as $api_response
       }
     }

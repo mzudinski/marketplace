@@ -1,3 +1,5 @@
+workspace union
+---
 // Returns a collection of unique elements from both left and right. Optional path allow you to specify the path to the value used for matching.
 // 
 // ```json

@@ -1,3 +1,7 @@
+workspace open_ai_summarize {
+  env = {openai_api_key: ""}
+}
+---
 // This function summarizes a piece of text using the OpenAI API
 function "OpenAI -> Summarize (Simple)" {
   input {
@@ -29,7 +33,7 @@ function "OpenAI -> Summarize (Simple)" {
           headers = []
             |push:"Content-Type: application/json"
             |push:("Authorization: Bearer %s"
-              |sprintf:($reg.openai_api_key|!get:"openai_api_key":null)
+              |sprintf:($env.openai_api_key|!get:"openai_api_key":null)
             )
         } as $openai_api
       }

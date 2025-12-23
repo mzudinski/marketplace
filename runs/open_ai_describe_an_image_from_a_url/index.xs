@@ -1,3 +1,7 @@
+workspace open_ai_describe_an_image_from_a_url {
+  env = {openai_api_key: ""}
+}
+---
 // # Function Documentation: OpenAI -> Describe an Image from a URL (Simple)
 // [OpenAI Vision API](https://platform.openai.com/docs/guides/vision)
 // ## Overview
@@ -98,7 +102,7 @@ function "OpenAI -> Describe an Image from a URL" {
             |set:"max_tokens":300
           headers = []
             |push:"Content-Type: application/json"
-            |push:("Authorization: Bearer %s"|sprintf:$reg.openai_api_key)
+            |push:("Authorization: Bearer %s"|sprintf:$env.openai_api_key)
           timeout = 60
         } as $openai_api
       

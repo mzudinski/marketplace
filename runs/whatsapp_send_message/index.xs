@@ -1,3 +1,7 @@
+workspace whatsapp_send_message {
+  env = {whatsapp_account_id: "", whatsapp_token: ""}
+}
+---
 // # WhatsApp API → Send Message via WhatsApp
 // ## Overview
 // This function allows you to send a WhatsApp message using the WhatsApp API by calling the Facebook Graph API. You can specify the recipient's phone number and the message content, and the function will handle sending the message to the recipient.
@@ -111,7 +115,7 @@ function "Whatsapp -> Send Message" {
       stack {
         api.request {
           url = "https://graph.facebook.com/%s/%s/messages"
-            |sprintf:$input.version:$reg.whatsapp_account_id
+            |sprintf:$input.version:$env.whatsapp_account_id
           method = "POST"
           params = {}
             |set:"messaging_product":"whatsapp"
@@ -124,7 +128,7 @@ function "Whatsapp -> Send Message" {
             )
           headers = []
             |push:"Content-Type: application/json"
-            |push:("Authorization: Bearer %s"|sprintf:$reg.whatsapp_token)
+            |push:("Authorization: Bearer %s"|sprintf:$env.whatsapp_token)
         } as $api_response
       }
     }

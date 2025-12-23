@@ -1,3 +1,5 @@
+workspace xor_array
+---
 // Creates an array of unique values that is the [symmetric difference](https://en.wikipedia.org/wiki/Symmetric_difference) of the given two arrays. The order of result values is determined by the order they occur in the arrays.
 // 
 // ## Example
