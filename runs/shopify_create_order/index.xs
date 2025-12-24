@@ -1,15 +1,13 @@
-workspace shopify_create_order {
-  env = {access_token: "", store: ""}
+run "Shopify -> Create Order" {
+  type = "job"
+  main = {name: "Shopify -> Create Order", input: {}}
+  env = ["access_token", "store"]
 }
 ---
-function "$main" {
+function "Shopify -> Create Order" {
   input {
-    object args {
-      schema {
-        text currency_code? filters=trim
-        json[] line_items?
-      }
-    }
+    text currency_code? filters=trim
+    json[] line_items?
   }
 
   stack {

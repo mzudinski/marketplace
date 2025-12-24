@@ -1,5 +1,7 @@
-workspace resend_send_email {
-  env = {resend_api_key: ""}
+run "Resend -> Send Email" {
+  type = "job"
+  main = {name: "Resend -> Send Email", input: {}}
+  env = ["resend_api_key"]
 }
 ---
 // # Resend → Send Email Xano Action
@@ -62,17 +64,13 @@ workspace resend_send_email {
 // ---
 // 
 // This example sends a test email from `onboarding@resend.dev` to `michael@xano.com` with the subject "Test" and both text and HTML body content "Test123" and "Test" respectively.
-function "$main" {
+function "Resend -> Send Email" {
   input {
-    object args {
-      schema {
-        email from filters=trim|lower
-        email[1:] to filters=trim|lower
-        text subject filters=trim
-        text text? filters=trim
-        text html? filters=trim
-      }
-    }
+    email from filters=trim|lower
+    email[1:] to filters=trim|lower
+    text subject filters=trim
+    text text? filters=trim
+    text html? filters=trim
   }
 
   stack {

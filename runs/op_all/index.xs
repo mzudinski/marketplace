@@ -1,19 +1,21 @@
-workspace op_all
+run op_all {
+  type = "job"
+  main = {
+    name : "op_all"
+    input: {numbers: [1, 2, 3, 4, 5], op: "add", value: 4}
+  }
+}
 ---
 // Apply an operation on all the element of an array
-function "$main" {
+function op_all {
   input {
-    object args {
-      schema {
-        decimal[] numbers?
-        enum op? {
-          values = ["add", "subtract", "divide", "multiply", "power"]
-        }
-      
-        // a single value or an array of values the same size as the numbers
-        json value?
-      }
+    decimal[] numbers?
+    enum op? {
+      values = ["add", "subtract", "divide", "multiply", "power"]
     }
+  
+    // a single value or an array of values the same size as the numbers
+    json value?
   }
 
   stack {

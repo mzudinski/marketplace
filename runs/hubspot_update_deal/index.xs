@@ -1,5 +1,7 @@
-workspace hubspot_update_deal {
-  env = {hubspot_api_key: ""}
+run "Hubspot -> Edit Deal" {
+  type = "job"
+  main = {name: "Hubspot -> Edit Deal", input: {}}
+  env = ["hubspot_api_key"]
 }
 ---
 // # HubSpot → Edit Deal
@@ -111,30 +113,26 @@ workspace hubspot_update_deal {
 //     "archived": false
 // }
 // ```
-function "$main" {
+function "Hubspot -> Edit Deal" {
   input {
-    object args {
-      schema {
-        text name? filters=trim
-        enum deal_stage? {
-          values = [
-            "appointmentscheduled"
-            "qualifiedtobuy"
-            "presentationscheduled"
-            "decisionmakerboughtin"
-            "contractsent"
-            "closedwon"
-            "closedlost"
-          ]
-        }
-      
-        timestamp? close_date?
-        int owner_id?
-        decimal amount?
-        json additional_properties?
-        text deal_id filters=trim
-      }
+    text name? filters=trim
+    enum deal_stage? {
+      values = [
+        "appointmentscheduled"
+        "qualifiedtobuy"
+        "presentationscheduled"
+        "decisionmakerboughtin"
+        "contractsent"
+        "closedwon"
+        "closedlost"
+      ]
     }
+  
+    timestamp? close_date?
+    int owner_id?
+    decimal amount?
+    json additional_properties?
+    text deal_id filters=trim
   }
 
   stack {

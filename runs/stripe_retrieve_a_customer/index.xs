@@ -1,14 +1,16 @@
-workspace stripe_retrieve_a_customer {
-  env = {stripe_api_key: ""}
+run "Stripe -> Retrieve a Customer" {
+  type = "job"
+  main = {
+    name : "Stripe -> Retrieve a Customer"
+    input: {customer_id: "12345"}
+  }
+
+  env = ["stripe_api_key"]
 }
 ---
-function "$main" {
+function "Stripe -> Retrieve a Customer" {
   input {
-    object args {
-      schema {
-        text customer_id filters=trim
-      }
-    }
+    text customer_id filters=trim
   }
 
   stack {

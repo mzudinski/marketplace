@@ -1,5 +1,15 @@
-workspace x_ai_create_a_chat_completion {
-  env = {xai_api_key: ""}
+run "xAI -> Completion" {
+  type = "job"
+  main = {
+    name : "xAI -> Completion"
+    input: {
+      model  : "grok-beta"
+      message: "Give me a spicy take on the current 2024 presidential election? Use x posts as sources"
+      system : "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."
+    }
+  }
+
+  env = ["xai_api_key"]
 }
 ---
 // # Function Documentation: xAI -> Create a Chat Completion
@@ -61,15 +71,11 @@ workspace x_ai_create_a_chat_completion {
 // ```
 // "Barack Obama is 6 feet 1 inch tall (185 cm)."  
 // ```
-function "$main" {
+function "xAI -> Completion" {
   input {
-    object args {
-      schema {
-        text model?="grok-beta" filters=trim
-        text message? filters=trim
-        text system?="You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy." filters=trim
-      }
-    }
+    text model?="grok-beta" filters=trim
+    text message? filters=trim
+    text system?="You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy." filters=trim
   }
 
   stack {

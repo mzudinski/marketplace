@@ -1,13 +1,12 @@
-workspace size_of_collection
+run "Size of collection" {
+  type = "job"
+  main = {name: "Size of collection", input: {}}
+}
 ---
-function "$main" {
+function "Size of collection" {
   input {
-    object args {
-      schema {
-        // The collection to inspect
-        json collection?
-      }
-    }
+    // The collection to inspect
+    json collection?
   }
 
   stack {

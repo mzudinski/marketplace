@@ -1,5 +1,7 @@
-workspace resend_send_batch_email {
-  env = {resend_api_key: ""}
+run "Resend -> Send Batch Email" {
+  type = "job"
+  main = {name: "Resend -> Send Batch Email", input: {}}
+  env = ["resend_api_key"]
 }
 ---
 // # Resend → Send Batch Email Xano Action
@@ -78,19 +80,15 @@ workspace resend_send_batch_email {
 // ---
 // 
 // This example will send two separate emails in one batch operation: one to `michael@xano.com` and another to `alex@xano.com`, each with different subjects and message bodies.
-function "$main" {
+function "Resend -> Send Batch Email" {
   input {
-    object args {
+    object[1:] emails {
       schema {
-        object[1:] emails {
-          schema {
-            email from filters=trim|lower
-            email[1:] to filters=trim|lower
-            text subject filters=trim
-            text text? filters=trim
-            text html? filters=trim
-          }
-        }
+        email from filters=trim|lower
+        email[] to filters=trim|lower
+        text subject filters=trim
+        text text? filters=trim
+        text html? filters=trim
       }
     }
   }

@@ -1,14 +1,12 @@
-workspace stripe_finalize_invoice {
-  env = {stripe_api_key: ""}
+run "Stripe -> Finalize Invoice" {
+  type = "job"
+  main = {name: "Stripe -> Finalize Invoice", input: {}}
+  env = ["stripe_api_key"]
 }
 ---
-function "$main" {
+function "Stripe -> Finalize Invoice" {
   input {
-    object args {
-      schema {
-        text invoice_id filters=trim
-      }
-    }
+    text invoice_id filters=trim
   }
 
   stack {

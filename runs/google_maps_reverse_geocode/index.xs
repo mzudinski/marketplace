@@ -1,15 +1,17 @@
-workspace google_maps_reverse_geocode {
-  env = {google_api_key: ""}
+run "Google Maps -> Reverse Geocode" {
+  type = "job"
+  main = {
+    name : "Google Maps -> Reverse Geocode"
+    input: {latitude: "37.423021", longitude: "-122.083739"}
+  }
+
+  env = ["google_api_key"]
 }
 ---
-function "$main" {
+function "Google Maps -> Reverse Geocode" {
   input {
-    object args {
-      schema {
-        text latitude filters=trim
-        text longitude? filters=trim
-      }
-    }
+    text latitude filters=trim
+    text longitude? filters=trim
   }
 
   stack {

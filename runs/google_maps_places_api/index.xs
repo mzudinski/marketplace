@@ -1,19 +1,32 @@
-workspace google_maps_places_api {
-  env = {google_key: ""}
-}
----
-function "$main" {
-  input {
-    object args {
-      schema {
-        text query filters=trim
-        text field_mask? filters=trim
-        text language_code? filters=trim
-        text page_token? filters=trim
-        int page_size?
-        json location_bias?
+run "Gmaps test" {
+  type = "job"
+  main = {
+    name : "Gmaps test"
+    input: {
+      query        : "pizza restaurants in Mumbai"
+      field_mask   : "places.displayName,places.formattedAddress,places.priceLevel"
+      language_code: "en"
+      page_size    : 5
+      location_bias: {
+        circle: {
+          center: {latitude: 19.076, longitude: 72.8777}
+          radius: 5000
+        }
       }
     }
+  }
+
+  env = ["google_key"]
+}
+---
+function "Gmaps test" {
+  input {
+    text query filters=trim
+    text field_mask? filters=trim
+    text language_code? filters=trim
+    text page_token? filters=trim
+    int page_size?
+    json location_bias?
   }
 
   stack {

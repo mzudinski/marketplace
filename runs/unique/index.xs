@@ -1,4 +1,7 @@
-workspace unique
+run Unique {
+  type = "job"
+  main = {name: "Unique", input: {collection: [1, 2, 3, 2]}}
+}
 ---
 // Creates a duplicate-free version of a collection, using equality comparisons, in which only the first occurrence of each element is kept. The order of result values is determined by the order they occur in the array.
 // 
@@ -71,16 +74,12 @@ workspace unique
 // ```
 // 
 // it will return all the object with a unique email
-function "$main" {
+function Unique {
   input {
-    object args {
-      schema {
-        json[] collection?
-      
-        // optional path value to compare elements
-        text? path? filters=trim
-      }
-    }
+    json[] collection?
+  
+    // optional path value to compare elements
+    text? path? filters=trim
   }
 
   stack {

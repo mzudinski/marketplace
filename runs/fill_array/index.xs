@@ -1,4 +1,10 @@
-workspace fill_array
+run "Fill array" {
+  type = "job"
+  main = {
+    name : "Fill array"
+    input: {array: [1, 2, 3, 4, 5, 6], value: "replaced", start: 2, end: 4}
+  }
+}
 ---
 // Fills elements of `array` with `value` from `start` up to, but not including, `end`.
 // 
@@ -16,16 +22,12 @@ workspace fill_array
 // ```
 // [1,2,"replaced","replaced",5,6]
 // ```
-function "$main" {
+function "Fill array" {
   input {
-    object args {
-      schema {
-        json array?
-        json value?
-        int start?
-        int end?="-1"
-      }
-    }
+    json array?
+    json value?
+    int start?
+    int end?="-1"
   }
 
   stack {

@@ -1,5 +1,21 @@
-workspace google_sheets_update_values {
-  env = {access_token: ""}
+run "Google Sheets -> Update Values" {
+  type = "job"
+  main = {
+    name : "Google Sheets -> Update Values"
+    input: {
+      spreadsheet_id    : "1A2B3C4D5E"
+      range             : "Sheet1!A1:C3"
+      values            : [
+        ["Name", "Role", "Email"]
+        ["Alice", "Manager", "alice@example.com"]
+        ["Bob", "Developer", "bob@example.com"]
+      ]
+      value_input_option: "RAW"
+      access_token      : "ya29.a0AfH6SMB..."
+    }
+  }
+
+  env = ["access_token"]
 }
 ---
 // Updates values in a specific range of a Google Sheet using the Sheets API.
@@ -102,23 +118,19 @@ workspace google_sheets_update_values {
 // - For more help, refer to the [Google Sheets API documentation](https://developers.google.com/sheets/api/guides/concepts).
 // 
 // ---
-function "$main" {
+function "Google Sheets -> Update Values" {
   input {
-    object args {
-      schema {
-        // The ID of the Google Spreadsheet.
-        text spreadsheet_id
-      
-        // The A1 notation of the range to update (e.g., 'Sheet1!A1:C10').
-        text range
-      
-        // 2D array of values to update in the sheet.
-        json values
-      
-        // How the input data should be interpreted (RAW or USER_ENTERED). Default is RAW.
-        text value_input_option?=RAW
-      }
-    }
+    // The ID of the Google Spreadsheet.
+    text spreadsheet_id
+  
+    // The A1 notation of the range to update (e.g., 'Sheet1!A1:C10').
+    text range
+  
+    // 2D array of values to update in the sheet.
+    json values
+  
+    // How the input data should be interpreted (RAW or USER_ENTERED). Default is RAW.
+    text value_input_option?=RAW
   }
 
   stack {

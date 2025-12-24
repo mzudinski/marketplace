@@ -1,12 +1,11 @@
-workspace resend_list_audiences {
-  env = {resend_api_key: ""}
+run "Resend -> List Audiences" {
+  type = "job"
+  main = {name: "Resend -> List Audiences", input: {}}
+  env = ["resend_api_key"]
 }
 ---
-function "$main" {
+function "Resend -> List Audiences" {
   input {
-    object args {
-      schema
-    }
   }
 
   stack {

@@ -1,18 +1,16 @@
-workspace stripe_create_an_invoice {
-  env = {stripe_api_key: ""}
+run "Stripe -> Create an Invoice" {
+  type = "job"
+  main = {name: "Stripe -> Create an Invoice", input: {}}
+  env = ["stripe_api_key"]
 }
 ---
-function "$main" {
+function "Stripe -> Create an Invoice" {
   input {
-    object args {
-      schema {
-        text customer_id filters=trim
-        text discount? filters=trim
-        text description? filters=trim
-        enum collection_method? {
-          values = ["charge_automatically", "send_invoice"]
-        }
-      }
+    text customer_id filters=trim
+    text discount? filters=trim
+    text description? filters=trim
+    enum collection_method? {
+      values = ["charge_automatically", "send_invoice"]
     }
   }
 

@@ -1,12 +1,11 @@
-workspace initial_of_array
+run "Initial of array" {
+  type = "job"
+  main = {name: "Initial of array", input: {}}
+}
 ---
-function "$main" {
+function "Initial of array" {
   input {
-    object args {
-      schema {
-        json array?
-      }
-    }
+    json array?
   }
 
   stack {

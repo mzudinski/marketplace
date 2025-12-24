@@ -1,5 +1,7 @@
-workspace hubspot_get_contact {
-  env = {hubspot_api_key: ""}
+run "Hubspot -> Get Contact" {
+  type = "job"
+  main = {name: "Hubspot -> Get Contact", input: {}}
+  env = ["hubspot_api_key"]
 }
 ---
 // # Function Documentation: HubSpot → Get Contact
@@ -78,14 +80,10 @@ workspace hubspot_get_contact {
 //     "archived": false
 // }
 // ```
-function "$main" {
+function "Hubspot -> Get Contact" {
   input {
-    object args {
-      schema {
-        int id filters=min:1
-        text[] properties? filters=trim
-      }
-    }
+    int id filters=min:1
+    text[] properties? filters=trim
   }
 
   stack {

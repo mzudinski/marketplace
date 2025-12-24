@@ -1,15 +1,20 @@
-workspace gemini_audio_understanding {
-  env = {gemini_api_key: ""}
+run "Gemini -> Audio Understanding" {
+  type = "job"
+  main = {
+    name : "Gemini -> Audio Understanding"
+    input: {
+      file_uri: "https://storage.googleapis.com/path-to-your-audio.wav"
+      question: "Summarize what is being discussed in this meeting recording."
+    }
+  }
+
+  env = ["gemini_api_key"]
 }
 ---
-function "$main" {
+function "Gemini -> Audio Understanding" {
   input {
-    object args {
-      schema {
-        text file_uri filters=trim
-        text question filters=trim
-      }
-    }
+    text file_uri filters=trim
+    text question filters=trim
   }
 
   stack {

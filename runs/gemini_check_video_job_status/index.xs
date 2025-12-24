@@ -1,14 +1,18 @@
-workspace gemini_check_video_job_status {
-  env = {gemini_api_key: ""}
+run "Gemini -> Check Video Job Status" {
+  type = "job"
+  main = {
+    name : "Gemini -> Check Video Job Status"
+    input: {
+      name: "models/veo-3.0-generate-preview/operations/abcd1234"
+    }
+  }
+
+  env = ["gemini_api_key"]
 }
 ---
-function "$main" {
+function "Gemini -> Check Video Job Status" {
   input {
-    object args {
-      schema {
-        text name filters=trim
-      }
-    }
+    text name filters=trim
   }
 
   stack {

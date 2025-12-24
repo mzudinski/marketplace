@@ -1,12 +1,11 @@
-workspace head_of_array
+run "Head array" {
+  type = "job"
+  main = {name: "Head array", input: {array: [1, 2, 3, 4, 5]}}
+}
 ---
-function "$main" {
+function "Head array" {
   input {
-    object args {
-      schema {
-        json array?
-      }
-    }
+    json array?
   }
 
   stack {

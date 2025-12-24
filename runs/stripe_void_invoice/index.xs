@@ -1,14 +1,16 @@
-workspace stripe_void_invoice {
-  env = {stripe_api_key: ""}
+run "Stripe -> Void Invoice" {
+  type = "job"
+  main = {
+    name : "Stripe -> Void Invoice"
+    input: {invoice_id: "in_1JYb2D2eZvKYlo2C..."}
+  }
+
+  env = ["stripe_api_key"]
 }
 ---
-function "$main" {
+function "Stripe -> Void Invoice" {
   input {
-    object args {
-      schema {
-        text invoice_id filters=trim
-      }
-    }
+    text invoice_id filters=trim
   }
 
   stack {

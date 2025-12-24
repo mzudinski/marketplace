@@ -1,4 +1,7 @@
-workspace standard_deviation
+run "Standard Deviation" {
+  type = "job"
+  main = {name: "Standard Deviation", input: {}}
+}
 ---
 // Return the standard deviation of the provided `values`. Set `is_sample` to `true` when submitting a partial data set instead of a complete population.
 // 
@@ -16,16 +19,12 @@ workspace standard_deviation
 // ```
 // 1.4142135623731
 // ```
-function "$main" {
+function "Standard Deviation" {
   input {
-    object args {
-      schema {
-        decimal[] values?
-      
-        // Indicate a sample of data instead of a complete data set
-        bool is_sample?
-      }
-    }
+    decimal[] values?
+  
+    // Indicate a sample of data instead of a complete data set
+    bool is_sample?
   }
 
   stack {

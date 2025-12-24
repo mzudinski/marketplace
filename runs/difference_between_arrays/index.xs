@@ -1,13 +1,15 @@
-workspace difference_between_arrays
+run "Difference array" {
+  type = "job"
+  main = {
+    name : "Difference array"
+    input: {array_1: [1, 2, 3, 4, 5, 6], array_2: [2, 4, 6]}
+  }
+}
 ---
-function "$main" {
+function "Difference array" {
   input {
-    object args {
-      schema {
-        json[] array_1?
-        json[] array_2?
-      }
-    }
+    json[] array_1?
+    json[] array_2?
   }
 
   stack {

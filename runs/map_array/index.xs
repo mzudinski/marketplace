@@ -1,4 +1,7 @@
-workspace map_array
+run "Map array" {
+  type = "job"
+  main = {name: "Map array", input: {}}
+}
 ---
 // Creates an array of values by running each element in collection thru the `path`.
 // 
@@ -23,14 +26,10 @@ workspace map_array
 // ```
 // [true, false, true, false]
 // ```
-function "$main" {
+function "Map array" {
   input {
-    object args {
-      schema {
-        json collection?
-        text path? filters=trim
-      }
-    }
+    json collection?
+    text path? filters=trim
   }
 
   stack {

@@ -1,16 +1,18 @@
-workspace percentile
+run Percentile {
+  type = "job"
+  main = {
+    name : "Percentile"
+    input: {numbers: [1, 4, 5, 6, 7, 2, 3, 8, 0, 9, 10], percentile: 55}
+  }
+}
 ---
-function "$main" {
+function Percentile {
   input {
-    object args {
-      schema {
-        // Array of numbers to calculate the percentile from
-        decimal[] numbers?
-      
-        // The percentile to calculate (0-100)
-        decimal percentile? filters=min:1|max:100
-      }
-    }
+    // Array of numbers to calculate the percentile from
+    decimal[] numbers?
+  
+    // The percentile to calculate (0-100)
+    decimal percentile? filters=min:1|max:100
   }
 
   stack {

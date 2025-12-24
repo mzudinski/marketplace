@@ -1,5 +1,11 @@
-workspace open_ai_create_a_chat_completion {
-  env = {openai_api_key: ""}
+run "OpenAI -> Create a Chat Completion (Simple)" {
+  type = "job"
+  main = {
+    name : "OpenAI -> Create a Chat Completion (Simple)"
+    input: {}
+  }
+
+  env = ["openai_api_key"]
 }
 ---
 // # Function Documentation: OpenAI -> Create a Chat Completion (Hybrid)
@@ -63,17 +69,13 @@ workspace open_ai_create_a_chat_completion {
 //    "Barack Obama is 6 feet 1 inch tall (185 cm)."
 // }
 // ```
-function "$main" {
+function "OpenAI -> Create a Chat Completion (Simple)" {
   input {
-    object args {
-      schema {
-        enum model?="gpt-4o-mini" {
-          values = ["gpt-4o-mini", "gpt-4o"]
-        }
-      
-        text message filters=trim
-      }
+    enum model?="gpt-4o-mini" {
+      values = ["gpt-4o-mini", "gpt-4o"]
     }
+  
+    text message filters=trim
   }
 
   stack {

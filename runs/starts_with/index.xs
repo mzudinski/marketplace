@@ -1,4 +1,7 @@
-workspace starts_with
+run "Starts with" {
+  type = "job"
+  main = {name: "Starts with", input: {}}
+}
 ---
 // Checks if `string` (or `array`) starts with the given `target` string (or `array`).
 // 
@@ -16,15 +19,11 @@ workspace starts_with
 // ```
 // true
 // ```
-function "$main" {
+function "Starts with" {
   input {
-    object args {
-      schema {
-        json text?
-        json target?
-        int position?
-      }
-    }
+    json text?
+    json target?
+    int position?
   }
 
   stack {

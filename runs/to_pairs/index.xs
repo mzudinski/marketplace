@@ -1,4 +1,7 @@
-workspace to_pairs
+run "To pairs" {
+  type = "job"
+  main = {name: "To pairs", input: {}}
+}
 ---
 // Creates an array of own enumerable string keyed-value pairs for `collection` which can be consumed by `From pairs`. If object is a map or set, its entries are returned.
 // 
@@ -13,13 +16,9 @@ workspace to_pairs
 // ```
 // [["a", 1], ["b", 2]]
 // ```
-function "$main" {
+function "To pairs" {
   input {
-    object args {
-      schema {
-        json collection?
-      }
-    }
+    json collection?
   }
 
   stack {

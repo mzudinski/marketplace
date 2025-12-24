@@ -1,12 +1,11 @@
-workspace shopify_get_all_orders {
-  env = {access_token: "", store: ""}
+run "Shopify -> Get All Orders" {
+  type = "job"
+  main = {name: "Shopify -> Get All Orders", input: {}}
+  env = ["access_token", "store"]
 }
 ---
-function "$main" {
+function "Shopify -> Get All Orders" {
   input {
-    object args {
-      schema
-    }
   }
 
   stack {

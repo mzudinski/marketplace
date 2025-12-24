@@ -1,20 +1,18 @@
-workspace postmark_send_batch_emails {
-  env = {postmark_base_url: "", postmark_api_token: ""}
+run "Postmark -> Send Batch Emails" {
+  type = "job"
+  main = {name: "Postmark -> Send Batch Emails", input: {}}
+  env = ["postmark_base_url", "postmark_api_token"]
 }
 ---
-function "$main" {
+function "Postmark -> Send Batch Emails" {
   input {
-    object args {
+    object[1:] messages? {
       schema {
-        object[1:] messages? {
-          schema {
-            text from_email filters=trim
-            text to_email filters=trim
-            text subject? filters=trim
-            text text_body? filters=trim
-            text html_body? filters=trim
-          }
-        }
+        text from_email filters=trim
+        text to_email filters=trim
+        text subject? filters=trim
+        text text_body? filters=trim
+        text html_body? filters=trim
       }
     }
   }

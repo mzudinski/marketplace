@@ -1,18 +1,20 @@
-workspace kurtosis_fisher
+run "Kurtosis (Fisher)" {
+  type = "job"
+  main = {
+    name : "Kurtosis (Fisher)"
+    input: {numbers: [1, 2], is_sample: false}
+  }
+}
 ---
 // The kurtosis measures the "tailedness" of a distribution, showing whether the data has heavy or light tails compared to a normal distribution.
 // 
 // This action returns Fisher kurtosis, to get the raw kurtosis you can add 3 to its result.
-function "$main" {
+function "Kurtosis (Fisher)" {
   input {
-    object args {
-      schema {
-        decimal[] numbers?
-      
-        // Set the bias to false for small dataset
-        bool bias?=true
-      }
-    }
+    decimal[] numbers?
+  
+    // Set the bias to false for small dataset
+    bool bias?=true
   }
 
   stack {

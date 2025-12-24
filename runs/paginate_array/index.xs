@@ -1,4 +1,7 @@
-workspace paginate_array
+run "Paginate array" {
+  type = "job"
+  main = {name: "Paginate array", input: {}}
+}
 ---
 // The array paginator is a function that divides a large array into smaller chunks, allowing you to display only a specific portion (or “page”) of the array at a time. It takes in parameters like the number of items you want per page (per_page) and the current page (page), and returns a portion of the array corresponding to that page. 
 // 
@@ -13,17 +16,13 @@ workspace paginate_array
 // 	•	The previous page (if there is one).
 // 
 // This allows for easier navigation through large datasets by breaking them up into smaller, manageable “pages.”
-function "$main" {
+function "Paginate array" {
   input {
-    object args {
-      schema {
-        // The array you wish to paginate.
-        json array
-      
-        int page?=1 filters=min:1
-        int per_page?=10 filters=min:1
-      }
-    }
+    // The array you wish to paginate.
+    json array
+  
+    int page?=1 filters=min:1
+    int per_page?=10 filters=min:1
   }
 
   stack {

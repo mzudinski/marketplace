@@ -1,14 +1,16 @@
-workspace gemini_upload_file {
-  env = {gemini_api_key: ""}
+run "Gemini -> Upload File" {
+  type = "job"
+  main = {
+    name : "Gemini -> Upload File"
+    input: {file: "uploaded_file"}
+  }
+
+  env = ["gemini_api_key"]
 }
 ---
-function "$main" {
+function "Gemini -> Upload File" {
   input {
-    object args {
-      schema {
-        file? file
-      }
-    }
+    file? file
   }
 
   stack {

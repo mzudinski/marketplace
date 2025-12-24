@@ -1,5 +1,7 @@
-workspace open_ai_get_embeddings {
-  env = {openai_api_key: ""}
+run "OpenAI -> Get an embedding (simple)" {
+  type = "job"
+  main = {name: "OpenAI -> Get an embedding (simple)", input: {}}
+  env = ["openai_api_key"]
 }
 ---
 // # Function Documentation: OpenAI -> Get an Embedding
@@ -78,22 +80,18 @@ workspace open_ai_get_embeddings {
 //    ]
 // }
 // ```
-function "$main" {
+function "OpenAI -> Get an embedding (simple)" {
   input {
-    object args {
-      schema {
-        text input_text filters=trim
-      
-        // The model from OpenAI to use
-        enum model?="text-embedding-3-small" {
-          values = [
-            "text-embedding-3-large"
-            "text-embedding-3-small"
-            "text-embedding-ada-002"
-          ]
-        
-        }
-      }
+    text input_text filters=trim
+  
+    // The model from OpenAI to use
+    enum model?="text-embedding-3-small" {
+      values = [
+        "text-embedding-3-large"
+        "text-embedding-3-small"
+        "text-embedding-ada-002"
+      ]
+    
     }
   }
 

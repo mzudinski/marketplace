@@ -1,4 +1,10 @@
-workspace linear_regression
+run "Linear Regression" {
+  type = "job"
+  main = {
+    name : "Linear Regression"
+    input: {x: [1.1, 2.05, 2.98, 4.1, 5.01], y: [0.9, 1.9, 2.8, 4.1, 5.1]}
+  }
+}
 ---
 // Performs simple linear regression and returns the slope, intercept, standard errors, residual variance, and R² goodness-of-fit score.
 // 
@@ -20,17 +26,13 @@ workspace linear_regression
 //   ]
 // }
 // ```
-function "$main" {
+function "Linear Regression" {
   input {
-    object args {
-      schema {
-        // the X dataset
-        decimal[] x?
-      
-        // The Y dataset
-        decimal[] y?
-      }
-    }
+    // the X dataset
+    decimal[] x?
+  
+    // The Y dataset
+    decimal[] y?
   }
 
   stack {

@@ -1,14 +1,13 @@
-workspace skewness
+run Skewness {
+  type = "job"
+  main = {name: "Skewness", input: {number: [2, 8, 0, 4, 1, 9, 9, 0]}}
+}
 ---
 // Measures the asymmetry of a data set’s distribution around its mean.
-function "$main" {
+function Skewness {
   input {
-    object args {
-      schema {
-        decimal[] numbers?
-        bool bias?
-      }
-    }
+    decimal[] numbers?
+    bool bias?
   }
 
   stack {

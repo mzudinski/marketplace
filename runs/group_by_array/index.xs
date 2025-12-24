@@ -1,4 +1,18 @@
-workspace group_by_array
+run "Group by array" {
+  type = "job"
+  main = {
+    name : "Group by array"
+    input: {
+      collection: [
+        {var: "a", value: 10}
+        {var: "b", value: 20}
+        {var: "c", value: 3}
+        {var: "a", value: 44}
+      ]
+      path      : "var"
+    }
+  }
+}
 ---
 // Creates an object composed of keys generated from the results of running each element of `collection` thru the provided `path`. The corresponding value of each key is the last element responsible for generating the key.
 // 
@@ -26,14 +40,10 @@ workspace group_by_array
 //   }
 // }
 // ```
-function "$main" {
+function "Group by array" {
   input {
-    object args {
-      schema {
-        json collection?
-        text path? filters=trim
-      }
-    }
+    json collection?
+    text path? filters=trim
   }
 
   stack {

@@ -1,5 +1,7 @@
-workspace quick_books_create_payment {
-  env = {quickbooks_realm_id: "", quickbooks_api_token: ""}
+run "QuickBooks -> Create Payment" {
+  type = "job"
+  main = {name: "QuickBooks -> Create Payment", input: {}}
+  env = ["quickbooks_realm_id", "quickbooks_api_token"]
 }
 ---
 // ## Function Documentation: QuickBooks -> Create Payment
@@ -137,14 +139,10 @@ workspace quick_books_create_payment {
 // }
 // 
 // ```
-function "$main" {
+function "QuickBooks -> Create Payment" {
   input {
-    object args {
-      schema {
-        decimal amount
-        int consumer_ref
-      }
-    }
+    decimal amount
+    int consumer_ref
   }
 
   stack {

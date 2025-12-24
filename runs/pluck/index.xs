@@ -1,14 +1,19 @@
-workspace pluck
+run Pluck {
+  type = "job"
+  main = {
+    name : "Pluck"
+    input: {
+      array: [{name: "barney", age: 36}, {name: "fred", age: 40}]
+      key  : "name"
+    }
+  }
+}
 ---
 // Retrieves the value of a specified property from all elements in the collection.
-function "$main" {
+function Pluck {
   input {
-    object args {
-      schema {
-        json[] array?
-        text key? filters=trim
-      }
-    }
+    json[] array?
+    text key? filters=trim
   }
 
   stack {

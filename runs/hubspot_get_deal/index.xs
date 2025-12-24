@@ -1,5 +1,7 @@
-workspace hubspot_get_deal {
-  env = {hubspot_api_key: ""}
+run "Hubspot -> Get Deal" {
+  type = "job"
+  main = {name: "Hubspot -> Get Deal", input: {}}
+  env = ["hubspot_api_key"]
 }
 ---
 // # HubSpot → Get Deal
@@ -78,15 +80,11 @@ workspace hubspot_get_deal {
 //     "archived": false
 // }
 // ```
-function "$main" {
+function "Hubspot -> Get Deal" {
   input {
-    object args {
-      schema {
-        int deal_id
-        text[] properties? filters=trim
-        text[] properties_with_history? filters=trim
-      }
-    }
+    int deal_id
+    text[] properties? filters=trim
+    text[] properties_with_history? filters=trim
   }
 
   stack {

@@ -1,15 +1,17 @@
-workspace google_maps_geocoding_api {
-  env = {google_api_key: ""}
+run "Google Maps -> Geocoding API" {
+  type = "job"
+  main = {
+    name : "Google Maps -> Geocoding API"
+    input: {address: "Toledo", region: "ES"}
+  }
+
+  env = ["google_api_key"]
 }
 ---
-function "$main" {
+function "Google Maps -> Geocoding API" {
   input {
-    object args {
-      schema {
-        text address filters=trim
-        text region? filters=trim
-      }
-    }
+    text address filters=trim
+    text region? filters=trim
   }
 
   stack {

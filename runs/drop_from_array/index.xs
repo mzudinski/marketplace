@@ -1,4 +1,7 @@
-workspace drop_from_array
+run "Drop array" {
+  type = "job"
+  main = {name: "Drop array", input: {array: [0, 1, 2, 3, 4], n: 2}}
+}
 ---
 // Creates a slice of `array` with `n` elements dropped from the beginning.
 // 
@@ -19,14 +22,10 @@ workspace drop_from_array
 // ```
 // [4]
 // ```
-function "$main" {
+function "Drop array" {
   input {
-    object args {
-      schema {
-        json[] array?
-        int n?
-      }
-    }
+    json[] array?
+    int n?
   }
 
   stack {

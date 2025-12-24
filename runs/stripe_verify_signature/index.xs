@@ -1,14 +1,16 @@
-workspace stripe_verify_signature {
-  env = {stripe_webhook_secret: ""}
+run "Stripe: Verify Signature" {
+  type = "job"
+  main = {
+    name : "Stripe: Verify Signature"
+    input: {http_headers: "env.$http_headers"}
+  }
+
+  env = ["stripe_webhook_secret"]
 }
 ---
-function "$main" {
+function "Stripe: Verify Signature" {
   input {
-    object args {
-      schema {
-        json http_headers
-      }
-    }
+    json http_headers
   }
 
   stack {

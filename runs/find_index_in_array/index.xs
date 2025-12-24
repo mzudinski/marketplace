@@ -1,13 +1,22 @@
-workspace find_index_in_array
----
-function "$main" {
-  input {
-    object args {
-      schema {
-        json array?
-        json predicate?
-      }
+run "FindIndex in array" {
+  type = "job"
+  main = {
+    name : "FindIndex in array"
+    input: {
+      array    : [
+        {name: "barney", age: 36, blocked: false}
+        {name: "fred", age: 40, blocked: true}
+        {name: "pebbles", age: 1, blocked: false}
+      ]
+      predicate: {age: 36}
     }
+  }
+}
+---
+function "FindIndex in array" {
+  input {
+    json array?
+    json predicate?
   }
 
   stack {

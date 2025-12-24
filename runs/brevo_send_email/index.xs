@@ -1,5 +1,7 @@
-workspace brevo_send_email {
-  env = {brevo_api_key: ""}
+run "Brevo -> Send Email" {
+  type = "job"
+  main = {name: "Brevo -> Send Email", input: {}}
+  env = ["brevo_api_key"]
 }
 ---
 // # Function Documentation: Brevo → Send Single Email
@@ -98,28 +100,24 @@ workspace brevo_send_email {
 //   "messageId": "<202410100***.1236169****@smtp-relay.mailin.fr>"
 // }
 // ```
-function "$main" {
+function "Brevo -> Send Email" {
   input {
-    object args {
+    object from {
       schema {
-        object from {
-          schema {
-            text name filters=trim
-            email email filters=trim|lower
-          }
-        }
-      
-        object to {
-          schema {
-            text name filters=trim
-            email email filters=trim|lower
-          }
-        }
-      
-        text message_html filters=trim
-        text subject filters=trim
+        text name filters=trim
+        email email filters=trim|lower
       }
     }
+  
+    object to {
+      schema {
+        text name filters=trim
+        email email filters=trim|lower
+      }
+    }
+  
+    text message_html filters=trim
+    text subject filters=trim
   }
 
   stack {

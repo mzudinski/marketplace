@@ -1,12 +1,11 @@
-workspace reverse_array
+run "Reverse array" {
+  type = "job"
+  main = {name: "Reverse array", input: {}}
+}
 ---
-function "$main" {
+function "Reverse array" {
   input {
-    object args {
-      schema {
-        json array?
-      }
-    }
+    json array?
   }
 
   stack {

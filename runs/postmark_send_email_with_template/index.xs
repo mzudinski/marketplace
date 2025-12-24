@@ -1,5 +1,7 @@
-workspace postmark_send_email_with_template {
-  env = {postmark_base_url: "", postmark_api_token: ""}
+run "Postmark Send email with template" {
+  type = "job"
+  main = {name: "Postmark Send email with template", input: {}}
+  env = ["postmark_base_url", "postmark_api_token"]
 }
 ---
 // # Function Documentation: Postmark → Send Email with Template
@@ -107,16 +109,12 @@ workspace postmark_send_email_with_template {
 //   "Message": "OK"
 // }
 // ```
-function "$main" {
+function "Postmark Send email with template" {
   input {
-    object args {
-      schema {
-        text from_email filters=trim|lower
-        text to_email filters=trim|lower
-        int template_id
-        json template_model
-      }
-    }
+    text from_email filters=trim|lower
+    text to_email filters=trim|lower
+    int template_id
+    json template_model
   }
 
   stack {

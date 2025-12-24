@@ -1,13 +1,12 @@
-workspace mode
+run Mode {
+  type = "job"
+  main = {name: "Mode", input: {numbers: [1, 2, 3, 1, 2, 1]}}
+}
 ---
 // Identifies the most frequently occurring value(s) in a data set
-function "$main" {
+function Mode {
   input {
-    object args {
-      schema {
-        decimal[] numbers?
-      }
-    }
+    decimal[] numbers?
   }
 
   stack {

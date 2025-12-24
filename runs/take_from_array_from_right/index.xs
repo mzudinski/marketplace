@@ -1,13 +1,12 @@
-workspace take_from_array_from_right
+run "Take from array from right" {
+  type = "job"
+  main = {name: "Take from array from right", input: {}}
+}
 ---
-function "$main" {
+function "Take from array from right" {
   input {
-    object args {
-      schema {
-        json array?
-        int n?=1
-      }
-    }
+    json array?
+    int n?=1
   }
 
   stack {

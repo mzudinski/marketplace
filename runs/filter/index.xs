@@ -1,4 +1,16 @@
-workspace filter
+run Filter {
+  type = "job"
+  main = {
+    name : "Filter"
+    input: {
+      array: [
+        {name: "barney", age: 36, pets: ["hoppy"]}
+        {name: "fred", age: 40, pets: ["baby puss", "dino"]}
+      ]
+      props: {pets: ["dino"]}
+    }
+  }
+}
 ---
 // Performs a deep comparison of each element in a collection to the given properties object, returning an array of all elements that have equivalent property values.
 // 
@@ -59,14 +71,10 @@ workspace filter
 // }
 // 
 // ```
-function "$main" {
+function Filter {
   input {
-    object args {
-      schema {
-        json[] array?
-        json props?
-      }
-    }
+    json[] array?
+    json props?
   }
 
   stack {

@@ -1,18 +1,20 @@
-workspace op_two_array
+run op_two_array {
+  type = "job"
+  main = {
+    name : "op_two_array"
+    input: {left: [1, 2, 3, 4], op: "add", right: [4, 3, 2, 1]}
+  }
+}
 ---
 // apply the operation from one array to the other
-function "$main" {
+function op_two_array {
   input {
-    object args {
-      schema {
-        decimal[] left_numbers?
-        enum op?=add {
-          values = ["add", "subtract", "multiply", "divide", "power"]
-        }
-      
-        decimal[] right_numbers?
-      }
+    decimal[] left_numbers?
+    enum op?=add {
+      values = ["add", "subtract", "multiply", "divide", "power"]
     }
+  
+    decimal[] right_numbers?
   }
 
   stack {

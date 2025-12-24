@@ -1,16 +1,22 @@
-workspace gemini_image_understanding {
-  env = {gemini_api_key: ""}
+run "Gemini -> Image Understanding" {
+  type = "job"
+  main = {
+    name : "Gemini -> Image Understanding"
+    input: {
+      model : "gemini-1.5-flash"
+      prompt: "Describe what is happening in this image."
+      image : "(attach image file)"
+    }
+  }
+
+  env = ["gemini_api_key"]
 }
 ---
-function "$main" {
+function "Gemini -> Image Understanding" {
   input {
-    object args {
-      schema {
-        text model?="gemini-2.0-flash" filters=trim
-        text prompt? filters=trim
-        file? image
-      }
-    }
+    text model?="gemini-2.0-flash" filters=trim
+    text prompt? filters=trim
+    file? image
   }
 
   stack {

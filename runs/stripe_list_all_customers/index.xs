@@ -1,16 +1,18 @@
-workspace stripe_list_all_customers {
-  env = {stripe_api_key: ""}
+run "Stripe -> List All Customers" {
+  type = "job"
+  main = {
+    name : "Stripe -> List All Customers"
+    input: {email: "asdasd@gmail.com"}
+  }
+
+  env = ["stripe_api_key"]
 }
 ---
-function "$main" {
+function "Stripe -> List All Customers" {
   input {
-    object args {
-      schema {
-        email email? filters=trim|lower
-        text starting_after? filters=trim
-        int limit?
-      }
-    }
+    email email? filters=trim|lower
+    text starting_after? filters=trim
+    int limit?
   }
 
   stack {

@@ -1,5 +1,7 @@
-workspace shopify_update_customer {
-  env = {access_token: "", store: ""}
+run "Shopify -> Update Customer" {
+  type = "job"
+  main = {name: "Shopify -> Update Customer", input: {}}
+  env = ["access_token", "store"]
 }
 ---
 // Xano Action: Update Shopify Customer
@@ -83,16 +85,12 @@ workspace shopify_update_customer {
 //     }
 //   }
 // }
-function "$main" {
+function "Shopify -> Update Customer" {
   input {
-    object args {
-      schema {
-        text customer_id filters=trim
-        text firstName? filters=trim
-        text lastName? filters=trim
-        email email? filters=trim|lower
-      }
-    }
+    text customer_id filters=trim
+    text firstName? filters=trim
+    text lastName? filters=trim
+    email email? filters=trim|lower
   }
 
   stack {

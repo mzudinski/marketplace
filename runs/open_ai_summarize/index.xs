@@ -1,17 +1,15 @@
-workspace open_ai_summarize {
-  env = {openai_api_key: ""}
+run "OpenAI -> Summarize (Simple)" {
+  type = "job"
+  main = {name: "OpenAI -> Summarize (Simple)", input: {}}
+  env = ["openai_api_key"]
 }
 ---
 // This function summarizes a piece of text using the OpenAI API
-function "$main" {
+function "OpenAI -> Summarize (Simple)" {
   input {
-    object args {
-      schema {
-        text input_text filters=trim
-        enum model?="gpt-4o-mini" {
-          values = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo"]
-        }
-      }
+    text input_text filters=trim
+    enum model?="gpt-4o-mini" {
+      values = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo"]
     }
   }
 

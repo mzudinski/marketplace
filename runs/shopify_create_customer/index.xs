@@ -1,16 +1,14 @@
-workspace shopify_create_customer {
-  env = {access_token: "", store: ""}
+run "Shopify -> Create Customer" {
+  type = "job"
+  main = {name: "Shopify -> Create Customer", input: {}}
+  env = ["access_token", "store"]
 }
 ---
-function "$main" {
+function "Shopify -> Create Customer" {
   input {
-    object args {
-      schema {
-        email email filters=trim|lower
-        text firstName filters=trim
-        text lastName filters=trim
-      }
-    }
+    email email filters=trim|lower
+    text firstName filters=trim
+    text lastName filters=trim
   }
 
   stack {

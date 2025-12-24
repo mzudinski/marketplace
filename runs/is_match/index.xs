@@ -1,14 +1,16 @@
-workspace is_match
+run isMatch {
+  type = "job"
+  main = {
+    name : "isMatch"
+    input: {object: {foo: {bar: [1, 2, 3]}}, props: {foo: {bar: [2]}}}
+  }
+}
 ---
 // Performs a partial deep comparison between `object` and `source` to determine if `object` contains equivalent property values.
-function "$main" {
+function isMatch {
   input {
-    object args {
-      schema {
-        json object?
-        json props?
-      }
-    }
+    json object?
+    json props?
   }
 
   stack {

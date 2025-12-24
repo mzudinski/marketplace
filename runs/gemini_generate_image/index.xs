@@ -1,15 +1,20 @@
-workspace gemini_generate_image {
-  env = {gemini_api_key: ""}
+run "Gemini -> Generate Image" {
+  type = "job"
+  main = {
+    name : "Gemini -> Generate Image"
+    input: {
+      model : "gemini-1.5-flash"
+      prompt: "A futuristic city skyline at sunset in vibrant colors"
+    }
+  }
+
+  env = ["gemini_api_key"]
 }
 ---
-function "$main" {
+function "Gemini -> Generate Image" {
   input {
-    object args {
-      schema {
-        text model?="gemini-2.0-flash-preview-image-generation" filters=trim
-        text prompt? filters=trim
-      }
-    }
+    text model?="gemini-2.0-flash-preview-image-generation" filters=trim
+    text prompt? filters=trim
   }
 
   stack {

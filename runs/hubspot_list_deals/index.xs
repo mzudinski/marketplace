@@ -1,5 +1,7 @@
-workspace hubspot_list_deals {
-  env = {hubspot_api_key: ""}
+run "Hubspot -> List Deals" {
+  type = "job"
+  main = {name: "Hubspot -> List Deals", input: {}}
+  env = ["hubspot_api_key"]
 }
 ---
 // # HubSpot → List Deals
@@ -80,16 +82,12 @@ workspace hubspot_list_deals {
 //     .
 // ]
 // ```
-function "$main" {
+function "Hubspot -> List Deals" {
   input {
-    object args {
-      schema {
-        text after? filters=trim
-        int limit?
-        text[] properties? filters=trim
-        text[] properties_with_history? filters=trim
-      }
-    }
+    text after? filters=trim
+    int limit?
+    text[] properties? filters=trim
+    text[] properties_with_history? filters=trim
   }
 
   stack {

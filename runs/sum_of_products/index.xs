@@ -1,14 +1,16 @@
-workspace sum_of_products
+run "Sum of products" {
+  type = "job"
+  main = {
+    name : "Sum of products"
+    input: {numbers_a: [1, 2, 3], numbers_b: [4, 5, 6]}
+  }
+}
 ---
 // Calculates the sum of the element-wise products of two arrays, requiring two input arrays of equal length.
-function "$main" {
+function "Sum of products" {
   input {
-    object args {
-      schema {
-        decimal[] numbers_a?
-        decimal[] numbers_b?
-      }
-    }
+    decimal[] numbers_a?
+    decimal[] numbers_b?
   }
 
   stack {

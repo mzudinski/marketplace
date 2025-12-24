@@ -1,17 +1,24 @@
-workspace google_maps_validate_address {
-  env = {google_api_key: ""}
+run "Google Maps -> Validate Address" {
+  type = "job"
+  main = {
+    name : "Google Maps -> Validate Address"
+    input: {
+      region_code  : "US"
+      address_lines: "abcd"
+      language_code: "en"
+      session_token: ""
+    }
+  }
+
+  env = ["google_api_key"]
 }
 ---
-function "$main" {
+function "Google Maps -> Validate Address" {
   input {
-    object args {
-      schema {
-        text region_code? filters=trim
-        text address_lines filters=trim
-        text language_code?=en filters=trim
-        text session_token? filters=trim
-      }
-    }
+    text region_code? filters=trim
+    text address_lines filters=trim
+    text language_code?=en filters=trim
+    text session_token? filters=trim
   }
 
   stack {

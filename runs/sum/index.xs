@@ -1,13 +1,12 @@
-workspace sum
+run Sum {
+  type = "job"
+  main = {name: "Sum", input: {numbers: [1, 2, 3, 4]}}
+}
 ---
 // Calculates the total sum of an array of number
-function "$main" {
+function Sum {
   input {
-    object args {
-      schema {
-        decimal[] numbers?
-      }
-    }
+    decimal[] numbers?
   }
 
   stack {

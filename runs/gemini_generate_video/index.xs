@@ -1,21 +1,29 @@
-workspace gemini_generate_video {
-  env = {gemini_api_key: ""}
+run "Gemini -> Generate Video" {
+  type = "job"
+  main = {
+    name : "Gemini -> Generate Video"
+    input: {
+      model            : "veo-3.0-generate-preview:predictLongRunning"
+      prompt           : "Panning wide shot of a purring kitten sleeping in the sunshine"
+      aspect_ratio     : "16:9"
+      person_generation: "allow_all"
+      duration_seconds : 5
+    }
+  }
+
+  env = ["gemini_api_key"]
 }
 ---
-function "$main" {
+function "Gemini -> Generate Video" {
   input {
-    object args {
-      schema {
-        text model?="veo-3.0-generate-preview:predictLongRunning" filters=trim
-        text prompt? filters=trim
-        enum aspect_ratio?="16:9" {
-          values = ["16:9", "9:16"]
-        }
-      
-        enum person_generation?="allow_all" {
-          values = ["dont_allow", "allow_adult", "allow_all"]
-        }
-      }
+    text model?="veo-3.0-generate-preview:predictLongRunning" filters=trim
+    text prompt? filters=trim
+    enum aspect_ratio?="16:9" {
+      values = ["16:9", "9:16"]
+    }
+  
+    enum person_generation?="allow_all" {
+      values = ["dont_allow", "allow_adult", "allow_all"]
     }
   }
 

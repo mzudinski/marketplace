@@ -1,23 +1,21 @@
-workspace open_ai_generate_an_image {
-  env = {openai_api_key: ""}
+run "OpenAI -> Create an image" {
+  type = "job"
+  main = {name: "OpenAI -> Create an image", input: {}}
+  env = ["openai_api_key"]
 }
 ---
 // This function creates an image from an input text using the OpenAI API
-function "$main" {
+function "OpenAI -> Create an image" {
   input {
-    object args {
-      schema {
-        text prompt filters=trim
-      
-        // The dimensions of the generated image
-        enum img_size?=1024x1024 {
-          values = ["1024x1024", "1024x1792", "1792x1024"]
-        }
-      
-        enum model?="dall-e-3" {
-          values = ["dall-e-3", "dall-e-2"]
-        }
-      }
+    text prompt filters=trim
+  
+    // The dimensions of the generated image
+    enum img_size?=1024x1024 {
+      values = ["1024x1024", "1024x1792", "1792x1024"]
+    }
+  
+    enum model?="dall-e-3" {
+      values = ["dall-e-3", "dall-e-2"]
     }
   }
 

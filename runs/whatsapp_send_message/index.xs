@@ -1,5 +1,7 @@
-workspace whatsapp_send_message {
-  env = {whatsapp_account_id: "", whatsapp_token: ""}
+run "Whatsapp -> Send Message" {
+  type = "job"
+  main = {name: "Whatsapp -> Send Message", input: {}}
+  env = ["whatsapp_account_id", "whatsapp_token"]
 }
 ---
 // # WhatsApp API → Send Message via WhatsApp
@@ -102,15 +104,11 @@ workspace whatsapp_send_message {
 //     ]
 // }
 // ```
-function "$main" {
+function "Whatsapp -> Send Message" {
   input {
-    object args {
-      schema {
-        text to_number filters=trim
-        text message filters=trim
-        text version filters=trim
-      }
-    }
+    text to_number filters=trim
+    text message filters=trim
+    text version filters=trim
   }
 
   stack {

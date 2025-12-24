@@ -1,4 +1,10 @@
-workspace central_moment
+run "Central Moment" {
+  type = "job"
+  main = {
+    name : "Central Moment"
+    input: {numbers: [1, 2, 3, 4, 5, 6], power: 2, is_sample: false}
+  }
+}
 ---
 // Compute the central moment at different level (default second). Change the power to compute different central moment.
 // 
@@ -39,17 +45,13 @@ workspace central_moment
 // ```
 // 
 // Unbiased Fourth Central Moment: `23.9806547`
-function "$main" {
+function "Central Moment" {
   input {
-    object args {
-      schema {
-        decimal[] numbers?
-        int power?=2 filters=min:2|max:4
-      
-        // Set the bias to false for small datasets
-        bool bias?=true
-      }
-    }
+    decimal[] numbers?
+    int power?=2 filters=min:2|max:4
+  
+    // Set the bias to false for small datasets
+    bool bias?=true
   }
 
   stack {

@@ -1,17 +1,24 @@
-workspace google_maps_places_details {
-  env = {google_api_key: ""}
+run "Google Maps -> Places Details" {
+  type = "job"
+  main = {
+    name : "Google Maps -> Places Details"
+    input: {
+      place_id     : "ChIJN1t_tDeuEmsRUsoyG83frY4"
+      field_mask   : "displayName,formattedAddress,internationalPhoneNumber,website"
+      language_code: "en"
+      session_token: "adf1234bc-5678-91de-0000-abc123456def"
+    }
+  }
+
+  env = ["google_api_key"]
 }
 ---
-function "$main" {
+function "Google Maps -> Places Details" {
   input {
-    object args {
-      schema {
-        text place_id filters=trim
-        text field_mask? filters=trim
-        text language_code? filters=trim
-        text session_token? filters=trim
-      }
-    }
+    text place_id filters=trim
+    text field_mask? filters=trim
+    text language_code? filters=trim
+    text session_token? filters=trim
   }
 
   stack {

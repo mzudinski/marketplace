@@ -1,5 +1,7 @@
-workspace convert_api_convert_file {
-  env = {convert_api_secret: ""}
+run "Convert API -> Convert File" {
+  type = "job"
+  main = {name: "Convert API -> Convert File", input: {}}
+  env = ["convert_api_secret"]
 }
 ---
 // # Function Documentation: Convert Api -> File Convert
@@ -103,21 +105,17 @@ workspace convert_api_convert_file {
 //    ]
 // }
 // ```
-function "$main" {
+function "Convert API -> Convert File" {
   input {
-    object args {
-      schema {
-        enum from_format {
-          values = ["pdf", "docx", "css", "xlsx", "jpg"]
-        }
-      
-        enum to_format? {
-          values = ["pdf", "docx", "css", "xlsx", "jpg"]
-        }
-      
-        text file_url filters=trim
-      }
+    enum from_format {
+      values = ["pdf", "docx", "css", "xlsx", "jpg"]
     }
+  
+    enum to_format? {
+      values = ["pdf", "docx", "css", "xlsx", "jpg"]
+    }
+  
+    text file_url filters=trim
   }
 
   stack {

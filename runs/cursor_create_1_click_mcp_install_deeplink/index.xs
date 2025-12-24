@@ -1,4 +1,14 @@
-workspace cursor_create_1_click_mcp_install_deeplink
+run "Cursor -> Create 1-click MCP Install Deeplink" {
+  type = "job"
+  main = {
+    name : "Cursor -> Create 1-click MCP Install Deeplink"
+    input: {
+      mcp_server_url: "https://x123-wu0q-dtak.n7.xano.io/x2/mcp/6vi_VA6-/mcp/sse"
+      server_name   : "Xano MCP Server Name"
+      server_type   : "sse"
+    }
+  }
+}
 ---
 // A helper function that creates a 1-click MCP install link for Cursor using URL-based authentication with Xano MCP Servers. This function generates deeplinks and various markup formats (Markdown, HTML, JSX) that allow users to install MCP servers directly into Cursor with a single click.
 // 
@@ -81,16 +91,12 @@ workspace cursor_create_1_click_mcp_install_deeplink
 //   "url": "{mcp_server_url}"
 // }
 // ```
-function "$main" {
+function "Cursor -> Create 1-click MCP Install Deeplink" {
   input {
-    object args {
-      schema {
-        text mcp_server_url filters=trim
-        text server_name? filters=trim
-        enum server_type?=sse {
-          values = ["sse", "streamable-http"]
-        }
-      }
+    text mcp_server_url filters=trim
+    text server_name? filters=trim
+    enum server_type?=sse {
+      values = ["sse", "streamable-http"]
     }
   }
 

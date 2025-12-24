@@ -1,15 +1,17 @@
-workspace stripe_list_all_products {
-  env = {stripe_api_key: ""}
+run "Stripe -> List All Products" {
+  type = "job"
+  main = {
+    name : "Stripe -> List All Products"
+    input: {starting_after: "prod_1234", limit: 5}
+  }
+
+  env = ["stripe_api_key"]
 }
 ---
-function "$main" {
+function "Stripe -> List All Products" {
   input {
-    object args {
-      schema {
-        text starting_after? filters=trim
-        int limit?
-      }
-    }
+    text starting_after? filters=trim
+    int limit?
   }
 
   stack {

@@ -1,14 +1,12 @@
-workspace shopify_get_customer_by_id {
-  env = {access_token: "", store: ""}
+run "Shopify -> Get Customer by ID" {
+  type = "job"
+  main = {name: "Shopify -> Get Customer by ID", input: {}}
+  env = ["access_token", "store"]
 }
 ---
-function "$main" {
+function "Shopify -> Get Customer by ID" {
   input {
-    object args {
-      schema {
-        text customer_id filters=trim
-      }
-    }
+    text customer_id filters=trim
   }
 
   stack {

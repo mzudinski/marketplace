@@ -1,5 +1,11 @@
-workspace stripe_create_an_invoice_item {
-  env = {stripe_api_key: ""}
+run "Stripe -> Create an Invoice Item" {
+  type = "job"
+  main = {
+    name : "Stripe -> Create an Invoice Item"
+    input: {customer_id: "cus_1234", price_id: "price_1234"}
+  }
+
+  env = ["stripe_api_key"]
 }
 ---
 // **Stripe - Create an Invoice Item**
@@ -50,14 +56,10 @@ workspace stripe_create_an_invoice_item {
 //   "livemode": false
 // }
 // ```
-function "$main" {
+function "Stripe -> Create an Invoice Item" {
   input {
-    object args {
-      schema {
-        text customer_id filters=trim
-        text price_id? filters=trim
-      }
-    }
+    text customer_id filters=trim
+    text price_id? filters=trim
   }
 
   stack {

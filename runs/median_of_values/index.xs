@@ -1,12 +1,11 @@
-workspace median_of_values
+run median {
+  type = "job"
+  main = {name: "median", input: {}}
+}
 ---
-function "$main" {
+function median {
   input {
-    object args {
-      schema {
-        decimal[] values
-      }
-    }
+    decimal[] values
   }
 
   stack {

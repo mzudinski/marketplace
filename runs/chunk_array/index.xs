@@ -1,4 +1,7 @@
-workspace chunk_array
+run "Chunk array" {
+  type = "job"
+  main = {name: "Chunk array", input: {array: [1, 2, 3, 4, 5], size: 2}}
+}
 ---
 // Creates an `array` of elements split into groups the length of `size`. 
 // 
@@ -13,17 +16,13 @@ workspace chunk_array
 // ```
 // [1, 2], [3, 4], [5]
 // ```
-function "$main" {
+function "Chunk array" {
   input {
-    object args {
-      schema {
-        // The length of each chunk
-        int size?=1
-      
-        // The array to process
-        json[] array
-      }
-    }
+    // The length of each chunk
+    int size?=1
+  
+    // The array to process
+    json[] array
   }
 
   stack {

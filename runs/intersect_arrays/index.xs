@@ -1,4 +1,7 @@
-workspace intersect_arrays
+run "Intersect arrays" {
+  type = "job"
+  main = {name: "Intersect arrays", input: {}}
+}
 ---
 // Creates an array of unique values that are included in all given `arrays` using equality comparisons. The order and references of result values are determined by the first array.
 // 
@@ -16,17 +19,13 @@ workspace intersect_arrays
 // ```
 // [2]
 // ```
-function "$main" {
+function "Intersect arrays" {
   input {
-    object args {
-      schema {
-        json array_1
-        json array_2?
-        json array_3?
-        json array_4?
-        json array_5?
-      }
-    }
+    json array_1
+    json array_2?
+    json array_3?
+    json array_4?
+    json array_5?
   }
 
   stack {

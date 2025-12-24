@@ -1,5 +1,7 @@
-workspace slack_send_channel_message {
-  env = {slack_token: ""}
+run "Slack -> Send Channel Message" {
+  type = "job"
+  main = {name: "Slack -> Send Channel Message", input: {}}
+  env = ["slack_token"]
 }
 ---
 // # Function Documentation: Slack -> Send Channel Message
@@ -76,14 +78,10 @@ workspace slack_send_channel_message {
 // }
 // }
 // ```
-function "$main" {
+function "Slack -> Send Channel Message" {
   input {
-    object args {
-      schema {
-        text channel_id filters=trim
-        text message filters=trim
-      }
-    }
+    text channel_id filters=trim
+    text message filters=trim
   }
 
   stack {

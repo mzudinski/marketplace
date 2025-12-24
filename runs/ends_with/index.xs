@@ -1,4 +1,10 @@
-workspace ends_with
+run "Ends with" {
+  type = "job"
+  main = {
+    name : "Ends with"
+    input: {text: [1, 2, 3, 4, 5], target: [4, 5]}
+  }
+}
 ---
 // Checks if `string` (or `array`) ends with the given `target` string (or `array`).
 // 
@@ -15,15 +21,11 @@ workspace ends_with
 // ```
 // true
 // ```
-function "$main" {
+function "Ends with" {
   input {
-    object args {
-      schema {
-        json text?
-        json target?
-        int position?="-1"
-      }
-    }
+    json text?
+    json target?
+    int position?="-1"
   }
 
   stack {

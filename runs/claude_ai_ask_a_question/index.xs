@@ -1,5 +1,7 @@
-workspace claude_ai_ask_a_question {
-  env = {claude_api_key: ""}
+run "Claude AI -> Ask a Question" {
+  type = "job"
+  main = {name: "Claude AI -> Ask a Question", input: {}}
+  env = ["claude_api_key"]
 }
 ---
 // ## Function Documentation: Claude AI -> Ask a Question
@@ -133,20 +135,16 @@ workspace claude_ai_ask_a_question {
 //     }
 // }
 // ```
-function "$main" {
+function "Claude AI -> Ask a Question" {
   input {
-    object args {
-      schema {
-        // User prompt to be asked from AI
-        text prompt filters=trim
-      
-        // Maximum number of tokens that can be used in single transaction
-        int max_tokens?=1024
-      
-        // Prompt for the assistant 
-        text assistant_prompt?="As an enthusiastic assistant, provide clear and understandable responses." filters=trim
-      }
-    }
+    // User prompt to be asked from AI
+    text prompt filters=trim
+  
+    // Maximum number of tokens that can be used in single transaction
+    int max_tokens?=1024
+  
+    // Prompt for the assistant 
+    text assistant_prompt?="As an enthusiastic assistant, provide clear and understandable responses." filters=trim
   }
 
   stack {

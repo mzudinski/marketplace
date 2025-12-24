@@ -1,18 +1,16 @@
-workspace postmark_send_single_email {
-  env = {postmark_base_url: "", postmark_api_token: ""}
+run "Postmark Send single email" {
+  type = "job"
+  main = {name: "Postmark Send single email", input: {}}
+  env = ["postmark_base_url", "postmark_api_token"]
 }
 ---
-function "$main" {
+function "Postmark Send single email" {
   input {
-    object args {
-      schema {
-        text from_email filters=trim|lower
-        text to_email filters=trim|lower
-        text subject? filters=trim
-        text text_body? filters=trim
-        text html_body? filters=trim
-      }
-    }
+    text from_email filters=trim|lower
+    text to_email filters=trim|lower
+    text subject? filters=trim
+    text text_body? filters=trim
+    text html_body? filters=trim
   }
 
   stack {

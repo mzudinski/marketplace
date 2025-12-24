@@ -1,13 +1,12 @@
-workspace average_of_values_mean
+run "Average of values" {
+  type = "job"
+  main = {name: "Average of values", input: {}}
+}
 ---
 // Compute the average (aka. mean) of provided `values`
-function "$main" {
+function "Average of values" {
   input {
-    object args {
-      schema {
-        decimal[] values?
-      }
-    }
+    decimal[] values?
   }
 
   stack {

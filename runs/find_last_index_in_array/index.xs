@@ -1,14 +1,13 @@
-workspace find_last_index_in_array
+run "Find last index in array" {
+  type = "job"
+  main = {name: "Find last index in array", input: {}}
+}
 ---
 // This method is like `Find index in array` except that it iterates over elements of collection from right to left.
-function "$main" {
+function "Find last index in array" {
   input {
-    object args {
-      schema {
-        json array?
-        json predicate?
-      }
-    }
+    json array?
+    json predicate?
   }
 
   stack {

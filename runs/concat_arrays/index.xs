@@ -1,20 +1,32 @@
-workspace concat_arrays
----
-function "$main" {
-  input {
-    object args {
-      schema {
-        json[] array_1?
-        json[] array_2?
-        json[] array_3?
-        json[] array_4?
-        json[] array_5?
-        json[] array_6?
-        json[] array_7?
-        json[] array_8?
-        json[] array_9?
-      }
+run "Concat array" {
+  type = "job"
+  main = {
+    name : "Concat array"
+    input: {
+      array_1: [1, 2, 3]
+      array_2: 12
+      array_3: []
+      array_4: []
+      array_5: []
+      array_6: "foo"
+      array_7: []
+      array_8: true
+      array_9: {}
     }
+  }
+}
+---
+function "Concat array" {
+  input {
+    json[] array_1?
+    json[] array_2?
+    json[] array_3?
+    json[] array_4?
+    json[] array_5?
+    json[] array_6?
+    json[] array_7?
+    json[] array_8?
+    json[] array_9?
   }
 
   stack {

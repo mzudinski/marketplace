@@ -1,5 +1,7 @@
-workspace shopify_get_product_by_id {
-  env = {access_token: "", store: ""}
+run "Shopify - Get Product By ID" {
+  type = "job"
+  main = {name: "Shopify - Get Product By ID", input: {}}
+  env = ["access_token", "store"]
 }
 ---
 // # Shopify - Get Product By ID 
@@ -80,13 +82,9 @@ workspace shopify_get_product_by_id {
 //   "product_id": "gid://shopify/Product/1234567890"
 // }
 // 
-function "$main" {
+function "Shopify - Get Product By ID" {
   input {
-    object args {
-      schema {
-        text product_id? filters=trim
-      }
-    }
+    text product_id? filters=trim
   }
 
   stack {

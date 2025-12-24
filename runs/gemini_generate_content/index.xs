@@ -1,15 +1,17 @@
-workspace gemini_generate_content {
-  env = {gemini_api_key: ""}
+run "Gemini -> Generate Content" {
+  type = "job"
+  main = {
+    name : "Gemini -> Generate Content"
+    input: {model: "gemini-2.0-flash", prompt: "How does AI work?"}
+  }
+
+  env = ["gemini_api_key"]
 }
 ---
-function "$main" {
+function "Gemini -> Generate Content" {
   input {
-    object args {
-      schema {
-        text model?="gemini-2.0-flash" filters=trim
-        text prompt? filters=trim
-      }
-    }
+    text model?="gemini-2.0-flash" filters=trim
+    text prompt? filters=trim
   }
 
   stack {

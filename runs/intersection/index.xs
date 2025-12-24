@@ -1,4 +1,21 @@
-workspace intersection
+run Intersection {
+  type = "job"
+  main = {
+    name : "Intersection"
+    input: {
+      left_collection : [
+        {id: 1, name: "john", age: 24, email: "john@example.com"}
+        {id: 2, name: "ted", age: 34, email: "ted@example.com"}
+      ]
+      right_collection: [
+        {id: 2, name: "ted", age: 34, email: "ted@example.com"}
+        {id: 3, name: "johnny", age: 24, email: "john@example.com"}
+        {id: 4, name: "fred", age: 33, email: "fred@example.com"}
+      ]
+      path            : "email"
+    }
+  }
+}
 ---
 // Returns the elements from left that have a match in right. Optional path allow you to specify the path to the value used for matching.
 // 
@@ -50,17 +67,13 @@ workspace intersection
 //   "path": "email"
 // }
 // ```
-function "$main" {
+function Intersection {
   input {
-    object args {
-      schema {
-        json[] left_collection?
-        json[] right_collection?
-      
-        // Optional object key to retrieve attribute to use for matching
-        text? path? filters=trim
-      }
-    }
+    json[] left_collection?
+    json[] right_collection?
+  
+    // Optional object key to retrieve attribute to use for matching
+    text? path? filters=trim
   }
 
   stack {

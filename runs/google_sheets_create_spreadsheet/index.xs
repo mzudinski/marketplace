@@ -1,5 +1,11 @@
-workspace google_sheets_create_spreadsheet {
-  env = {access_token: ""}
+run "Google Sheets -> Create Spreadsheet" {
+  type = "job"
+  main = {
+    name : "Google Sheets -> Create Spreadsheet"
+    input: {title: "My Spreadsheet"}
+  }
+
+  env = ["access_token"]
 }
 ---
 // Here is the updated documentation for your new `create_spreadsheet` function:
@@ -88,14 +94,10 @@ workspace google_sheets_create_spreadsheet {
 // - **PERMISSION_DENIED**: Check your access token and Google account permissions.
 // - **INVALID_ARGUMENT**: Ensure all required fields are provided and valid.
 // - **For more help**: Refer to the [Google Sheets API documentation](https://developers.google.com/sheets/api/guides/concepts).
-function "$main" {
+function "Google Sheets -> Create Spreadsheet" {
   input {
-    object args {
-      schema {
-        // The title of the new spreadsheet.
-        text title
-      }
-    }
+    // The title of the new spreadsheet.
+    text title
   }
 
   stack {

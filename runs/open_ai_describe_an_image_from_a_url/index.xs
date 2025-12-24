@@ -1,5 +1,7 @@
-workspace open_ai_describe_an_image_from_a_url {
-  env = {openai_api_key: ""}
+run "OpenAI -> Describe an Image from a URL" {
+  type = "job"
+  main = {name: "OpenAI -> Describe an Image from a URL", input: {}}
+  env = ["openai_api_key"]
 }
 ---
 // # Function Documentation: OpenAI -> Describe an Image from a URL (Simple)
@@ -65,17 +67,13 @@ workspace open_ai_describe_an_image_from_a_url {
 // }
 // 
 // ```
-function "$main" {
+function "OpenAI -> Describe an Image from a URL" {
   input {
-    object args {
-      schema {
-        text image_url? filters=trim|pattern:"(?i)^https?:\\/\\/[^\\s]+?\\.(jpg|jpeg|png|gif|bmp|webp)$":"Whoops, the input parameter image_url is invalid :-(!"
-      
-        // The model from OpenAI to use
-        enum model?="gpt-4o-mini" {
-          values = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo"]
-        }
-      }
+    text image_url? filters=trim|pattern:"(?i)^https?:\\/\\/[^\\s]+?\\.(jpg|jpeg|png|gif|bmp|webp)$":"Whoops, the input parameter image_url is invalid :-(!"
+  
+    // The model from OpenAI to use
+    enum model?="gpt-4o-mini" {
+      values = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo"]
     }
   }
 

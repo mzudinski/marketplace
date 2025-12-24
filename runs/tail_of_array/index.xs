@@ -1,12 +1,11 @@
-workspace tail_of_array
+run "Tail of array" {
+  type = "job"
+  main = {name: "Tail of array", input: {}}
+}
 ---
-function "$main" {
+function "Tail of array" {
   input {
-    object args {
-      schema {
-        json array?
-      }
-    }
+    json array?
   }
 
   stack {

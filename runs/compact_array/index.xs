@@ -1,13 +1,15 @@
-workspace compact_array
+run "Compact array" {
+  type = "job"
+  main = {
+    name : "Compact array"
+    input: {array: [false, null, 0, "", {}, [], "all good"]}
+  }
+}
 ---
 // Creates an array with all falsey values removed. The values false, null, 0, `""` (empty string), `{}` (empty object) , `[]` (empty array) are falsey.
-function "$main" {
+function "Compact array" {
   input {
-    object args {
-      schema {
-        json[] array?
-      }
-    }
+    json[] array?
   }
 
   stack {

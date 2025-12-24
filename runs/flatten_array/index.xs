@@ -1,12 +1,11 @@
-workspace flatten_array
+run "Flatten array" {
+  type = "job"
+  main = {name: "Flatten array", input: {}}
+}
 ---
-function "$main" {
+function "Flatten array" {
   input {
-    object args {
-      schema {
-        json[] array?
-      }
-    }
+    json[] array?
   }
 
   stack {

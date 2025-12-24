@@ -1,13 +1,12 @@
-workspace factorial
+run Factorial {
+  type = "job"
+  main = {name: "Factorial", input: {number: 5}}
+}
 ---
 // Compute the factorial of a value
-function "$main" {
+function Factorial {
   input {
-    object args {
-      schema {
-        int number?
-      }
-    }
+    int number?
   }
 
   stack {

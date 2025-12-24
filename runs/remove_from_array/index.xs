@@ -1,13 +1,12 @@
-workspace remove_from_array
+run "Remove from array" {
+  type = "job"
+  main = {name: "Remove from array", input: {}}
+}
 ---
-function "$main" {
+function "Remove from array" {
   input {
-    object args {
-      schema {
-        json array?
-        json[] values?
-      }
-    }
+    json array?
+    json[] values?
   }
 
   stack {

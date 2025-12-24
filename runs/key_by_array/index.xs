@@ -1,13 +1,12 @@
-workspace key_by_array
+run "Key by array" {
+  type = "job"
+  main = {name: "Key by array", input: {}}
+}
 ---
-function "$main" {
+function "Key by array" {
   input {
-    object args {
-      schema {
-        json collection?
-        text path? filters=trim
-      }
-    }
+    json collection?
+    text path? filters=trim
   }
 
   stack {

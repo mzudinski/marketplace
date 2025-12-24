@@ -1,4 +1,10 @@
-workspace flatten_deep_array
+run "Flatten deep array" {
+  type = "job"
+  main = {
+    name : "Flatten deep array"
+    input: {array: [1, [2, [3, [4]], 5]]}
+  }
+}
 ---
 // Recursively flattens `array`.
 // 
@@ -13,13 +19,9 @@ workspace flatten_deep_array
 // ```
 // [1, 2, 3, 4, 5]
 // ```
-function "$main" {
+function "Flatten deep array" {
   input {
-    object args {
-      schema {
-        json[] array?
-      }
-    }
+    json[] array?
   }
 
   stack {

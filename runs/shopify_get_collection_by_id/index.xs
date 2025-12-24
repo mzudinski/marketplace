@@ -1,14 +1,12 @@
-workspace shopify_get_collection_by_id {
-  env = {access_token: "", store: ""}
+run "Shopify -> Get Collection by ID" {
+  type = "job"
+  main = {name: "Shopify -> Get Collection by ID", input: {}}
+  env = ["access_token", "store"]
 }
 ---
-function "$main" {
+function "Shopify -> Get Collection by ID" {
   input {
-    object args {
-      schema {
-        text collection_id filters=trim
-      }
-    }
+    text collection_id filters=trim
   }
 
   stack {

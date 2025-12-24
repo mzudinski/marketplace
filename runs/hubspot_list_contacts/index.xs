@@ -1,5 +1,7 @@
-workspace hubspot_list_contacts {
-  env = {hubspot_api_key: ""}
+run "Hubspot -> List Contacts" {
+  type = "job"
+  main = {name: "Hubspot -> List Contacts", input: {}}
+  env = ["hubspot_api_key"]
 }
 ---
 // # Function Documentation: HubSpot → List Contacts
@@ -103,14 +105,10 @@ workspace hubspot_list_contacts {
 //   }
 // }
 // ```
-function "$main" {
+function "Hubspot -> List Contacts" {
   input {
-    object args {
-      schema {
-        int after?
-        text[] properties? filters=trim
-      }
-    }
+    int after?
+    text[] properties? filters=trim
   }
 
   stack {

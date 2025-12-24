@@ -1,20 +1,28 @@
-workspace google_maps_autocomplete_api {
-  env = {google_api_key: ""}
+run "Google Maps -> Autocomplete API" {
+  type = "job"
+  main = {
+    name : "Google Maps -> Autocomplete API"
+    input: {
+      input      : "221B Baker Street"
+      latitude   : "51.5237"
+      longitude  : "-0.1585"
+      radius     : 500
+      region_code: "gb"
+    }
+  }
+
+  env = ["google_api_key"]
 }
 ---
-function "$main" {
+function "Google Maps -> Autocomplete API" {
   input {
-    object args {
-      schema {
-        text input filters=trim
-        text session_token? filters=trim
-        text field_mask? filters=trim
-        text latitude? filters=trim
-        text longitude? filters=trim
-        int radius?
-        text region_code? filters=trim
-      }
-    }
+    text input filters=trim
+    text session_token? filters=trim
+    text field_mask? filters=trim
+    text latitude? filters=trim
+    text longitude? filters=trim
+    int radius?
+    text region_code? filters=trim
   }
 
   stack {

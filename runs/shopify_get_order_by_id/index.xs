@@ -1,14 +1,12 @@
-workspace shopify_get_order_by_id {
-  env = {access_token: "", store: ""}
+run "Shopify -> Get Order by ID" {
+  type = "job"
+  main = {name: "Shopify -> Get Order by ID", input: {}}
+  env = ["access_token", "store"]
 }
 ---
-function "$main" {
+function "Shopify -> Get Order by ID" {
   input {
-    object args {
-      schema {
-        int id
-      }
-    }
+    int id
   }
 
   stack {

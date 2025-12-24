@@ -1,4 +1,10 @@
-workspace variance
+run Variance {
+  type = "job"
+  main = {
+    name : "Variance"
+    input: {numbers: [1, 2, 3, 4, 5, 6], is_sample: true}
+  }
+}
 ---
 // Compute the variance of a sample or population
 // 
@@ -23,16 +29,12 @@ workspace variance
 // ```
 // 
 // returns `3.5`
-function "$main" {
+function Variance {
   input {
-    object args {
-      schema {
-        decimal[] numbers?
-      
-        // set to false for small dataset
-        bool bias?=true
-      }
-    }
+    decimal[] numbers?
+  
+    // set to false for small dataset
+    bool bias?=true
   }
 
   stack {

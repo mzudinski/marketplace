@@ -1,5 +1,7 @@
-workspace hubspot_create_contact {
-  env = {hubspot_api_key: ""}
+run "Hubspot -> Create Contact" {
+  type = "job"
+  main = {name: "Hubspot -> Create Contact", input: {}}
+  env = ["hubspot_api_key"]
 }
 ---
 // # Function Documentation: HubSpot → Create Contact
@@ -147,32 +149,28 @@ workspace hubspot_create_contact {
 //   "archived": false
 // }
 // ```
-function "$main" {
+function "Hubspot -> Create Contact" {
   input {
-    object args {
-      schema {
-        text first_name? filters=trim
-        text last_name? filters=trim
-        email email filters=trim|lower
-        text company? filters=trim
-        enum lead_status? {
-          values = [
-            "NEW"
-            "OPEN"
-            "IN_PROGRESS"
-            "OPEN_DEAL"
-            "UNQUALIFIED"
-            "ATTEMPTED_TO_CONTACT"
-            "CONNECTED"
-            "BAD_TIMING"
-          ]
-        }
-      
-        int contact_owner?
-        text phone_number? filters=trim
-        json additional_properties?
-      }
+    text first_name? filters=trim
+    text last_name? filters=trim
+    email email filters=trim|lower
+    text company? filters=trim
+    enum lead_status? {
+      values = [
+        "NEW"
+        "OPEN"
+        "IN_PROGRESS"
+        "OPEN_DEAL"
+        "UNQUALIFIED"
+        "ATTEMPTED_TO_CONTACT"
+        "CONNECTED"
+        "BAD_TIMING"
+      ]
     }
+  
+    int contact_owner?
+    text phone_number? filters=trim
+    json additional_properties?
   }
 
   stack {

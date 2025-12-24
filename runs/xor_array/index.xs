@@ -1,4 +1,7 @@
-workspace xor_array
+run "Xor array" {
+  type = "job"
+  main = {name: "Xor array", input: {}}
+}
 ---
 // Creates an array of unique values that is the [symmetric difference](https://en.wikipedia.org/wiki/Symmetric_difference) of the given two arrays. The order of result values is determined by the order they occur in the arrays.
 // 
@@ -16,14 +19,10 @@ workspace xor_array
 // ```
 // [1, 2]
 // ```
-function "$main" {
+function "Xor array" {
   input {
-    object args {
-      schema {
-        json[] array_1?
-        json[] array_2?
-      }
-    }
+    json[] array_1?
+    json[] array_2?
   }
 
   stack {

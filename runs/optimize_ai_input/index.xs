@@ -1,15 +1,20 @@
-workspace optimize_ai_input
----
-function "$main" {
-  input {
-    object args {
-      schema {
-        json payload?
-      
-        // This will remove any empty keys to reduce token usage
-        bool strip_empty_keys?
-      }
+run "Optimize AI Input" {
+  type = "job"
+  main = {
+    name : "Optimize AI Input"
+    input: {
+      payload         : {name: "Daniel", staus: null}
+      strip_empty_keys: true
     }
+  }
+}
+---
+function "Optimize AI Input" {
+  input {
+    json payload?
+  
+    // This will remove any empty keys to reduce token usage
+    bool strip_empty_keys?
   }
 
   stack {

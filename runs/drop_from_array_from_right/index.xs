@@ -1,14 +1,13 @@
-workspace drop_from_array_from_right
+run "Drop right array" {
+  type = "job"
+  main = {name: "Drop right array", input: {array: [0, 1, 2, 3, 4], n: 2}}
+}
 ---
 // Creates a slice of `array` with `n` elements dropped from the end.
-function "$main" {
+function "Drop right array" {
   input {
-    object args {
-      schema {
-        json array?
-        int n?
-      }
-    }
+    json array?
+    int n?
   }
 
   stack {

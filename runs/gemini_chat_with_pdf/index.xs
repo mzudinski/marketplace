@@ -1,15 +1,20 @@
-workspace gemini_chat_with_pdf {
-  env = {gemini_api_key: ""}
+run "Gemini -> Chat with PDF" {
+  type = "job"
+  main = {
+    name : "Gemini -> Chat with PDF"
+    input: {
+      file_uri: "https://storage.googleapis.com/path-to-your-pdf.pdf"
+      question: "Summarize the main arguments from this document."
+    }
+  }
+
+  env = ["gemini_api_key"]
 }
 ---
-function "$main" {
+function "Gemini -> Chat with PDF" {
   input {
-    object args {
-      schema {
-        text file_uri filters=trim
-        text question filters=trim
-      }
-    }
+    text file_uri filters=trim
+    text question filters=trim
   }
 
   stack {

@@ -1,5 +1,7 @@
-workspace hubspot_create_deal {
-  env = {hubspot_api_key: ""}
+run "Hubspot -> Create Deal" {
+  type = "job"
+  main = {name: "Hubspot -> Create Deal", input: {}}
+  env = ["hubspot_api_key"]
 }
 ---
 // # Function Documentation: HubSpot → Create Deal
@@ -108,29 +110,25 @@ workspace hubspot_create_deal {
 //     "archived": false
 // }
 // ```
-function "$main" {
+function "Hubspot -> Create Deal" {
   input {
-    object args {
-      schema {
-        text name? filters=trim
-        enum deal_stage? {
-          values = [
-            "appointmentscheduled"
-            "qualifiedtobuy"
-            "presentationscheduled"
-            "decisionmakerboughtin"
-            "contractsent"
-            "closedwon"
-            "closedlost"
-          ]
-        }
-      
-        timestamp? close_date?
-        int owner_id?
-        decimal amount?
-        json additional_properties?
-      }
+    text name? filters=trim
+    enum deal_stage? {
+      values = [
+        "appointmentscheduled"
+        "qualifiedtobuy"
+        "presentationscheduled"
+        "decisionmakerboughtin"
+        "contractsent"
+        "closedwon"
+        "closedlost"
+      ]
     }
+  
+    timestamp? close_date?
+    int owner_id?
+    decimal amount?
+    json additional_properties?
   }
 
   stack {

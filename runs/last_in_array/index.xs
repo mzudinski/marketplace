@@ -1,12 +1,11 @@
-workspace last_in_array
+run "Last array" {
+  type = "job"
+  main = {name: "Last array", input: {array: [1, 2, 3, 4, 5]}}
+}
 ---
-function "$main" {
+function "Last array" {
   input {
-    object args {
-      schema {
-        json array?
-      }
-    }
+    json array?
   }
 
   stack {

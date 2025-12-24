@@ -1,13 +1,12 @@
-workspace take_from_array
+run "Take from array" {
+  type = "job"
+  main = {name: "Take from array", input: {}}
+}
 ---
-function "$main" {
+function "Take from array" {
   input {
-    object args {
-      schema {
-        json array?
-        int n?=1
-      }
-    }
+    json array?
+    int n?=1
   }
 
   stack {

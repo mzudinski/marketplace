@@ -1,14 +1,16 @@
-workspace stripe_retrieve_a_product {
-  env = {stripe_api_key: ""}
+run "Stripe -> Get Product" {
+  type = "job"
+  main = {
+    name : "Stripe -> Get Product"
+    input: {product_id: "prod_12345"}
+  }
+
+  env = ["stripe_api_key"]
 }
 ---
-function "$main" {
+function "Stripe -> Get Product" {
   input {
-    object args {
-      schema {
-        text product_id filters=trim
-      }
-    }
+    text product_id filters=trim
   }
 
   stack {
