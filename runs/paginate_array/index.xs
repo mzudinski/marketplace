@@ -1,5 +1,4 @@
-run "Paginate array" {
-  type = "job"
+run.job "Paginate array" {
   main = {name: "Paginate array", input: {}}
 }
 ---

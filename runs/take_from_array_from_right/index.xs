@@ -1,5 +1,4 @@
-run "Take from array from right" {
-  type = "job"
+run.job "Take from array from right" {
   main = {name: "Take from array from right", input: {}}
 }
 ---

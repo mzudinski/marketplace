@@ -1,5 +1,4 @@
-run "OpenAI -> Summarize (Simple)" {
-  type = "job"
+run.job "OpenAI -> Summarize (Simple)" {
   main = {name: "OpenAI -> Summarize (Simple)", input: {}}
   env = ["openai_api_key"]
 }

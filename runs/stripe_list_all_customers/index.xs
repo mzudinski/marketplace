@@ -1,5 +1,4 @@
-run "Stripe -> List All Customers" {
-  type = "job"
+run.job "Stripe -> List All Customers" {
   main = {
     name : "Stripe -> List All Customers"
     input: {email: "asdasd@gmail.com"}

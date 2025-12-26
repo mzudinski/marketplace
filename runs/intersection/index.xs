@@ -1,5 +1,4 @@
-run Intersection {
-  type = "job"
+run.job Intersection {
   main = {
     name : "Intersection"
     input: {

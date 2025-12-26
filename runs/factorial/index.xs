@@ -1,5 +1,4 @@
-run Factorial {
-  type = "job"
+run.job Factorial {
   main = {name: "Factorial", input: {number: 5}}
 }
 ---

@@ -1,5 +1,4 @@
-run "Kurtosis (Fisher)" {
-  type = "job"
+run.job "Kurtosis (Fisher)" {
   main = {
     name : "Kurtosis (Fisher)"
     input: {numbers: [1, 2], is_sample: false}

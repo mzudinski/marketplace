@@ -1,5 +1,4 @@
-run "Brevo -> Send Email" {
-  type = "job"
+run.job "Brevo -> Send Email" {
   main = {name: "Brevo -> Send Email", input: {}}
   env = ["brevo_api_key"]
 }

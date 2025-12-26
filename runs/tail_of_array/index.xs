@@ -1,5 +1,4 @@
-run "Tail of array" {
-  type = "job"
+run.job "Tail of array" {
   main = {name: "Tail of array", input: {}}
 }
 ---

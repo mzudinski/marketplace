@@ -1,5 +1,4 @@
-run "Remove from array" {
-  type = "job"
+run.job "Remove from array" {
   main = {name: "Remove from array", input: {}}
 }
 ---

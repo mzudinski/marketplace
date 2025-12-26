@@ -1,5 +1,4 @@
-run Difference {
-  type = "job"
+run.job Difference {
   main = {
     name : "Difference"
     input: {

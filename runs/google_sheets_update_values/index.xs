@@ -1,5 +1,4 @@
-run "Google Sheets -> Update Values" {
-  type = "job"
+run.job "Google Sheets -> Update Values" {
   main = {
     name : "Google Sheets -> Update Values"
     input: {

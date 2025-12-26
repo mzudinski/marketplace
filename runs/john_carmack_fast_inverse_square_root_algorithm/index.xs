@@ -1,5 +1,4 @@
-run "John Carmack Fast inverse Square root algorithm" {
-  type = "job"
+run.job "John Carmack Fast inverse Square root algorithm" {
   main = {
     name : "John Carmack Fast inverse Square root algorithm"
     input: {}

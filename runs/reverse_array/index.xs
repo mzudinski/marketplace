@@ -1,5 +1,4 @@
-run "Reverse array" {
-  type = "job"
+run.job "Reverse array" {
   main = {name: "Reverse array", input: {}}
 }
 ---

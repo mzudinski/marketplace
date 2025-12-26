@@ -1,5 +1,4 @@
-run "QuickBooks -> Create Payment" {
-  type = "job"
+run.job "QuickBooks -> Create Payment" {
   main = {name: "QuickBooks -> Create Payment", input: {}}
   env = ["quickbooks_realm_id", "quickbooks_api_token"]
 }

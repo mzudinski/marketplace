@@ -1,5 +1,4 @@
-run "Stripe -> Create an Invoice" {
-  type = "job"
+run.job "Stripe -> Create an Invoice" {
   main = {name: "Stripe -> Create an Invoice", input: {}}
   env = ["stripe_api_key"]
 }

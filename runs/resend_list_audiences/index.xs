@@ -1,5 +1,4 @@
-run "Resend -> List Audiences" {
-  type = "job"
+run.job "Resend -> List Audiences" {
   main = {name: "Resend -> List Audiences", input: {}}
   env = ["resend_api_key"]
 }

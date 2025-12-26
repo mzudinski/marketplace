@@ -1,5 +1,4 @@
-run "Gemini -> Generate Image" {
-  type = "job"
+run.job "Gemini -> Generate Image" {
   main = {
     name : "Gemini -> Generate Image"
     input: {

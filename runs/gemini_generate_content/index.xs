@@ -1,5 +1,4 @@
-run "Gemini -> Generate Content" {
-  type = "job"
+run.job "Gemini -> Generate Content" {
   main = {
     name : "Gemini -> Generate Content"
     input: {model: "gemini-2.0-flash", prompt: "How does AI work?"}

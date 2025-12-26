@@ -1,5 +1,4 @@
-run Sum {
-  type = "job"
+run.job Sum {
   main = {name: "Sum", input: {numbers: [1, 2, 3, 4]}}
 }
 ---

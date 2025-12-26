@@ -1,5 +1,4 @@
-run "Average of values" {
-  type = "job"
+run.job "Average of values" {
   main = {name: "Average of values", input: {}}
 }
 ---

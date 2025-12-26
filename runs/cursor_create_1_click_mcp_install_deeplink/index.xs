@@ -1,5 +1,4 @@
-run "Cursor -> Create 1-click MCP Install Deeplink" {
-  type = "job"
+run.job "Cursor -> Create 1-click MCP Install Deeplink" {
   main = {
     name : "Cursor -> Create 1-click MCP Install Deeplink"
     input: {

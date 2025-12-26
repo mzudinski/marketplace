@@ -1,5 +1,4 @@
-run "Gmaps test" {
-  type = "job"
+run.job "Gmaps test" {
   main = {
     name : "Gmaps test"
     input: {

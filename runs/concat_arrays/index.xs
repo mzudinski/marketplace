@@ -1,5 +1,4 @@
-run "Concat array" {
-  type = "job"
+run.job "Concat array" {
   main = {
     name : "Concat array"
     input: {

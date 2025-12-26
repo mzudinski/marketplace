@@ -1,5 +1,4 @@
-run "Google Maps -> Validate Address" {
-  type = "job"
+run.job "Google Maps -> Validate Address" {
   main = {
     name : "Google Maps -> Validate Address"
     input: {

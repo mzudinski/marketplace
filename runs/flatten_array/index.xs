@@ -1,5 +1,4 @@
-run "Flatten array" {
-  type = "job"
+run.job "Flatten array" {
   main = {name: "Flatten array", input: {}}
 }
 ---

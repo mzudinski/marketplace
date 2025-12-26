@@ -1,5 +1,4 @@
-run "Stripe -> Create an Invoice Item" {
-  type = "job"
+run.job "Stripe -> Create an Invoice Item" {
   main = {
     name : "Stripe -> Create an Invoice Item"
     input: {customer_id: "cus_1234", price_id: "price_1234"}

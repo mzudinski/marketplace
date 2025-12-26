@@ -1,5 +1,4 @@
-run "Starts with" {
-  type = "job"
+run.job "Starts with" {
   main = {name: "Starts with", input: {}}
 }
 ---

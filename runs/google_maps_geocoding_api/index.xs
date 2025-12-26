@@ -1,5 +1,4 @@
-run "Google Maps -> Geocoding API" {
-  type = "job"
+run.job "Google Maps -> Geocoding API" {
   main = {
     name : "Google Maps -> Geocoding API"
     input: {address: "Toledo", region: "ES"}

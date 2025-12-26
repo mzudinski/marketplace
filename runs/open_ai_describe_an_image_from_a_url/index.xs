@@ -1,5 +1,4 @@
-run "OpenAI -> Describe an Image from a URL" {
-  type = "job"
+run.job "OpenAI -> Describe an Image from a URL" {
   main = {name: "OpenAI -> Describe an Image from a URL", input: {}}
   env = ["openai_api_key"]
 }

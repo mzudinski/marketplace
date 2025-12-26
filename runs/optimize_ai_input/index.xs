@@ -1,5 +1,4 @@
-run "Optimize AI Input" {
-  type = "job"
+run.job "Optimize AI Input" {
   main = {
     name : "Optimize AI Input"
     input: {

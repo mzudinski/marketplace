@@ -1,5 +1,4 @@
-run median {
-  type = "job"
+run.job median {
   main = {name: "median", input: {}}
 }
 ---

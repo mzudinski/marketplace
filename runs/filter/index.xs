@@ -1,5 +1,4 @@
-run Filter {
-  type = "job"
+run.job Filter {
   main = {
     name : "Filter"
     input: {

@@ -1,5 +1,4 @@
-run "Slack -> Send Channel Message" {
-  type = "job"
+run.job "Slack -> Send Channel Message" {
   main = {name: "Slack -> Send Channel Message", input: {}}
   env = ["slack_token"]
 }

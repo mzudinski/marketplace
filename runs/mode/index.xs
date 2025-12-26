@@ -1,5 +1,4 @@
-run Mode {
-  type = "job"
+run.job Mode {
   main = {name: "Mode", input: {numbers: [1, 2, 3, 1, 2, 1]}}
 }
 ---

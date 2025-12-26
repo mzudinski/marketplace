@@ -1,5 +1,4 @@
-run op_two_array {
-  type = "job"
+run.job op_two_array {
   main = {
     name : "op_two_array"
     input: {left: [1, 2, 3, 4], op: "add", right: [4, 3, 2, 1]}

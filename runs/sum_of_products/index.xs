@@ -1,5 +1,4 @@
-run "Sum of products" {
-  type = "job"
+run.job "Sum of products" {
   main = {
     name : "Sum of products"
     input: {numbers_a: [1, 2, 3], numbers_b: [4, 5, 6]}

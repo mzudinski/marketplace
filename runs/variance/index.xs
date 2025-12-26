@@ -1,5 +1,4 @@
-run Variance {
-  type = "job"
+run.job Variance {
   main = {
     name : "Variance"
     input: {numbers: [1, 2, 3, 4, 5, 6], is_sample: true}

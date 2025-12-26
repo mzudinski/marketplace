@@ -1,5 +1,4 @@
-run "OpenAI -> Create an image" {
-  type = "job"
+run.job "OpenAI -> Create an image" {
   main = {name: "OpenAI -> Create an image", input: {}}
   env = ["openai_api_key"]
 }

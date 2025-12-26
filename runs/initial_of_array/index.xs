@@ -1,5 +1,4 @@
-run "Initial of array" {
-  type = "job"
+run.job "Initial of array" {
   main = {name: "Initial of array", input: {}}
 }
 ---

@@ -1,5 +1,4 @@
-run op_all {
-  type = "job"
+run.job op_all {
   main = {
     name : "op_all"
     input: {numbers: [1, 2, 3, 4, 5], op: "add", value: 4}

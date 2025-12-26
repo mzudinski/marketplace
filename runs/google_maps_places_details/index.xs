@@ -1,5 +1,4 @@
-run "Google Maps -> Places Details" {
-  type = "job"
+run.job "Google Maps -> Places Details" {
   main = {
     name : "Google Maps -> Places Details"
     input: {

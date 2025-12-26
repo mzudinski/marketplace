@@ -1,5 +1,4 @@
-run "Google Sheets -> Create Spreadsheet" {
-  type = "job"
+run.job "Google Sheets -> Create Spreadsheet" {
   main = {
     name : "Google Sheets -> Create Spreadsheet"
     input: {title: "My Spreadsheet"}

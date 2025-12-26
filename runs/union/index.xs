@@ -1,5 +1,4 @@
-run Union {
-  type = "job"
+run.job Union {
   main = {
     name : "Union"
     input: {

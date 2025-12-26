@@ -1,5 +1,4 @@
-run "OpenAI -> Get an embedding (simple)" {
-  type = "job"
+run.job "OpenAI -> Get an embedding (simple)" {
   main = {name: "OpenAI -> Get an embedding (simple)", input: {}}
   env = ["openai_api_key"]
 }

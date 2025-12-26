@@ -1,5 +1,4 @@
-run "Compact array" {
-  type = "job"
+run.job "Compact array" {
   main = {
     name : "Compact array"
     input: {array: [false, null, 0, "", {}, [], "all good"]}

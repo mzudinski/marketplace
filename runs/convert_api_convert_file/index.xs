@@ -1,5 +1,4 @@
-run "Convert API -> Convert File" {
-  type = "job"
+run.job "Convert API -> Convert File" {
   main = {name: "Convert API -> Convert File", input: {}}
   env = ["convert_api_secret"]
 }

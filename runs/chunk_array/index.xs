@@ -1,5 +1,4 @@
-run "Chunk array" {
-  type = "job"
+run.job "Chunk array" {
   main = {name: "Chunk array", input: {array: [1, 2, 3, 4, 5], size: 2}}
 }
 ---

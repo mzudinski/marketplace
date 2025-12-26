@@ -1,5 +1,4 @@
-run "Difference array" {
-  type = "job"
+run.job "Difference array" {
   main = {
     name : "Difference array"
     input: {array_1: [1, 2, 3, 4, 5, 6], array_2: [2, 4, 6]}

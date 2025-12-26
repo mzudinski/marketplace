@@ -1,5 +1,4 @@
-run "Stripe -> Void Invoice" {
-  type = "job"
+run.job "Stripe -> Void Invoice" {
   main = {
     name : "Stripe -> Void Invoice"
     input: {invoice_id: "in_1JYb2D2eZvKYlo2C..."}

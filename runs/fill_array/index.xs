@@ -1,5 +1,4 @@
-run "Fill array" {
-  type = "job"
+run.job "Fill array" {
   main = {
     name : "Fill array"
     input: {array: [1, 2, 3, 4, 5, 6], value: "replaced", start: 2, end: 4}

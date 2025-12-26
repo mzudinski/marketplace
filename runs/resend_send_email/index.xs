@@ -1,5 +1,4 @@
-run "Resend -> Send Email" {
-  type = "job"
+run.job "Resend -> Send Email" {
   main = {name: "Resend -> Send Email", input: {}}
   env = ["resend_api_key"]
 }

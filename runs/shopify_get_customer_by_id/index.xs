@@ -1,5 +1,4 @@
-run "Shopify -> Get Customer by ID" {
-  type = "job"
+run.job "Shopify -> Get Customer by ID" {
   main = {name: "Shopify -> Get Customer by ID", input: {}}
   env = ["access_token", "store"]
 }

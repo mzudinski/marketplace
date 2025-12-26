@@ -1,5 +1,4 @@
-run "Ends with" {
-  type = "job"
+run.job "Ends with" {
   main = {
     name : "Ends with"
     input: {text: [1, 2, 3, 4, 5], target: [4, 5]}

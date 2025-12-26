@@ -1,5 +1,4 @@
-run "Google Maps -> Autocomplete API" {
-  type = "job"
+run.job "Google Maps -> Autocomplete API" {
   main = {
     name : "Google Maps -> Autocomplete API"
     input: {

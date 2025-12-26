@@ -1,5 +1,4 @@
-run Percentile {
-  type = "job"
+run.job Percentile {
   main = {
     name : "Percentile"
     input: {numbers: [1, 4, 5, 6, 7, 2, 3, 8, 0, 9, 10], percentile: 55}

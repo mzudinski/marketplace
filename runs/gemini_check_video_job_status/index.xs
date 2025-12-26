@@ -1,5 +1,4 @@
-run "Gemini -> Check Video Job Status" {
-  type = "job"
+run.job "Gemini -> Check Video Job Status" {
   main = {
     name : "Gemini -> Check Video Job Status"
     input: {

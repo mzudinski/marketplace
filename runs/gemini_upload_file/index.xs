@@ -1,5 +1,4 @@
-run "Gemini -> Upload File" {
-  type = "job"
+run.job "Gemini -> Upload File" {
   main = {
     name : "Gemini -> Upload File"
     input: {file: "uploaded_file"}

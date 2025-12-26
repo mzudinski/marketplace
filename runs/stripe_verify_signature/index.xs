@@ -1,5 +1,4 @@
-run "Stripe: Verify Signature" {
-  type = "job"
+run.job "Stripe: Verify Signature" {
   main = {
     name : "Stripe: Verify Signature"
     input: {http_headers: "env.$http_headers"}

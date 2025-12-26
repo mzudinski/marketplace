@@ -1,5 +1,4 @@
-run "Last array" {
-  type = "job"
+run.job "Last array" {
   main = {name: "Last array", input: {array: [1, 2, 3, 4, 5]}}
 }
 ---

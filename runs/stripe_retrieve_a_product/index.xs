@@ -1,5 +1,4 @@
-run "Stripe -> Get Product" {
-  type = "job"
+run.job "Stripe -> Get Product" {
   main = {
     name : "Stripe -> Get Product"
     input: {product_id: "prod_12345"}

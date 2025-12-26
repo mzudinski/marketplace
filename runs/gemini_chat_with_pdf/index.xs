@@ -1,5 +1,4 @@
-run "Gemini -> Chat with PDF" {
-  type = "job"
+run.job "Gemini -> Chat with PDF" {
   main = {
     name : "Gemini -> Chat with PDF"
     input: {

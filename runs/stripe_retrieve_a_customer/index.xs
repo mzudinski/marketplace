@@ -1,5 +1,4 @@
-run "Stripe -> Retrieve a Customer" {
-  type = "job"
+run.job "Stripe -> Retrieve a Customer" {
   main = {
     name : "Stripe -> Retrieve a Customer"
     input: {customer_id: "12345"}

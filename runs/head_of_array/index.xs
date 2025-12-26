@@ -1,5 +1,4 @@
-run "Head array" {
-  type = "job"
+run.job "Head array" {
   main = {name: "Head array", input: {array: [1, 2, 3, 4, 5]}}
 }
 ---

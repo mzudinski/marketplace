@@ -1,5 +1,4 @@
-run "Intersect arrays" {
-  type = "job"
+run.job "Intersect arrays" {
   main = {name: "Intersect arrays", input: {}}
 }
 ---

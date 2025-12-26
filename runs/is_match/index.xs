@@ -1,5 +1,4 @@
-run isMatch {
-  type = "job"
+run.job isMatch {
   main = {
     name : "isMatch"
     input: {object: {foo: {bar: [1, 2, 3]}}, props: {foo: {bar: [2]}}}

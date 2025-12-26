@@ -1,5 +1,4 @@
-run "Gemini -> Image Understanding" {
-  type = "job"
+run.job "Gemini -> Image Understanding" {
   main = {
     name : "Gemini -> Image Understanding"
     input: {

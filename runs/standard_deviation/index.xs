@@ -1,5 +1,4 @@
-run "Standard Deviation" {
-  type = "job"
+run.job "Standard Deviation" {
   main = {name: "Standard Deviation", input: {}}
 }
 ---

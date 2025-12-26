@@ -1,5 +1,4 @@
-run "Drop array" {
-  type = "job"
+run.job "Drop array" {
   main = {name: "Drop array", input: {array: [0, 1, 2, 3, 4], n: 2}}
 }
 ---

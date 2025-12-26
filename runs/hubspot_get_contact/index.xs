@@ -1,5 +1,4 @@
-run "Hubspot -> Get Contact" {
-  type = "job"
+run.job "Hubspot -> Get Contact" {
   main = {name: "Hubspot -> Get Contact", input: {}}
   env = ["hubspot_api_key"]
 }

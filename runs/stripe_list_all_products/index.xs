@@ -1,5 +1,4 @@
-run "Stripe -> List All Products" {
-  type = "job"
+run.job "Stripe -> List All Products" {
   main = {
     name : "Stripe -> List All Products"
     input: {starting_after: "prod_1234", limit: 5}

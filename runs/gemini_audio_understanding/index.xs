@@ -1,5 +1,4 @@
-run "Gemini -> Audio Understanding" {
-  type = "job"
+run.job "Gemini -> Audio Understanding" {
   main = {
     name : "Gemini -> Audio Understanding"
     input: {

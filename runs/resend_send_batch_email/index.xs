@@ -1,5 +1,4 @@
-run "Resend -> Send Batch Email" {
-  type = "job"
+run.job "Resend -> Send Batch Email" {
   main = {name: "Resend -> Send Batch Email", input: {}}
   env = ["resend_api_key"]
 }

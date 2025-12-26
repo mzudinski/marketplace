@@ -1,5 +1,4 @@
-run "OpenAI -> Create a Chat Completion (Simple)" {
-  type = "job"
+run.job "OpenAI -> Create a Chat Completion (Simple)" {
   main = {
     name : "OpenAI -> Create a Chat Completion (Simple)"
     input: {}

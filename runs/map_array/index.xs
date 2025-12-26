@@ -1,5 +1,4 @@
-run "Map array" {
-  type = "job"
+run.job "Map array" {
   main = {name: "Map array", input: {}}
 }
 ---

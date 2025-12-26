@@ -1,5 +1,4 @@
-run Pluck {
-  type = "job"
+run.job Pluck {
   main = {
     name : "Pluck"
     input: {

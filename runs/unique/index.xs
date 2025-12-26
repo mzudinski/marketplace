@@ -1,5 +1,4 @@
-run Unique {
-  type = "job"
+run.job Unique {
   main = {name: "Unique", input: {collection: [1, 2, 3, 2]}}
 }
 ---

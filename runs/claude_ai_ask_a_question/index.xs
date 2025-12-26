@@ -1,5 +1,4 @@
-run "Claude AI -> Ask a Question" {
-  type = "job"
+run.job "Claude AI -> Ask a Question" {
   main = {name: "Claude AI -> Ask a Question", input: {}}
   env = ["claude_api_key"]
 }

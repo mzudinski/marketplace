@@ -1,5 +1,4 @@
-run "FindIndex in array" {
-  type = "job"
+run.job "FindIndex in array" {
   main = {
     name : "FindIndex in array"
     input: {

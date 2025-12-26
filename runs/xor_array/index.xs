@@ -1,5 +1,4 @@
-run "Xor array" {
-  type = "job"
+run.job "Xor array" {
   main = {name: "Xor array", input: {}}
 }
 ---

@@ -1,5 +1,4 @@
-run "Group by array" {
-  type = "job"
+run.job "Group by array" {
   main = {
     name : "Group by array"
     input: {

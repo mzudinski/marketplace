@@ -1,5 +1,4 @@
-run "Shopify -> Update Customer" {
-  type = "job"
+run.job "Shopify -> Update Customer" {
   main = {name: "Shopify -> Update Customer", input: {}}
   env = ["access_token", "store"]
 }

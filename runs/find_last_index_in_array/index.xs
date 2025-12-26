@@ -1,5 +1,4 @@
-run "Find last index in array" {
-  type = "job"
+run.job "Find last index in array" {
   main = {name: "Find last index in array", input: {}}
 }
 ---

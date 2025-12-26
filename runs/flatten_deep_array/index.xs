@@ -1,5 +1,4 @@
-run "Flatten deep array" {
-  type = "job"
+run.job "Flatten deep array" {
   main = {
     name : "Flatten deep array"
     input: {array: [1, [2, [3, [4]], 5]]}

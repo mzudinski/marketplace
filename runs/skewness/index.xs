@@ -1,5 +1,4 @@
-run Skewness {
-  type = "job"
+run.job Skewness {
   main = {name: "Skewness", input: {number: [2, 8, 0, 4, 1, 9, 9, 0]}}
 }
 ---

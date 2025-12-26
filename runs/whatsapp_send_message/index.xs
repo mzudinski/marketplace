@@ -1,5 +1,4 @@
-run "Whatsapp -> Send Message" {
-  type = "job"
+run.job "Whatsapp -> Send Message" {
   main = {name: "Whatsapp -> Send Message", input: {}}
   env = ["whatsapp_account_id", "whatsapp_token"]
 }

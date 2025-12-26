@@ -1,5 +1,4 @@
-run "Size of collection" {
-  type = "job"
+run.job "Size of collection" {
   main = {name: "Size of collection", input: {}}
 }
 ---

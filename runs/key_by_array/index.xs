@@ -1,5 +1,4 @@
-run "Key by array" {
-  type = "job"
+run.job "Key by array" {
   main = {name: "Key by array", input: {}}
 }
 ---

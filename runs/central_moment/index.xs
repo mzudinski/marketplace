@@ -1,5 +1,4 @@
-run "Central Moment" {
-  type = "job"
+run.job "Central Moment" {
   main = {
     name : "Central Moment"
     input: {numbers: [1, 2, 3, 4, 5, 6], power: 2, is_sample: false}

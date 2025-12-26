@@ -1,5 +1,4 @@
-run "Linear Regression" {
-  type = "job"
+run.job "Linear Regression" {
   main = {
     name : "Linear Regression"
     input: {x: [1.1, 2.05, 2.98, 4.1, 5.01], y: [0.9, 1.9, 2.8, 4.1, 5.1]}

@@ -1,5 +1,4 @@
-run "xAI -> Completion" {
-  type = "job"
+run.job "xAI -> Completion" {
   main = {
     name : "xAI -> Completion"
     input: {

@@ -1,5 +1,4 @@
-run "Postmark Send email with template" {
-  type = "job"
+run.job "Postmark Send email with template" {
   main = {name: "Postmark Send email with template", input: {}}
   env = ["postmark_base_url", "postmark_api_token"]
 }

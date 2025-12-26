@@ -1,5 +1,4 @@
-run "Google Maps -> Reverse Geocode" {
-  type = "job"
+run.job "Google Maps -> Reverse Geocode" {
   main = {
     name : "Google Maps -> Reverse Geocode"
     input: {latitude: "37.423021", longitude: "-122.083739"}

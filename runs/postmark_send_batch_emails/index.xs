@@ -1,5 +1,4 @@
-run "Postmark -> Send Batch Emails" {
-  type = "job"
+run.job "Postmark -> Send Batch Emails" {
   main = {name: "Postmark -> Send Batch Emails", input: {}}
   env = ["postmark_base_url", "postmark_api_token"]
 }

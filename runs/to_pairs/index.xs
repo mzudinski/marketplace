@@ -1,5 +1,4 @@
-run "To pairs" {
-  type = "job"
+run.job "To pairs" {
   main = {name: "To pairs", input: {}}
 }
 ---
