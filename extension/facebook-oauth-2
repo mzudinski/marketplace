@@ -1,0 +1,1084 @@
+market_item "google-oauth-vars" {
+  type = "extension"
+  category = "authentication"
+  license = "CC BY 4.0"
+
+  guid = "042327D0-D2F8-4C1A-8BCA-73BBC9891EEA"
+  email = "michael@xano.com"
+  canonical = "jk224r"
+
+  video = "Oy5F9h5JqEU"
+  icon_url = "https://cdn.xano.com/marketplace/7zYt8hK2wEPPzw_Lr2OdRdPAXt0/google-logo.png"
+  short_description = "This extension provides functionality to enable authentication against a Google account."
+  long_description = """
+    <p>This extension supports three modes of authentication that can be leveraged for different requirements on your frontend application. Additional schema is merged into your user table to store necessary information in the google_oauth object.</p>
+    <p><span style="font-size: 18px;"><strong>Continue with Google</strong></span></p>
+    <p>This mode is the most flexible because it allows both sign up and login in the same API request. If you want an extremely low friction entry point and don&#39;t have special sign up requirements, this is the best way to create a seamless experience for your customer.</p>
+    <p><span style="font-size: 18px;"><strong>Login with Google</strong></span></p>
+    <p>This mode allows you to login to your application with your Google account. If you did not sign up previously through your Google account, then this API will fail. &nbsp;This API request is normally used in conjunction with the Sign up request.</p>
+    <p><span style="font-size: 18px;"><strong>Sign up with Google</strong></span></p>
+    <p>This mode allows you to sign up to your application with your Google account. &nbsp;This request will only work once for your user as it throws an error if you have a customer that has already signed up previously with this same request. If you have special requirements like perhaps an invite code, then this request tends to be more flexible than the &quot;continue with google&quot; version.</p>
+    """
+  readme = """
+    <p>This extension requires a <strong>client id</strong> and a <strong>client secret</strong> from Google.&nbsp;</p>
+    <ol><li>If you don't have a Google project already, then go to the <a href="https://console.developers.google.com/" rel="noopener noreferrer" target="_blank">Google Developer Console</a>, login with your Google account, and create a project.&nbsp;</li><li>Now that you have your project created, you need to configure your <a href="https://console.developers.google.com/apis/credentials/consent" rel="noopener noreferrer" target="_blank">OAuth consent screen</a>. If you have already done this before, then you can skip to step 5.</li><li>Click configure, and choose a User Type of External.</li><li>Next you need to enter in some basic information: choose your application name, authorized domain, homepage link, and privacy link. If you don't have all of this information ready, then you can just enter a placeholder and come back to it later. Make sure to not adjust any of the "Scopes" or there may be a significant delay before being able to use your Oauth integration.</li><li>Once your OAuth consent screen is ready, you need to go to the <a href="https://console.developers.google.com/apis/credentials" rel="noopener noreferrer" target="_blank">Credentials</a> page.</li><li>Click Create credentials -&gt; OAuth client ID</li><li>Select your application type depending on if this is a website, mobile app, etc.</li><li>Name your OAuth client and click Create.&nbsp;</li><li>Copy the client id and the client secret and make sure to enter it in the environment variable settings for this extension.</li></ol><p>NOTE: Additional settings can be configured for restricting access. Once you have authentication working with Xano, it is recommended to revisit this to use these options with settings that make sense for your application.</p>
+    """
+  env = {
+    facebook_oauth_client_id: "2019032378858885"
+    facebook_oauth_secret   : "fa788772aff1a30f603439c3d2cced2e"
+  }
+}
+---
+table user {
+  auth = true
+
+  schema {
+    int id
+    timestamp created_at?=now
+    text name filters=trim
+    email? email filters=trim|lower
+    password? password filters=min:8|minAlpha:1|minDigit:1
+    object facebook_oauth? {
+      schema {
+        int id?
+        text name? filters=trim
+        email email? filters=trim|lower
+      }
+    }
+  }
+
+  index = [
+    {type: "primary", field: [{name: "id"}]}
+    {type: "btree", field: [{name: "created_at", op: "desc"}]}
+    {type: "btree|unique", field: [{name: "email", op: "asc"}]}
+  ]
+}
+---
+// After the user completes authentication, the user gets sent back to the "redirect_uri" along with the "code" parameter. That page is then responsible for exchanging the "code" parameter for an access token via this function.
+function facebook_oauth_getaccesstoken {
+  input {
+    text code? filters=trim
+    text redirect_uri? filters=trim
+  }
+
+  stack {
+    api.request {
+      url = "https://graph.facebook.com/v9.0/oauth/access_token"
+      method = "GET"
+      params = {}
+        |set:"client_id":$env.facebook_oauth_client_id
+        |set:"redirect_uri":$input.redirect_uri
+        |set:"client_secret":$env.facebook_oauth_secret
+        |set:"code":$input.code
+      headers = ""
+    } as $facebook_oauth
+  
+    precondition (($facebook_oauth.response.result|get:"error") == null) {
+      error = $facebook_oauth.response.result.error.message
+    }
+  }
+
+  response = $facebook_oauth.response.result.access_token
+}
+---
+// This creates the URL from your environment variables that you will use to send the user to for authentication
+function facebook_oauth_getauthurl {
+  input {
+    text redirect_uri? filters=trim
+  }
+
+  stack {
+    precondition ($env.facebook_oauth_client_id != "") {
+      error = 'Please set your "facebook_oauth_client_id" environment variable.'
+    }
+  
+    precondition ($env.facebook_oauth_secret != "") {
+      error = 'Please set your "facebook_oauth_secret" environment variable.'
+    }
+  
+    var $facebook_oauth_url {
+      value = "https://www.facebook.com/v9.0/dialog/oauth"
+        |url_addarg:"client_id":$env.facebook_oauth_client_id
+        |url_addarg:"redirect_uri":$input.redirect_uri
+        |url_addarg:"scope":"email"
+    }
+  }
+
+  response = $facebook_oauth_url
+}
+---
+// This gets user information stored within Facebook which is retrieved via access token
+function facebook_oauth_getuserinfo {
+  input {
+    text access_token? filters=trim
+  }
+
+  stack {
+    api.request {
+      url = "https://graph.facebook.com/me"
+        |url_addarg:"access_token":$input.access_token
+        |url_addarg:"fields":"email, name"
+      method = "GET"
+      headers = ""
+    } as $facebook_user
+  }
+
+  response = $facebook_user.response.result
+}
+---
+api_group Authentication {
+  canonical = "FK3IiTUo"
+}
+---
+api_group "Facebook OAuth" {
+  canonical = "ch4k-M_C"
+  swagger = {token: "PsB_8v0LwKkc_TkdhNSBM3EAVrk"}
+}
+---
+// Login and retrieve an authentication token
+query "auth/login" verb=POST {
+  api_group = "Authentication"
+
+  input {
+    email email? filters=trim|lower
+    text password?
+  }
+
+  stack {
+    db.get user {
+      field_name = "email"
+      field_value = $input.email
+      output = ["id", "created_at", "name", "email", "password"]
+    } as $user
+  
+    precondition ($user != null) {
+      error_type = "accessdenied"
+      error = "Invalid Credentials."
+    }
+  
+    security.check_password {
+      text_password = $input.password
+      hash_password = $user.password
+    } as $pass_result
+  
+    precondition ($pass_result) {
+      error_type = "accessdenied"
+      error = "Invalid Credentials."
+    }
+  
+    security.create_auth_token {
+      table = "user"
+      extras = {}
+      expiration = 86400
+      id = $user.id
+    } as $authToken
+  }
+
+  response = {authToken: $authToken}
+}
+---
+// Get the user record belonging to the authentication token
+query "auth/me" verb=GET {
+  api_group = "Authentication"
+  auth = "user"
+
+  input {
+  }
+
+  stack {
+    db.get user {
+      field_name = "id"
+      field_value = $auth.id
+      output = ["id", "created_at", "name", "email"]
+    } as $user
+  }
+
+  response = $user
+}
+---
+// Get the record belonging to the authentication token
+query "auth/me" verb=GET {
+  api_group = "Facebook OAuth"
+  auth = "user"
+
+  input {
+  }
+
+  stack {
+    db.get user {
+      field_name = "id"
+      field_value = $auth.id
+      output = ["id", "created_at", "name", "email", "facebook_oauth"]
+    } as $user
+  }
+
+  response = $user
+}
+---
+// Signup and retrieve an authentication token
+query "auth/signup" verb=POST {
+  api_group = "Authentication"
+
+  input {
+    text name?
+    email email? filters=trim|lower
+    text password?
+  }
+
+  stack {
+    db.get user {
+      field_name = "email"
+      field_value = $input.email
+    } as $user
+  
+    precondition ($user == null) {
+      error_type = "accessdenied"
+      error = "This account is already in use."
+    }
+  
+    db.add user {
+      data = {
+        created_at: "now"
+        name      : $input.name
+        email     : $input.email
+        password  : $input.password
+      }
+    } as $user
+  
+    security.create_auth_token {
+      table = "user"
+      extras = {}
+      expiration = 86400
+      id = $user.id
+    } as $authToken
+  }
+
+  response = {authToken: $authToken}
+}
+---
+query demo_page verb=GET {
+  api_group = "Facebook OAuth"
+
+  input {
+  }
+
+  stack {
+    util.set_header {
+      value = "Content-type: text/html"
+      duplicates = "replace"
+    }
+  
+    var $api_base_url {
+      value = $env.$api_baseurl
+    }
+  
+    util.template_engine {
+      value = """
+        <!doctype html>
+        <html lang="en">
+        <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Facebook OAuth Demo</title>
+        <meta name="color-scheme" content="light dark" />
+        <style>
+          :root{
+            --brand:#0866FF; /* Facebook blue */
+            --bg:#0e1116;
+            --ink:#0b1220;
+            --muted:#64748b;
+            --line:#e5e7eb;
+            --panel:#ffffff;
+          }
+        
+          *{box-sizing:border-box}
+          html,body{height:100%}
+          body{
+            margin:0;
+            font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;
+            background:var(--bg);
+            color:#eef3f8;
+            line-height:1.5;
+          }
+        
+          .page{min-height:100dvh;display:flex}
+          .col{flex:1 1 50%}
+        
+          /* LEFT SIDE */
+          .left{
+            padding:48px 36px;
+            background:var(--brand);
+            display:flex;
+            flex-direction:column;
+            gap:24px;
+          }
+          .label{opacity:.75}
+          h1{margin:0 0 4px;font-size:34px;line-height:1.1}
+          h2{margin:0 0 8px;font-size:20px}
+          p{margin:0}
+        
+          .box{
+            background:rgba(255,255,255,.12);
+            backdrop-filter:saturate(1.1) blur(4px);
+            border-radius:14px;
+            padding:20px;
+            border:1px solid rgba(255,255,255,.18);
+          }
+        
+          .bullets{display:grid;gap:12px}
+          .bullet{display:flex;gap:10px;align-items:flex-start}
+          .dot{
+            color:#fff;
+            font-weight:700;
+            line-height:1;
+          }
+        
+          /* Notice / hint */
+          .hint {
+            display:flex;
+            align-items:center;
+            gap:10px;
+            padding:12px 16px;
+            border-radius:14px;
+            border:1px solid rgba(255,255,255,0.18);
+            background:rgba(255,255,255,0.10);
+            font-size:14px;
+            line-height:1.3;
+            color:#f9fafb;
+            cursor:default;
+            width:100%;
+          }
+          .hint:hover {
+            background:rgba(255,255,255,0.16);
+            border-color:rgba(255,255,255,0.30);
+          }
+          .hint-dot {
+            width:8px;
+            height:8px;
+            border-radius:999px;
+            background:#fde047;
+            flex-shrink:0;
+          }
+          .hint-text-main,
+          .hint-text-hover {
+            flex:1;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+          }
+          .hint-text-hover { display:none; }
+          .hint:hover .hint-text-main { display:none; }
+          .hint:hover .hint-text-hover { display:inline; }
+        
+          /* RIGHT SIDE */
+          .right{
+            background:#fff;
+            color:var(--ink);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:48px 24px;
+          }
+          .card{
+            width:100%;
+            max-width:560px;
+            border:1px solid var(--line);
+            border-radius:16px;
+            padding:28px;
+            background:#fff;
+          }
+        
+          .muted{color:var(--muted)}
+          .mb8{margin-bottom:8px}
+          .mb12{margin-bottom:12px}
+          .mb16{margin-bottom:16px}
+          .mb20{margin-bottom:20px}
+          .mb24{margin-bottom:24px}
+        
+          .field{
+            background:#f8fafc;
+            border:1px solid var(--line);
+            border-radius:10px;
+            padding:12px;
+            word-break:break-all;
+          }
+        
+          /* BUTTONS */
+          .btn{
+            appearance:none;
+            border:1px solid var(--line);
+            background:#111827;
+            color:#fff;
+            border-radius:12px;
+            padding:12px 14px;
+            font-weight:600;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            width:100%;
+            cursor:pointer;
+          }
+          .btn[disabled]{opacity:.7;cursor:not-allowed}
+        
+          /* Facebook button w/ white halo */
+          .btn-facebook {
+            background:#111827;
+            color:#ffffff;
+            border:1px solid #1f2937;
+          }
+          .btn-facebook:hover {
+            background:#1f2937;
+          }
+        
+          .facebook-logo {
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            background:white;
+            border-radius:4px;
+            width:20px;
+            height:20px;
+            flex-shrink:0;
+          }
+        
+          .facebook-logo svg {
+            width:100%;
+            height:100%;
+          }
+          .facebook-logo svg rect {
+            fill:#0866FF;
+          }
+          .facebook-logo svg path {
+            fill:#ffffff;
+          }
+        
+          /* Success */
+          .check-badge{
+            width:64px;height:64px;
+            border-radius:999px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            margin:0 auto;
+            background:#e7f0ff;
+            color:#1849a9;
+          }
+          .check{width:36px;height:36px;display:block}
+        
+          .divider{height:1px;background:var(--line);margin:20px 0}
+        
+          [data-view="demo"] #demoView{display:block}
+          [data-view="demo"] #successView{display:none}
+          [data-view="success"] #demoView{display:none}
+          [data-view="success"] #successView{display:block}
+        
+          @media (max-width:960px){
+            .page{flex-direction:column}
+            .left{border-bottom:1px solid rgba(255,255,255,.2)}
+          }
+        
+          code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
+        
+          .endpoint-inputs {
+            margin-top:6px;
+            margin-left:2px;
+            display:grid;
+            gap:4px;
+          }
+          .endpoint-input-line {
+            display:flex;
+            gap:6px;
+            font-size:12px;
+            line-height:1.3;
+            color:var(--muted);
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+          }
+          .endpoint-input-name {
+            font-weight:600;
+            color:var(--muted);
+          }
+          .endpoint-input-value {
+            font-family:ui-monospace,Menlo,Consolas,monospace;
+            color:var(--muted);
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+          }
+        </style>
+        </head>
+        
+        <body>
+        <div id="app" class="page" data-view="demo">
+        
+          <!-- LEFT PANEL -->
+          <section class="col left">
+            <div class="label">Facebook OAuth</div>
+            <h1 id="leftTitle">Facebook OAuth Demo App</h1>
+            <p id="leftLead">A demo built to showcase Facebook OAuth authentication. This is for demonstration purposes only.</p>
+        
+            <div class="box">
+              <h2 class="mb12">Demo Overview</h2>
+              <div class="bullets">
+                <div class="bullet">
+                  <span class="dot">•</span>
+                  <div><strong>Start:</strong> The button calls <code>GET /oauth/facebook/init</code> with <code>redirect_uri</code> to generate the Facebook OAuth URL.</div>
+                </div>
+                <div class="bullet">
+                  <span class="dot">•</span>
+                  <div><strong>Facebook:</strong> You're redirected to the Facebook OAuth dialog.</div>
+                </div>
+                <div class="bullet">
+                  <span class="dot">•</span>
+                  <div><strong>Callback:</strong> You're redirected back to this page at <code>/demo_page?code=</code>.</div>
+                </div>
+                <div class="bullet">
+                  <span class="dot">•</span>
+                  <div><strong>Exchange:</strong> The app calls <code>/oauth/facebook/continue</code> with the <code>code</code>, receives a Facebook token, and exchanges it for a Xano auth token.</div>
+                </div>
+                <div class="bullet">
+                  <span class="dot">•</span>
+                  <div><strong>Success:</strong> The app calls <code>/auth/me</code> with the Xano Bearer token and displays the success view.</div>
+                </div>
+              </div>
+            </div>
+        
+            <div class="hint">
+              <span class="hint-dot"></span>
+              <span class="hint-text-main">
+                Not for production use, remove when you're ready.
+              </span>
+              <span class="hint-text-hover">
+                This is only for demo purposes and testing, please remove this API endpoint in Xano when you're ready.
+              </span>
+            </div>
+          </section>
+        
+          <!-- RIGHT PANEL: DEMO VIEW -->
+          <section class="col right" id="demoView" aria-label="OAuth Form">
+            <div class="card">
+        
+              <div class="mb16">
+                <h2 class="mb8">Sign in with <span>Facebook</span></h2>
+                <p class="muted">Authenticate using your Facebook account</p>
+              </div>
+        
+              <!-- INIT -->
+              <div class="mb20">
+                <div class="mb8">Init Endpoint</div>
+                <div class="field">
+                  <strong>GET</strong> <span id="endpointInit"></span>
+                </div>
+        
+                <div class="endpoint-inputs">
+                  <div class="endpoint-input-line">
+                    <span class="endpoint-input-name">redirect_uri:</span>
+                    <span class="endpoint-input-value" id="endpointInitRedirect"></span>
+                  </div>
+                </div>
+              </div>
+        
+              <!-- CONTINUE -->
+              <div class="mb20">
+                <div class="mb8">Continue Endpoint</div>
+                <div class="field">
+                  <strong>GET</strong> <span id="endpointContinue"></span>
+                </div>
+        
+                <div class="endpoint-inputs">
+                  <div class="endpoint-input-line">
+                    <span class="endpoint-input-name">code:</span>
+                    <span class="endpoint-input-value">provided by the OAuth provider</span>
+                  </div>
+                  <div class="endpoint-input-line">
+                    <span class="endpoint-input-name">redirect_uri:</span>
+                    <span class="endpoint-input-value" id="endpointContinueRedirect"></span>
+                  </div>
+                </div>
+              </div>
+        
+              <!-- AUTH ME -->
+              <div class="mb20">
+                <div class="mb8">Auth Me</div>
+                <div class="field">
+                  <strong>GET</strong> <span id="endpointMe"></span>
+                </div>
+              </div>
+        
+              <!-- FACEBOOK BUTTON -->
+              <button id="oauthBtn" class="btn btn-facebook">
+                <span class="facebook-logo" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="0" y="0" width="24" height="24" rx="4"></rect>
+                    <path d="M14 6h2V3h-2c-3 0-5 2-5 5v2H7v3h2v6h3v-6h2.2L15 10h-3V8c0-1.3.7-2 2-2z"></path>
+                  </svg>
+                </span>
+                <span>Continue with Facebook</span>
+              </button>
+        
+              <p class="muted" style="margin-top:16px;text-align:center">
+                By continuing, you agree to grant this demo app access to your basic Facebook profile information.
+              </p>
+        
+            </div>
+          </section>
+        
+          <!-- RIGHT PANEL: SUCCESS VIEW -->
+          <section class="col right" id="successView" aria-label="Success">
+            <div class="card">
+        
+              <div class="mb24" style="display:flex;justify-content:center">
+                <div class="check-badge">
+                  <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                </div>
+              </div>
+        
+              <div class="mb16" style="text-align:center">
+                <h2 class="mb8">Welcome!</h2>
+                <p class="muted">You’re now authenticated with Facebook</p>
+              </div>
+        
+              <div class="mb20">
+                <div class="mb8">Authentication Status</div>
+                <div class="field" style="display:flex;align-items:center;gap:8px;color:#047857;background:#ecfdf5;border-color:#a7f3d0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Successfully Authenticated
+                </div>
+              </div>
+        
+              <div class="mb20">
+                <div class="mb8">Provider</div>
+                <div class="field" style="display:flex;align-items:center;gap:8px">
+                  <span class="facebook-logo">
+                    <svg viewBox="0 0 24 24">
+                      <rect width="24" height="24" rx="4"></rect>
+                      <path d="M14 6h2V3h-2c-3 0-5 2-5 5v2H7v3h2v6h3v-6h2.2L15 10h-3V8c0-1.3.7-2 2-2z"></path>
+                    </svg>
+                  </span>
+                  <span>Facebook</span>
+                </div>
+              </div>
+        
+              <div class="divider"></div>
+        
+              <div class="mb16">
+                <h3 class="mb8">User Information</h3>
+        
+                <div id="userPictureWrap" class="mb12" style="display:none;justify-content:center">
+                  <img id="userPicture" alt="User" style="width:80px;height:80px;border-radius:999px;object-fit:cover;border:1px solid var(--line)" />
+                </div>
+        
+                <div class="mb12">
+                  <label class="muted" style="display:block;margin-bottom:6px">Name</label>
+                  <div class="field" id="userName">—</div>
+                </div>
+        
+                <div class="mb12">
+                  <label class="muted" style="display:block;margin-bottom:6px">Email</label>
+                  <div class="field" id="userEmail">—</div>
+                </div>
+        
+              </div>
+        
+              <button id="tryAgainBtn" class="btn btn-ghost">Try Again</button>
+        
+            </div>
+          </section>
+        </div>
+        
+        <script>
+          // ===== CONFIG (dynamic from Xano) =====
+          const API_BASE = "{{ $var.api_base_url }}"; 
+          const ENDPOINTS = {
+            init: "/oauth/facebook/init",
+            cont: "/oauth/facebook/continue",
+            me: "/auth/me"
+          };
+        
+          const $ = (s) => document.querySelector(s);
+          const setView = (v) => $("#app").setAttribute("data-view", v);
+        
+          function computeRedirectURI() {
+            const url = new URL(window.location.href);
+            url.search = "";
+            url.hash = "";
+            return url.href;
+          }
+        
+          function renderEndpointInfo() {
+            const demoPageUrl = computeRedirectURI();
+            $("#endpointInit").textContent = `${API_BASE}${ENDPOINTS.init}`;
+            $("#endpointInitRedirect").textContent = demoPageUrl;
+        
+            $("#endpointContinue").textContent = `${API_BASE}${ENDPOINTS.cont}`;
+            $("#endpointContinueRedirect").textContent = demoPageUrl;
+        
+            $("#endpointMe").textContent = `${API_BASE}${ENDPOINTS.me}`;
+          }
+        
+          function qp(name) {
+            return new URL(location.href).searchParams.get(name);
+          }
+        
+          function extractAuthUrl(data) {
+            if (!data || typeof data !== "object") return null;
+        
+            const candidates = Object.values(data);
+            for (const val of candidates) {
+              if (typeof val === "string" && /^https?:\/\//.test(val)) return val;
+            }
+            return null;
+          }
+        
+          async function startOAuth(btn) {
+            try {
+              btn.disabled = true;
+              btn.textContent = "Opening Facebook…";
+        
+              const redirect_uri = computeRedirectURI();
+              const url = `${API_BASE}${ENDPOINTS.init}?redirect_uri=${encodeURIComponent(redirect_uri)}`;
+        
+              const res = await fetch(url, { method:"GET" });
+        
+              if (res.redirected && res.url) {
+                window.location.href = res.url;
+                return;
+              }
+        
+              const ct = res.headers.get("content-type") || "";
+              if (!ct.includes("application/json")) {
+                if (res.url) {
+                  window.location.href = res.url;
+                  return;
+                }
+                throw new Error("Init did not return JSON or redirect.");
+              }
+        
+              const data = await res.json();
+              const authUrl = extractAuthUrl(data);
+              if (!authUrl) throw new Error("No authorization URL found.");
+        
+              window.location.href = authUrl;
+        
+            } catch (err) {
+              console.error(err);
+              alert("Failed to start OAuth. Check console.");
+              btn.disabled = false;
+              btn.textContent = "Continue with Facebook";
+            }
+          }
+        
+          async function exchangeCodeForToken(code) {
+            const redirect_uri = computeRedirectURI();
+            const url =
+              `${API_BASE}${ENDPOINTS.cont}?code=${encodeURIComponent(code)}&redirect_uri=${encodeURIComponent(redirect_uri)}`;
+        
+            const res = await fetch(url, { method: "GET" });
+            if (!res.ok) throw new Error("continue failed " + res.status);
+        
+            return res.json();
+          }
+        
+          async function fetchMe(token) {
+            const url = `${API_BASE}${ENDPOINTS.me}`;
+        
+            const res = await fetch(url, {
+              headers: { Authorization:"Bearer " + token }
+            });
+        
+            if (!res.ok) throw new Error("auth/me failed " + res.status);
+        
+            return res.json();
+          }
+        
+          function renderSuccess(user) {
+            $("#userName").textContent =
+              user.name || (user.facebook_oauth && user.facebook_oauth.name) || "Authenticated User";
+        
+            $("#userEmail").textContent =
+              user.email || (user.facebook_oauth && user.facebook_oauth.email) || "(no email)";
+        
+            const picture =
+              user.picture || (user.facebook_oauth && user.facebook_oauth.picture);
+            if (picture) {
+              $("#userPicture").src = picture;
+              $("#userPictureWrap").style.display = "flex";
+            } else {
+              $("#userPictureWrap").style.display = "none";
+            }
+        
+            setView("success");
+          }
+        
+          async function boot() {
+            renderEndpointInfo();
+        
+            const code = qp("code");
+            if (code) {
+              try {
+                const data = await exchangeCodeForToken(code);
+                if (data && data.token) sessionStorage.setItem("oauth_token", data.token);
+              } catch (e) {
+                console.error(e);
+              }
+        
+              const clean = new URL(location.href);
+              clean.search = "";
+              history.replaceState({}, "", clean.toString());
+            }
+        
+            const token = sessionStorage.getItem("oauth_token");
+            if (token) {
+              try {
+                const profile = await fetchMe(token);
+                renderSuccess(profile);
+              } catch (e) {
+                console.error(e);
+                sessionStorage.removeItem("oauth_token");
+                setView("demo");
+              }
+            } else {
+              setView("demo");
+            }
+          }
+        
+          $("#oauthBtn").addEventListener("click", () => startOAuth($("#oauthBtn")));
+        
+          $("#tryAgainBtn").addEventListener("click", () => {
+            sessionStorage.removeItem("oauth_token");
+            const clean = new URL(location.href);
+            clean.search = "";
+            clean.hash = "";
+            history.replaceState({}, "", clean.toString());
+            setView("demo");
+          });
+        
+          boot();
+        </script>
+        
+        </body>
+        </html>
+        """
+    } as $html
+  }
+
+  response = $html
+}
+---
+// This endpoint handles both Facebook login and signup depending on the state of the user account.
+query "oauth/facebook/continue" verb=GET {
+  api_group = "Facebook OAuth"
+
+  input {
+    // The authorization code received from Facebook after user grants permissions.
+    text code? filters=trim
+  
+    // The URI Facebook should redirect to after authentication, matching the one configured in the Facebook app.
+    text redirect_uri? filters=trim
+  }
+
+  stack {
+    // Exchange the authorization code for an access token from Facebook.
+    function.run facebook_oauth_getaccesstoken {
+      input = {code: $input.code, redirect_uri: $input.redirect_uri}
+    } as $access_token
+  
+    // Use the access token to retrieve the user's profile information from Facebook.
+    function.run facebook_oauth_getuserinfo {
+      input = {access_token: $access_token}
+    } as $facebook_user
+  
+    // Search for an existing user in the database using their Facebook ID or email.
+    db.query user {
+      where = $db.user.facebook_oauth.id == $facebook_user.id || ($db.user.email|to_lower) == ($facebook_user.email|to_lower)
+      return = {type: "single"}
+    } as $user
+  
+    // Check if the user already exists in the database or if their account needs to be updated.
+    conditional {
+      if ($user == null) {
+        // Create a new user account in the database using the information retrieved from Facebook.
+        db.add user {
+          data = {
+            created_at    : "now"
+            name          : $facebook_user.name
+            email         : $facebook_user|get:"email"
+            password      : null
+            facebook_oauth: {
+            id   : $facebook_user.id
+            name : $facebook_user.name
+            email: $facebook_user|get:"email":null
+          }
+          }
+        } as $user
+      }
+    
+      elseif (($user.email|to_lower) == ($facebook_user.email|to_lower)) {
+        // Update the existing user's record with their Facebook OAuth information.
+        db.edit user {
+          field_name = "id"
+          field_value = $user.id
+          data = {
+            facebook_oauth: {
+            id   : $facebook_user.id
+            name : $facebook_user.name
+            email: $facebook_user|get:"email":null
+          }
+          }
+        } as $user
+      }
+    }
+  
+    // Generate a new authentication token for the user, allowing them to access protected resources.
+    security.create_auth_token {
+      table = "user"
+      extras = {}
+      expiration = 86400
+      id = $user.id
+    } as $token
+  }
+
+  response = {
+    token: $token
+    name : $facebook_user.name
+    email: $facebook_user|get:"email"
+  }
+}
+---
+// Initiates the Facebook OAuth process, redirecting the user to Facebook for authentication.
+query "oauth/facebook/init" verb=GET {
+  api_group = "Facebook OAuth"
+
+  input {
+    // The URL where the user will be redirected after Facebook authentication is complete.
+    text redirect_uri? filters=trim
+  }
+
+  stack {
+    // Calls a function to generate the Facebook authentication URL with the provided redirect URI.
+    function.run facebook_oauth_getauthurl {
+      input = {redirect_uri: $input.redirect_uri}
+    } as $facebook_authurl
+  }
+
+  response = {authURL: $facebook_authurl}
+}
+---
+// This endpoint handles login only. If the user has not already signed up through Facebook, then this endpoint will throw an error message.
+query "oauth/facebook/login" verb=GET {
+  api_group = "Facebook OAuth"
+
+  input {
+    // The authorization code received from Facebook after the user grants permission.
+    text code? filters=trim
+  
+    // The URI to which Facebook redirects the user after authorization, matching the one used in the initial request.
+    text redirect_uri? filters=trim
+  }
+
+  stack {
+    // Exchange the authorization code for an access token from Facebook.
+    function.run facebook_oauth_getaccesstoken {
+      input = {code: $input.code, redirect_uri: $input.redirect_uri}
+    } as $access_token
+  
+    // Use the access token to retrieve the user's profile information from Facebook.
+    function.run facebook_oauth_getuserinfo {
+      input = {access_token: $access_token}
+    } as $facebook_user
+  
+    // Look up a user in the database using their Facebook OAuth ID.
+    db.get user {
+      field_name = "facebook_oauth.id"
+      field_value = $facebook_user.id
+    } as $user
+  
+    // Check if a user account exists for the retrieved Facebook ID; if not, stop the process and return an error.
+    precondition ($user != null) {
+      error = "No user exists with these credentials. Try signing up instead."
+    }
+  
+    // Generate a new authentication token for the found user, allowing them to log in.
+    security.create_auth_token {
+      table = "user"
+      extras = {}
+      expiration = 86400
+      id = $user.id
+    } as $token
+  }
+
+  response = {
+    name : $facebook_user.name
+    email: $facebook_user|get:"email"
+    token: $token
+  }
+}
+---
+// This endpoint handles signup only. If the user already has signed up through Facebook, then this endpoint will throw an error message
+query "oauth/facebook/signup" verb=GET {
+  api_group = "Facebook OAuth"
+
+  input {
+    // The authorization code received from Facebook after the user grants permission.
+    text code? filters=trim
+  
+    // The URL Facebook redirects to after authorization, which must match the configured URI.
+    text redirect_uri? filters=trim
+  }
+
+  stack {
+    // Exchange the authorization code for an access token from Facebook.
+    function.run facebook_oauth_getaccesstoken {
+      input = {code: $input.code, redirect_uri: $input.redirect_uri}
+    } as $access_token
+  
+    // Use the access token to retrieve the user's profile information from Facebook.
+    function.run facebook_oauth_getuserinfo {
+      input = {access_token: $access_token}
+    } as $facebook_user
+  
+    // Check if a user with this Facebook ID already exists in the database.
+    db.get user {
+      field_name = "facebook_oauth.id"
+      field_value = $facebook_user.id
+    } as $user
+  
+    // Ensure that no existing account is found with the provided Facebook credentials.
+    precondition ($user == null) {
+      error = "There is already an account with these credentials. Try logging in instead."
+    }
+  
+    // Create a new user record in the database using the Facebook profile information.
+    db.add user {
+      data = {
+        created_at    : "now"
+        name          : $facebook_user.name
+        email         : $facebook_user|get:"email"
+        password      : ""
+        facebook_oauth: {
+        id   : $facebook_user.id
+        name : $facebook_user.name
+        email: $facebook_user|get:"email":null
+      }
+      }
+    } as $new_user
+  
+    // Generate a new authentication token for the newly created user.
+    security.create_auth_token {
+      table = "user"
+      extras = {}
+      expiration = 86400
+      id = $new_user.id
+    } as $token
+  }
+
+  response = {
+    name : $facebook_user.name
+    email: $facebook_user|get:"email"
+    token: $token
+  }
+}
