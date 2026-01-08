@@ -1,4 +1,4 @@
-market_item "google-oauth-vars" {
+market_item "facebook-oauth-v2" {
   type = "extension"
   category = "authentication"
   license = "CC BY 4.0"
